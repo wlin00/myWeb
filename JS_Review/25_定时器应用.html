@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        #btn{width: 100px;height: 100px;background-color: red;position: absolute}
+    </style>
+</head>
+<body>
+
+<button id="btn" value="点击右移">click move</button>
+<script>
+    var flag=false;
+    var btn=document.getElementById("btn")
+    var currleft=0;
+    //建立btn的move函数，只要检测到flag=true就让btn右移动；
+    // 并且这个函数被一个定时器每指定毫秒监听触发一次，实现平滑移动
+    //使用flag来作为点击后的触发开关，目的是增加程序流畅度
+    var settool=setInterval(btnmove,10)
+    function btnmove(){
+        if(flag===true){
+            currleft+=10;
+            btn.style.left=currleft+"px";
+            if(parseInt(btn.style.left)>=500){clearInterval(settool);flag=false}//若按钮移动的水平值到达1000，则清除定时器
+            console.log(btn.style.left)
+            console.log(flag)
+
+        }}
+    btn.onclick=function () {
+        flag=true}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;}
+        body{
+            background: url("img/bg1.jpg");
+            background-size: 100%,100%;
+        }
+        #out{
+            overflow: hidden;
+            /*width: 500px;*/
+            height: 400px;
+            top: 100%;
+            left: 50%;
+            margin-left: -250px;
+            margin-top:150px;
+            width: 500px;
+            position: relative;
+            /*padding:10px;*/
+            background-color: lawngreen;
+            box-shadow: 0 0  10px 10px rgba(15,15,15,.84);
+        }
+        #out img{
+            width: 500px;
+            height: 90%;
+            float: left  }
+
+        .inner{
+            width: 3500px;
+            position: absolute;
+            height: 97%;
+            /*overflow: hidden;*/
+            /*float: right;*/
+            z-index: 1;
+        }
+        .btn{
+            top:350px;
+            position: absolute;
+             z-index: 2;
+            text-align: center;
+            height: 10%;width: 100%;
+        }
+        .btn button{
+            background: url("img/3_btn.gif");
+            height: 70%;
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="out">
+    <div class="inner" style="left: -2500px" id="panel">
+        <img src="img/tx5.jpg" alt="#">
+        <img src="img/tx1.jpg" alt="#">
+        <img src="img/tx2.jpg" alt="#">
+        <img src="img/tx3.jpg" alt="#">
+        <img src="img/tx4.jpg" alt="#">
+        <img src="img/tx5.jpg" alt="#">
+        <img src="img/tx1.jpg" alt="#">
+    </div>
+    <div class="btn">
+        <button id="btn1">
+            上一张
+        </button>
+        <button id="btn2">
+            下一张
+        </button>
+    </div>
+</div>
+
+
+<script>
+var btn1=document.getElementById("btn1");
+btn1.onclick=function () {
+     nextpage(true);//
+};
+var btn2=document.getElementById("btn2");
+btn2.onclick=function () {
+    nextpage(false);
+}
+
+function nextpage(next){
+    var targetleft=0;
+    var currleft=parseInt(document.getElementById("panel").style.left);
+    console.log(currleft);
+
+    var offset=0;
+    offset=next?(-500):500;
+    currleft+=parseInt(offset);
+    console.log(currleft);
+
+    if(currleft>=0){currleft=-2500;}
+    else if(currleft<=-3000){currleft=-500;}
+    document.getElementById("panel").style.left=currleft+"px";
+}
+
+
+</script>
+</body>
+</html>

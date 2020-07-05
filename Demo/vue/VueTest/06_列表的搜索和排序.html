@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_HelloWorld</title>
+</head>
+<body>
+
+<!--
+  1. 引入Vue.js
+  2. 创建Vue对象
+    el : 指定根element(选择器)
+    data : 初始化数据(页面可以访问)
+  3. 双向数据绑定 : v-model
+  4. 显示数据 : {{xxx}}
+  5. 理解vue的mvvm实现
+-->
+
+<!--模板-->
+<div id="test">
+
+    <input type="text" placeholder="搜索指定用户名" v-module="searchName" >
+    <ul>
+        <li v-for="(x,index) in filterPersons" :key="index">
+            {{index}}---{{x.name}}---{{x.age}}
+        </li>
+    </ul>
+    <button >年龄升序</button>
+    <button >年龄降序</button>
+    <button >初始顺序</button>
+
+</div>
+
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({ // 配置对象 options
+        // 配置选项(option)
+        // el: '#test',  // element: 指定用vue来管理页面中的哪个标签区域
+        // data: {
+        //     msg: 'atguigu'
+        // }
+        el:'#test',
+        data:{
+            searchName: '',
+            persons:[
+                {name:'Tom',age:18},
+                {name:'Bob',age:19},
+                {name:'Alice',age:17},
+                {name:'Sam',age:11},
+                {name:'Allen',age:12},
+                {name:'Canada',age:13}
+            ],
+        },
+        computed:{
+            filterPersons(){
+               //逻辑：结合sudos,input的输入 来重新生成一个filterSudos 新数组
+
+                //取出相关的数据
+                const {searchName,persons}=this
+
+
+                //建立一个新缓冲区用与存放新数组
+                  let newSudos;
+
+                 //过滤
+                   newSudos=persons.filter(x => (x.name.indexOf(searchName)!== -1)) //过滤只返回数组中name值包含搜索名的 数组成员
+
+                  return newSudos
+            }
+        }
+
+
+    })
+</script>
+</body>
+</html>

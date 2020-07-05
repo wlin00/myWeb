@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+       *{margin:0;padding:0;}
+        .box1{
+            transition: all 1.6s;
+            width: 100px;
+            height: 100px;
+            background-color: aliceblue;
+            margin-bottom: 20px;
+            border: 1px solid black;
+        }
+        .box2{
+            width: 100px;
+            height: 100px;
+            background-color: #2196F3;
+            border: 1px solid black;
+            margin-top: 30px;
+
+        }
+       .box1:hover{transform: scale(1.4)}
+       .box2:hover{transform: scale(1.4)}
+
+
+       /*    根据css2.1 两个相邻的普通流中的块框在垂直位置的空白边会发生重叠现象；
+         即处于用一个BFC中两个垂直窗口的margin会重叠（或者浮动导致高度塌陷也可以由BFC消除） */
+
+       /*解决方法：
+             根据css2.1 生成BFC的元素不会和在流中的子元素发生空白边的折叠；
+         所以解决方法是为两个容器分别包裹一个具有BFC的div外容器
+             BFC概念：决定元素如何对其内容进行定位，以及与其他元素的关系和相互作用；
+         Block Formatting Context提供了一个环境，让HTML元素子这个环境中按照一定规则进行布局；
+         让一个环境中的元素不会影响到其他环境中的布局
+         */
+
+       .BFC{
+            /*overflow: hidden;*/
+            display: table;
+        }
+        /*BFC的触发方式：
+        1、overflow：hidden
+        2、display：table
+        3、position：absolute
+        4、设置float
+        */
+
+    </style>
+</head>
+<body>
+
+<div class="BFC">
+<div class="box1"></div>
+</div>
+<div CLASS="BFC">
+<div class="box2"></div>
+</div>
+
+</body>
+</html>

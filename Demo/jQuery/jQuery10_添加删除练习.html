@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+
+    <style>
+        *{margin:0;padding:0;}
+        html,body{
+            width: 300px;
+            margin-left: 150px;
+            margin-top: 40px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<table id="employeeTable">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>Tom</td>
+        <td>tom@tom.com</td>
+        <td>5000</td>
+        <td><a href="deleteEmp?id=001">Delete</a></td>
+    </tr>
+
+    <tr>
+        <td>Jerry</td>
+        <td>jerry@sohu.com</td>
+        <td>8000</td>
+        <td><a href="deleteEmp?id=002">Delete</a></td>
+    </tr>
+
+    <tr>
+        <td>Bob</td>
+        <td>bob@tom.com</td>
+        <td>10000</td>
+        <td><a href="deleteEmp?id=003">Delete</a></td>
+    </tr>
+</table>
+
+<h2>添加新员工</h2>
+<table id="addTable">
+    <tr>
+        <td class="word">name:</td>
+        <td class="inp">
+            <input type="text" name="empName" id="empName">
+        </td>
+    </tr>
+
+    <tr>
+        <td class="word">email:</td>
+        <td class="inp">
+            <input type="text" name="email" id="email">
+        </td>
+    </tr>
+
+    <tr>
+        <td class="word">salary:</td>
+        <td class="inp">
+            <input type="text" name="salary" id="salary">
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2" align="center">
+            <button id="addEmpButton" value="abc">添加</button>
+        </td>
+    </tr>
+
+</table>
+
+
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script>
+
+    //实现添加功能，给button绑定事件,插入一串表单html数据到table后面：append方法
+$('#addEmpButton').click(function () {
+    //1、收集数据   2、生成对应tr标签插入到table   3、清除输入
+
+    var $empName=$('#empName');
+    var $email=$('#email');
+    var $salary=$('#salary');
+    var empName=$empName.val();
+    var email=$email.val();
+    var salary=$salary.val();
+
+    console.log(empName,email,salary);
+
+
+    /*
+    <tr>
+        <td>Jerry</td>
+        <td>jerry@sohu.com</td>
+        <td>8000</td>
+        <td><a href="deleteEmp?id=002">Delete</a></td>
+    </tr>
+      需要进行拼串操作
+     */
+
+    //验证输入是否为空
+    if(empName===''||email===''||salary===''){
+        alert('please input your information！');
+        $empName.val('');
+        $email.val('');
+        $salary.val('');
+        return
+    }
+
+    $('<tr></tr>').append('<td>'+empName+'</td>')
+                 .append('<td>'+email+'</td>')
+                 .append('<td>'+salary+'</td>')
+                 .append('<td><a href="deleteEmp?id="'+Date.now()+'>Delete</a></td>')
+        .appendTo('#employeeTable>tbody')
+        .find('a').click(function () {
+              //通过this封装jQ对象，使用查找方法，找父节点的兄弟节点（第一个兄弟为目标）
+              var $fTr=$(this).parent().parent();
+              var name=$fTr.children(':first').html();
+              if(confirm("真的要删除"+name+"的信息吗？")){
+                  $fTr.remove()
+               }
+              return false;
+    });
+       //核心步骤： 先将需插入标签通过拼串构建，然后插入到目的表的tbody内
+       //接着，继续对插入的html结构使用find方法，给后代唯一的a标签绑定点击监听
+
+
+
+    //清除输入三个框
+    $empName.val('');
+    $email.val('');
+    $salary.val('');
+})
+    
+    
+    
+    //实现删除功能
+      $('#employeeTable a').click(function () {
+          //通过this封装jQ对象，使用查找方法，找父节点的兄弟节点（第一个兄弟为目标）
+          var $fTr=$(this).parent().parent();
+          var name=$fTr.children(':first').html();
+          if(confirm("真的要删除"+name+"的信息吗？")){
+              $fTr.remove()
+          }
+           return false;
+      })
+
+</script>
+
+</body>
+</html>

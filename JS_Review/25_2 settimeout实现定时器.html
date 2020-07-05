@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+/*setinterval的缺陷：1、不检查回调函数fun是否还在执行；
+                    2、若代码有错误，setinterval依然执行
+                    3、缺乏一个调用次数的参数
+                    */    
+/*下面使用setTimeout来实现一个可以识别回调函数错误、是否运行
+  以及可设置调用次数的参数的setInterval*/
+
+var a=1;
+function selfInterval(func,time,n){
+    function interval() {
+        n--;
+        if(n>0){setTimeout(interval,time)}//递归调用interval,若超过规定次数，则不再递归调用
+        func()//闭包调用callback
+
+    }
+    setTimeout(interval,time)
+}
+
+
+function fun1(){
+    console.log(a++)
+}
+selfInterval(fun1,1000,2)
+
+setTimeout(function () {
+    a=null
+},5000)
+</script>
+</body>
+</html>

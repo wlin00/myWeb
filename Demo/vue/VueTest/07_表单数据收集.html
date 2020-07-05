@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_HelloWorld</title>
+</head>
+<body>
+
+<!--
+  1. 引入Vue.js
+  2. 创建Vue对象
+    el : 指定根element(选择器)
+    data : 初始化数据(页面可以访问)
+  3. 双向数据绑定 : v-model
+  4. 显示数据 : {{xxx}}
+  5. 理解vue的mvvm实现
+-->
+
+<!--模板-->
+<div id="test">
+    <form action="/xxx" @click.prevent="func1()">
+    用户名：<input type="text" v-model="username"><br>
+        &nbsp;密码：&nbsp;&nbsp;<input type="password" v-model="pwd"><br>
+    性别：&nbsp;&nbsp;<input type="radio" id="female" value="女" v-model="sex">&nbsp;&nbsp;<input type="radio" id="male" v-model="sex" value="男"><br>
+    爱好:&nbsp;&nbsp;篮球<input type="checkbox" id="basket" value="篮球" v-model="likes">
+        &nbsp;&nbsp;足球<input type="checkbox" id="foot" v-model="likes" value="足球">
+        &nbsp;&nbsp;乒乓<input type="checkbox" id="pingpang" value="乒乓" v-model="likes"><br>
+    城市: <select v-model="cityId">
+    <option value="" >未选择</option>
+    <option :value="x.Id" v-for="(x,index) in cities ">{{x.name}}</option><br/>
+          </select><br>
+        <!--option中value前：的作用 将后文的Id转化为表达式传给后台-->
+
+    <span>介绍：</span>
+    <textarea  rows="10" v-model="introduction"></textarea><br/>
+        <input type="submit" value='注册' >
+    </form>
+
+</div>
+
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({ // 配置对象 options
+        // 配置选项(option)
+        // el: '#test',  // element: 指定用vue来管理页面中的哪个标签区域
+        // data: {
+        //     msg: 'atguigu'
+        // }
+
+        el:'#test',
+        data:{
+            username:'',
+            pwd:'',
+            sex:'女',
+            likes:['foot'],
+            cities:[
+                {Id:1,name:'BJ'},
+                {Id:2,name:'SH'},
+                {Id:3,name:'GD'}
+            ],
+            introduction:'',
+            cityId:'2'
+
+        },
+        methods:{
+            func1(){
+                // event.preventDefault();
+                console.log(this.username,this.pwd,this.sex,this.likes,this.introduction,this.cityId)
+
+            }
+        },
+        mounted() {
+            this.func1()
+        }
+
+
+    })
+</script>
+</body>
+</html>

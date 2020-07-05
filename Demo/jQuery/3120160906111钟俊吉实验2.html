@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;
+          padding:0;}
+        .w{
+            width: 840px;
+            margin: 0 auto;}
+
+        /*因使用浮动 需解决高度塌陷问题，需使用clearfix*/
+        .clearfix:before,.clearfix:after{
+            content:"";
+            display: table;
+            clear: both;}
+        .clearfix{zoom: 1;}
+
+        .panel{ /*最外层盒子*/
+            width: 100%;
+            height: 1150px;}
+        .top{height: 24%;
+             background-color: #2196F3;
+             background: url("JavaWebImages/top.gif");
+            background-size: 100%,50%;}
+         .top_search{width: 440px;height: 82px;background-color: #eeeef3;border-radius: 8px;
+                     position: absolute;top: 60px;margin-left: 28px;}
+        .top_info{position: absolute;top: 190px;width: 400px;padding-left: 58px;}
+        /*上方设置结束*/
+        .mid{height: 54%;
+             /*background-color: green;*/}
+        .name{
+            background: url("JavaWebImages/ing_12.jpg") no-repeat;
+            background-size: 100%,100%;
+            border-bottom: 1px dashed gainsboro;}
+        .midinput{
+            width: 200px;
+            height: 25px;
+            margin-left: 20px;}
+        .midinput2{
+            width: 180px;
+            height: 25px;
+            margin-left: 20px;}
+        .midinput3{
+            width: 420px;
+            height: 25px;
+            margin-left: 20px;}
+        .tarea{
+            width: 440px;
+            height: 80px;
+            margin-top: -55px;
+            position: relative;
+            top:42px;
+            left:20px;
+            overflow-y: auto;}
+        .tr{
+            margin-bottom: 5px;
+            border-bottom: 1px solid gainsboro;
+            padding-bottom: 10px;}
+        .line{
+            width: 600px;
+            border-bottom: 1px dashed gainsboro;
+            padding-bottom: 10px;
+            position: relative;
+            top:9px}
+        .form_mid{
+            margin-top: 40px;
+            width: 150px;
+            height: 50px;}
+        .form_mid2{
+            width: 230px;
+            height: 50px;}
+        .form_bot1{
+            width: 600px;
+            height: 100px;
+            box-sizing: border-box;
+            border: 3px solid darkgreen;
+            background-color: #cfeae5;
+            border-bottom: 1px dashed gainsboro;}
+        .form_last{margin-bottom: 24px}
+        .check1{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-around;
+            position: relative;
+            top:16px;}
+        .check2{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-around;
+            position: relative;
+            top:6px;}
+        /*mid设置结束*/
+        .bottom{
+            height: 200px;
+            background-color: gray;
+            background: url("JavaWebImages/ing_33.jpg") no-repeat;
+            background-size: 100%,200px;
+            border-top: 1px dashed gray;}
+        .packet{
+            display: flex;
+            justify-content: space-around;
+            padding-top: 40px;}
+        .bottom button{
+            width: 45px;
+            height: 22px;
+            border:1px solid gray;
+            border-radius: 3px;}
+    </style>
+</head>
+<body>
+
+
+
+<div class="panel w">
+    <div class="top w">
+        <div class="top_search clearfix">
+            <!--上方第一个信息栏-->
+            <div class="img1">
+                <a href="#"><img src="JavaWebImages/ing_03.jpg" alt="#" style="float: left;width: 60px;height: 60px;position: relative;left: 10px;top: -15px; "></a>
+                 <p style="font-weight: bold;font-size: 20px;margin-top: 27px;"> &nbsp; &nbsp;精品搜索</p>
+            </div>
+            <div class="img2"><a href="#"><img src="JavaWebImages/ing_05.jpg" alt="#" style="float: right;width: 60px;height: 60px;position: relative;left:-30px;top: -42px"></a></div>
+            <div class="input"><input type="text" name="userSearch" id="input1" style="width: 150px;float: right;position: relative;top: -19px;left:-54px;"></div>
+        </div>
+         <div class="top_info">
+             <!--上方的第二个信息栏div-->
+             <img src="JavaWebImages/ing_09.jpg" alt="#" style="float: left;width: 80px;height: 80px">
+             <p style="font-weight: bold;font-size: 20px;margin-top: 27px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户基本信息:</p>
+         </div>
+    </div>
+    <!--上方布局结束-->
+    <div class="mid w">
+        <form action="" method="get">
+            <table style="margin-top: 10px">
+                <!--表单上部分布局，先四行二列的表单-->
+                <tr class="tr">
+                    <td><div class="name" style="width: 150px;height: 53px;"><p style="font-weight: bold;font-size: 15px;padding-top: 20px;text-align: center">顾客姓名</p></div></td>
+                    <td><div class="line"><input type="text"class="midinput" name="username" id="input2" ></div></td>
+                </tr>
+                <tr class="tr">
+                    <td><div class="name" style="width: 150px;height: 53px;"><p style="font-weight: bold;font-size: 15px;padding-top: 20px;text-align: center">联系电话</p></div></td>
+                    <td><div class="line"><input type="text"class="midinput2" name="phone" id="input3"></div></td>
+                </tr>
+                <tr class="tr">
+                    <td><div class="name" style="width: 150px;height: 53px;"><p style="font-weight: bold;font-size: 15px;padding-top: 20px;text-align: center">邮箱地址</p></div></td>
+                    <td><div class="line"><input type="text"class="midinput3" name="email" id="input4" ></div></td>
+                </tr>
+                <tr class="tr" >
+                    <td><div class="name" style="width: 150px;height: 53px;"><p style="font-weight: bold;font-size: 15px;padding-top: 20px;text-align: center">要求事项</p></div></td>
+                    <td><div class="line2"><textarea class="tarea" placeholder="message" name="event" id="input5"></textarea></div></td>
+                </tr>
+            </table>
+            <div class="form_mid">
+                <img src="JavaWebImages/ing_16.jpg" alt="#" style="float: left">
+                <p style="font-weight: bold;font-size: 17px;margin-top: 27px;position: relative;left:1px;top: 11px">选择商品:</p>
+            </div>
+            <div class="form_bot1">
+                <!--商品选择checkbox-->
+                <div class="check1">
+                    <div style="font-weight: bold;font-size: 13px;"><input type="checkbox" name="hz" class="chec" id="input6" >化妆品</div>
+                    <div style="font-weight: bold;font-size: 13px;"><input type="checkbox" name="sm" class="chec" id="input7" >数码产品</div>
+                    <div style="font-weight: bold;font-size: 13px;"><input type="checkbox" name="xx" class="chec" id="input8" >休闲服饰</div>
+                </div>
+                <div class="check2">
+                    <div style="font-weight: bold;font-size: 13px;"><input type="checkbox" name="dq" class="chec" id="input9" >家用电器</div>
+                    <div style="font-weight: bold;font-size: 13px;"><input type="checkbox" name="xb" class="chec" id="input10" >箱包</div>
+                    <div style="font-weight: bold;font-size: 13px;"><input type="checkbox" name="jj" class="chec" id="input11" >家具用品</div>
+                </div>
+            </div>
+            <div class="form_mid2">
+                <img src="JavaWebImages/ing_20.jpg" alt="#" style="float: left">
+                <p style="font-weight: bold;font-size: 17px;position: relative;left:1px;top: 11px">您对产品的满意度:</p>
+            </div>
+            <div class="form_bot1">
+                <!--用户满意度单选框-->
+                <div class="check1">
+                    <div style="font-weight: bold;font-size: 13px;"><input type="radio" name="view" class="chec" id="input12" value="1">很满意</div>
+                    <div style="font-weight: bold;font-size: 13px;"><input type="radio" name="view" class="chec" id="input13" value="2">一般</div>
+                </div>
+                <div class="check2">
+                    <div style="font-weight: bold;font-size: 13px;"><input type="radio" name="view" class="chec" id="input14" value="3">比较满意</div>
+                    <div style="font-weight: bold;font-size: 13px;"><input type="radio" name="view" class="chec" id="input15" value="4">不好</div>
+                </div>
+
+            </div>
+            <div class="form_last">
+                <img src="JavaWebImages/ing_23.jpg" alt="#" style="float: left">
+                <p style="font-weight: bold;font-size: 17px;position: relative;left:1px;top: 11px">选择您最喜爱的图片:</p>
+                <input name="scan";type="text" id="text_liulan" style="width: 150px;position: relative;left: 166px;top:-8px;">
+                <button class="btn_liulan" style="width: 87px;height:20px;position: relative;border-radius: 2px;
+                        border:1px solid gray;left: 163px;top:-8px;" >浏览</button>
+            </div>
+            <div class="border"></div>
+            <div class="bottom w">
+                <div class="packet">
+                    <input type="submit" name="submit" value="提交" style="  width: 45px;
+            height: 22px;
+            border:1px solid gray;
+            border-radius: 3px;">
+                    <button value="1" name="reset" id="reset">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--mid布局结束-->
+
+</div>
+
+
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+var resetBtn=document.getElementById("reset")
+var inpu1=document.getElementById("input6")
+var inpu2=document.getElementById("input7")
+var inpu3=document.getElementById("input8")
+var inpu4=document.getElementById("input9")
+var inpu5=document.getElementById("input10")
+var inpu6=document.getElementById("input11")
+var inpu7=document.getElementById("input12")
+var inpu8=document.getElementById("input13")
+var inpu9=document.getElementById("input14")
+var inpu10=document.getElementById("input15")
+
+
+    resetBtn.onclick=function () {
+
+        //reset输入框
+        $('#input1').val("");
+        $('#input2').val("");
+        $('#input3').val("");
+        $('#input4').val("");
+        $('#input5').val("");
+        $('#text_liulan').val("");
+        //reset—checkbox and radio
+        $('.chec').prop("checked","false");
+        var href=window.location
+        console.log(href)
+        console.log(navigator.userAgent)
+
+
+        return false
+    }
+</script>
+</body>
+</html>

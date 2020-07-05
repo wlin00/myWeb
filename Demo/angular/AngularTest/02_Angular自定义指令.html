@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+
+<div class="container">
+    <dialog title="我是标题" content="我是内容">
+    </dialog>
+</div>
+
+
+<script src="../AngularTest/prepared/js/angular-1.5.5"></script>
+<script type="text/javascript">
+
+    var App=angular.module("app",[])
+        .controller('ctrl',function ($scope) {
+            //依赖模块
+
+        });
+      App.directive('dialog',function () {
+          return{
+              //自定义指令
+              restrict:'E',  //restrict限制：指令用的位置是元素、attribute、class
+              replace:'true',
+              template:'<div><div>{{dialogTitle}}</div><div>{{dialogContent}}</div></div>',
+              scope:{
+                  dialogTitle:'@title',
+                  dialogContent:'@content'
+              }
+          };
+      });
+
+</script>
+</body>
+</html>

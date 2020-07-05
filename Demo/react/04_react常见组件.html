@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<div id="test1"></div>
+<div id="test2"></div>
+
+<script type="text/javascript" src="js/react.development1.js"></script>
+<script type="text/javascript" src="js/react-dom.development1.js"></script>
+<script type="text/javascript" src="js/babel.js"></script>
+
+<script type="text/babel">
+   //一、工厂函数组件：实际上是将虚拟Dom元素封装在 函数返回值中
+    function MyComponent() {
+        return <h2>工厂函数组件</h2>
+        }
+    ReactDOM.render(<MyComponent /> ,document.getElementById('test1'))
+
+   //二、ES6复杂组件（类）：
+    class MyComponent2 extends React.Component
+    {
+        render(){return  <h2>ES6复杂组件</h2>}
+    }
+
+   ReactDOM.render(<MyComponent />,document.getElementById('test1'))
+   ReactDOM.render(<MyComponent2 />,document.getElementById('test2'))
+</script>
+</body>
+</html>

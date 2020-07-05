@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body{background: url("img/bg.jpg");background-size: 100%,100%;}
+    </style>
+</head>
+<body>
+  <div>
+      <button id="btn">点击可弹出</button><br/>
+      <input type="text" name="msg1"><br/>
+      <input type="text" name="msg2"><br/>
+  </div>
+
+<!--
+    一.$可作为一般函数使用
+        1）参数为函数：$（function（）{}）：当dom加载完成以后，就执行这个函数实现监听
+        2）参数为选择器字符串：查找所有匹配的标签，并将它们封装为jquery的对象
+        3）参数为dom对象：将dom对象封装为jQuery对象，如：var $btn2=$('#btn2');
+        4）参数为html的标签字符串，创建标签对象，封装为jQUery对象
+
+    二.$可以作为对象来调用
+        1） $.each（）：隐式遍历数组
+        2） $.trim（）：去除两端的空格
+-->
+
+
+
+
+  <!--Demo2需求
+             1.点击button，显示button的文本，显示一个新的输入框
+             2.遍历，输出数组
+             3.去空格练习
+  -->
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+     //绑定文档加载完成的监听，dom加载完成后执行
+    $(function () {
+        $('#btn').click(function () {
+            //需要通过点击显示按钮中的文本内容
+            //当前this指向dom操作的对象，即button，也可以使用var $btn=$('#id标签');
+            alert($(this).html());
+
+
+            //改变html结构，可以通过jq对象封装一个html标签内容，并且使用方法AppendTo
+            $('<input type="text" name="msg2"><br/>').appendTo('div');
+        })
+    });
+
+
+//  需求2，遍历数组,可以使用$的对象调用，使用方法$.each
+//     each()方法的两个参数，第一个是arr数组对象
+//                          第二个是一个回调函数，参数有序列数和遍历的元素
+     var arr=[2,4,7];
+    $.each(arr,function (index,item) {
+        console.log("index="+index+' '+"item="+item);
+
+    });
+
+//    需求3：trim方法 去除字符串变量两边的空格
+     var str='    my  jQuery    day   ';
+     console.log('-----'+$.trim(str)+'------');
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+
+<script>
+    // for(var i=0;i<3;i++)
+    // {
+    //     setTimeout(function(){console.log(i);
+    //     },0);
+    //     console.log(i);
+    // }
+    //   会输出0 1 2 3 3 3的原因是 setTimeout函数是异步通信的，setTimeout的函数参数，
+    //   会放入等待队列的线程，等待主程序队列的线程都执行完毕后，才会执行等待队列的线程，故先跑完所有主线程的console.log();
+    //   解决异步问题，使用闭包特性，①闭包函数作为返回值  ②将函数作为立即执行函数的参数
+
+
+
+    //①闭包函数作为返回值
+    // for(var i=0;i<3;i++)
+    // {
+    //     setTimeout(function(i){return function(){
+    //         console.log(i);
+    //     }}(i),0);
+    //     console.log(i);
+    // }
+
+
+    //②将函数作为立即执行函数的参数
+    for(var i=0;i<3;i++)
+    {
+        (function(i) {
+            setTimeout(function () {
+                console.log(i);
+            }, 0);
+            console.log(i);
+        })(i)
+    }
+
+
+</script>
+</body>
+</html>

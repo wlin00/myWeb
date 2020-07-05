@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+    
+	
+        var a= new Date();
+        console.log("日期为:"+a);
+        var b=a.getFullYear();
+        var c=a.getMonth()+1;
+        var d=a.getDate();
+
+        var b1=a.getHours();
+        var c1=a.getMinutes();
+        var d1=a.getSeconds();
+        var e1=b1+":"+c1+":"+d1;
+        console.log("理想输出格式为："+e1);
+        
+
+
+        if(a!=e1){console.log("日期类型与理想输出不符合");}
+        
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

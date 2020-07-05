@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<div id="box"></div>
+<script type="text/javascript" src="js/react.development1.js"></script>
+<script type="text/javascript" src="js/react-dom.development1.js"></script>
+<script type="text/javascript" src="js/prop-types.js"></script>
+<script type="text/javascript" src="js/babel.js"></script>
+
+<script type="text/babel">
+class Component extends React.Component{
+
+    constructor(props){
+        super(props)
+        this.state={
+            opacity:1
+        }
+        this.HandleClick=this.HandleClick.bind(this)
+    }
+
+    render(){
+        const {opacity}=this.state
+        return(
+            <div>
+                <h3 style={{opacity:opacity}}>{this.props.msg}</h3>
+                <button onClick={this.HandleClick}>消失</button>
+            </div>
+        )
+    }
+    //思路：设置一个定时器来循环修改state，定时器需要放在 渲染刚刚结束的回调函数componentdidmount中
+    componentDidMount(){
+        this.interval=setInterval( ()=> {
+
+            let {opacity}=this.state
+            //重点：注意setinterval等延时函数代码是在全局执行的；
+            // 即定时器内this指向window,改变this指向组件的方法是：箭头函数、bind
+            opacity-=0.1
+            if(opacity<=0){opacity=1}
+            this.setState({opacity})
+        }
+        ,200)
+    }
+     //react生命周期钩子函数--componentDidMount 用与组件的render刚刚结束阶段 的代码植入
+
+    componentWillUnmount(){
+         //组件即将被删除时执行，这里面可以用与删除或清理未清除的全局变量或者定时器，防止内存泄漏
+         clearInterval(this.interval)
+    }
+
+    HandleClick(){
+       ReactDOM.unmountComponentAtNode(document.getElementById('box'))
+    }
+
+
+
+
+}
+
+ReactDOM.render(<Component msg='React生命周期Demo'/>,document.getElementById('box'))
+
+</script>
+</body>
+</html>

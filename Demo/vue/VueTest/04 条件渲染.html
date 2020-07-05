@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_HelloWorld</title>
+</head>
+<body>
+
+<!--
+  1. 引入Vue.js
+  2. 创建Vue对象
+    el : 指定根element(选择器)
+    data : 初始化数据(页面可以访问)
+  3. 双向数据绑定 : v-model
+  4. 显示数据 : {{xxx}}
+  5. 理解vue的mvvm实现
+-->
+
+<!--模板-->
+<div id="test">
+
+    <!--1、v-if和v-else的匹配使用-->
+    <!--
+    v-if和v-else的显示原理:将标签直接移出
+    v-show：通过类似display：none的样式来隐藏对应的元素，故v-show调用时，内存中对象还在，所以不会多次删除和创建对象占用内存。
+    -->
+    <h3 v-if="ok">显示1</h3>
+    <h3 v-else>显示2</h3>
+    <button @click="ok=!ok">切换1</button>
+    <br>
+    <!--2、v-show控制条件渲染，适合频繁切换的情况-->
+     <p style="color: red" v-show="ok2">Demo1</p>
+     <p style="color: red" v-show="!ok2">Demo2</p>
+     <button @click="ok2=!ok2">切换1</button>
+
+</div>
+
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({ // 配置对象 options
+        // 配置选项(option)
+        // el: '#test',  // element: 指定用vue来管理页面中的哪个标签区域
+        // data: {
+        //     msg: 'atguigu'
+        // }
+         el:'#test',
+        data:{
+             ok:true,
+             ok2:true
+        }
+
+    })
+</script>
+</body>
+</html>

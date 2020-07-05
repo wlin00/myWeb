@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /*初始化*/
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .left {
+            height: 300px;
+            width: 50%;
+            background-color: red;
+            float: left;
+
+
+        }
+
+        .right {
+            height: 300px;
+            width: 50%;
+            background-color: blue;
+            float: left;
+
+        }
+
+        /*开始使用媒体查询，来自适应分辨率,让窗口大小在600-700px之间*/
+        @media only screen and (min-width: 600px) and(max-width: 699.99px) {
+            .right {
+                background-color: yellow;
+                font-size: 15px;
+            }
+
+
+        }
+
+        @media only screen and (min-width: 700px) and(max-width: 999.99px) {
+            .right {
+                background-color: black;
+                font-size: 15px;
+            }
+
+
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="left">
+    Left
+</div>
+<div class="right">
+    Right
+</div>
+</body>
+</html>

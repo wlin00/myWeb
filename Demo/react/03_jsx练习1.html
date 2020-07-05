@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<h2>前端js框架列表</h2>
+<div id="example1"></div>
+
+<script type="text/javascript" src="js/react.development1.js"></script>
+<script type="text/javascript" src="js/react-dom.development1.js"></script>
+<script type="text/javascript" src="js/babel.js"></script>
+
+<script type="text/babel">
+
+    //功能：动态展示列表数据
+    const names=['jQuery','zepto','angular','react','vue']
+    //数组数据一般存在于组件内部或者是其父级组件中，若是在父级，则需要将数据设置到state中在渲染子组件时要将this.state.属性名赋予到组件的属性上；
+    // 然后在后续组件需要用的时候，直接在this.prop.属性名 中就可以访问使用。
+    var index=0;
+    //react核心操作：1、创建虚拟dom元素对象；
+    //重要知识点：如何将数据的数组转化为标签的数组；使用数组的map方法
+    const vDom=<ul>
+        {
+            names.map((name,index)=> <li key={index}>{name}</li>)
+            //react的特性：会自动遍历数组--通过数组的map方法；用map方法在遍历数组同时渲染虚拟Dom
+            //map方法用法：(value,key)=><标签 key={key}>{value}</标签>
+            //实际上是将第一个参数的value提取数组的数据渲染页面，第二个参数的key来给每个value加上索引key
+
+        }
+              </ul>
+    //2、虚拟Dom渲染到页面真实dom容器,使用方法render
+           ReactDOM.render(vDom,document.getElementById('example1'))
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #test1,#test2{
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+<body>
+<div id="test1"></div>
+<div id="test2"></div>
+
+
+<script type="text/javascript" src="js/react.development1.js"></script>
+<script type="text/javascript" src="js/react-dom.development1.js"></script>
+<script type="text/javascript" src="js/babel.js"></script>
+<script type="text/javascript">
+    var msg='I like you'
+    var myId='AtGuigu'//用于给新插入的虚拟dom元素对象 带上id
+
+    //需求：将两段文本分别插入两个div中
+    // 实现方式1：纯js，不使用babel
+    //react核心操作：1、创建虚拟dom元素对象；
+       var vDom_js=React.createElement('h2',{id:myId.toUpperCase()},msg.toUpperCase())
+       var trueDom=document.getElementById('test1')
+       // debugger
+    //2、虚拟Dom渲染到页面真实dom容器,使用方法render
+       ReactDOM.render(vDom_js,document.getElementById('test1'))
+
+
+</script>
+<script type="text/babel">
+
+    // 实现方式1：使用jsx语法，工具babel进行转换
+    //react核心操作：1、创建虚拟dom元素对象；
+    var vDom_jsx=<h3 id={myId.toLowerCase()}>{msg.toLowerCase()}</h3>
+    //2、虚拟Dom渲染到页面真实dom容器,使用方法render
+    ReactDOM.render(vDom_jsx,document.getElementById('test2'))
+
+
+</script>
+
+</body>
+</html>

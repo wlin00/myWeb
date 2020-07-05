@@ -1,0 +1,27 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+
+<script>
+    //判断0-1000内一共多少个0
+function getSum(num) {
+    let sum = 0
+    let reg = /0/g   //全局匹配0
+
+    for (let i = 0; i <= num; i++) {
+        let str = '' + i
+        let match = str.match(reg)
+        sum += match == null ? 0 : match.length
+    }
+    return sum
+}
+console.log(getSum(1000))
+
+</script>
+</body>
+</html>

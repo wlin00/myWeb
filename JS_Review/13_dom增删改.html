@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        body{background: url("img/bg.jpg");background-size: 100%,100%;}
+
+        /*因使用浮动 需解决高度塌陷问题，需使用clearfix*/
+        .clearfix:before,.clearfix:after{
+            content:"";
+            display: table;
+            clear: both;
+        }
+        .clearfix{zoom: 1;}
+        .w{
+            width: 280px;
+            margin-left: 430px;
+            float: left;
+        }
+        .r{width: 440px;
+            margin-right: 300px;
+            float: right;}
+
+        .inner>ul{display: flex;justify-content: flex-start}
+        .inner ul li {list-style: none;margin-right: 15px;font-size: 20px;border: 1px solid gray;background: lightgreen;}
+
+        .inner{
+            width: 100%;
+            height: 100%;
+            border: 1px solid black;
+        }
+        .inner:first-child{margin-top: 50px;margin-bottom: 30px;}
+
+        .inner>h2{
+            text-indent: 2em;
+        }
+        .bt{margin-top: 50px;}
+
+        .btn{
+            margin-top: 2px;
+            margin-bottom: 3px;
+            width: 210px;
+        }
+    </style>
+</head>
+<body>
+<div class="total w clearfix">
+    <div class="inner">
+        <h2>你最喜欢的城市</h2>
+        <ul id="city">
+            <li id="bj">北京</li>
+            <li>上海</li>
+            <li>东京</li>
+            <li>首尔</li>
+        </ul>
+        <br/>
+        <br/>
+    </div>
+</div>
+<div id="btnList" class="bt r clearfix">
+    <div><button class="btn" id="btn01">创建一个“广州”节点添加到#city下</button></div>
+    <div><button class="btn" id="btn02">将“广州"节点插入到#bj前面</button></div>
+    <div><button class="btn" id="btn03">使用”广州“节点替换#bj节点</button></div>
+    <div><button class="btn" id="btn04">删除bj节点</button></div>
+    <div><button class="btn" id="btn05">读取#city内html代码</button></div>
+    <div><button class="btn" id="btn06">设置#bj内的html代码</button></div>
+</div>
+
+
+<script>
+    //获取#city、bj对象
+    var city=document.getElementById("city");
+    var bj=document.getElementById("bj");
+
+    //第一个按钮触发事件,创建一个“广州”  li元素节点、广州文本节点
+    myclick("btn01",function () {
+        var li=document.createElement("li");
+        var gz=document.createTextNode("广州");//或直接li.innerHtml="广州"（更好）
+        li.appendChild(gz);//向元素节点添加文本子节点
+        city.appendChild(li);
+    });
+
+    //第二个按钮触发事件，将“广州"节点插入到#bj前面
+    myclick("btn02",function () {
+        var li=document.createElement("li");
+        var gz=document.createTextNode("广州");
+        li.appendChild(gz);//向元素节点添加文本子节点
+        city.insertBefore(li,bj);//参数1：新node  参数2：prenode（插入到此点前面）
+    });
+
+
+    //第三个按钮触发事件，“广州"节点替换#bj节点
+    myclick("btn03",function () {
+        if(document.getElementById("bj")===null){return;}
+        var li=document.createElement("li");
+        var gz=document.createTextNode("广州");
+        li.appendChild(gz);//向元素节点添加文本子节点
+        city.replaceChild(li,bj);//参数1：新node  参数2：oldNode
+    });
+
+    //第四个按钮触发事件，删除bj节点
+    myclick("btn04",function () {
+        if(document.getElementById("bj")===null){return;}
+
+        city.removeChild(bj);
+    });
+
+    //第5个按钮触发事件，读取#city内html代码
+    myclick("btn05",function () {
+       alert(city.innerHTML)
+    });
+
+    //第6个按钮触发事件，读取#bj内html代码
+    myclick("btn06",function () {
+        alert(bj.innerHTML)
+    });
+
+    function myclick(id,fun)
+    {
+        var aaa=document.getElementById(id);
+        aaa.onclick=fun
+    }
+</script>
+</body>
+</html>

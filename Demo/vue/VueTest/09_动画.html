@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_HelloWorld</title>
+    <style>
+        .donghua-enter-active, .donghua-leave-active{
+            /*定义显示、隐藏的过渡效果*/
+            transition:opacity 1s;
+        }
+        .donghua-enter, .donghua-leave-to{
+            /*定义隐藏时的样式*/
+            opacity:0;
+            transform: translateX(20px);
+        }
+
+
+
+        /*.donghua2-enter-active, .donghua2-leave-active{*/
+            /*!*定义显示、隐藏的过渡效果*!*/
+            /*transition:opacity 1s;*/
+        /*}*/
+        /*.donghua2-enter, .donghua2-leave-to{*/
+            /*!*定义隐藏时的样式*!*/
+            /*opacity:0;*/
+            /*transform: translateX(20px);*/
+        /*}*/
+
+        /*使用animation做出缩放效果,实际上是绑定动画donghua2*/
+        .donghua2-enter-active{
+            animation: donghua2 2s;
+        }
+        .donghua2-leave-active{
+            animation: donghua2 reverse 2s;
+        }
+
+
+
+
+        /*设置缩放效果*/
+        @keyframes donghua2 {
+            0%{
+               transform: scale(0);
+                opacity: 0.5;
+            }
+             50%{
+                 transform: scale(1.5) translateX(20px);
+                   opacity: 0.7;
+             }
+               100%{
+                   transform: scale(1);
+                   opacity: 1;
+
+               }
+        }
+
+
+    </style>
+</head>
+<body>
+
+<!--
+  1. 引入Vue.js
+  2. 创建Vue对象
+    el : 指定根element(选择器)
+    data : 初始化数据(页面可以访问)
+  3. 双向数据绑定 : v-model
+  4. 显示数据 : {{xxx}}
+  5. 理解vue的mvvm实现
+-->
+
+<!--模板-->
+<div id="test">
+    <button @click="isShow=!isShow">过渡动画</button>
+    <transition name="donghua">
+        <p v-show="isShow" class="donghua-enter-to">hello world</p>
+    </transition>
+</div>
+
+<!--模板2-->
+<div id="test2">
+    <button @click="isShow2=!isShow2">过渡动画</button><br>
+    <transition name="donghua2">
+        <p v-show="isShow2"  style="display: inline-block">hello world2</p>
+    </transition>
+</div>
+
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({ // 配置对象 options
+        // 配置选项(option)
+        // el: '#test',  // element: 指定用vue来管理页面中的哪个标签区域
+        // data: {
+        //     msg: 'atguigu'
+        // }
+        el:'#test',
+        data(){
+            return{
+                 isShow:true
+            }
+        }
+    })
+
+    const vm2=new Vue({
+        el:'#test2',
+        data(){
+            return{
+                isShow2:true
+            }
+
+        }
+    })
+
+
+</script>
+</body>
+</html>

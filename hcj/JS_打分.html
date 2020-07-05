@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+      function    comp(a){
+      
+      for(var i=0;i<a.length;i++){
+          for(var j=0;j<a.length-1;j++)
+            {
+            	if(a[j]<a[j+1]){
+                      t=a[j];
+                      a[j]=a[j+1];
+                      a[j+1]=t;
+
+            	}
+            }
+
+      }
+      return a;
+ }
+
+     console.log("the result is :");
+     var a1=[88,67,87,77,86,67,66,89,95,93];
+     comp(a1);
+    
+     for(var k=1;k<a1.length-1;k++)
+        {
+        	console.log(a1[k]);
+        }
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

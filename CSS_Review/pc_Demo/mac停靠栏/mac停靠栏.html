@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        #wrap{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            text-align: center;
+            width: 100%;
+        }
+        #wrap >img{
+            width: 64px;
+            height: 64px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrap">
+    <img src="images/1.png" >
+    <img src="images/2.png" >
+    <img src="images/3.png" >
+    <img src="images/4.png" >
+    <img src="images/5.png" >
+</div>
+
+<script>
+    window.onload=function () {
+        var r=128;
+        var imgNodes = document.querySelectorAll("#wrap >img")
+        //给所有图片加鼠标滑动的监听，判断当鼠标小于各个图片位置的时候，对图片进行scale的放大
+
+        document.onmousemove=function (e) {
+            e=e||event
+          for(var i =0 ;i<imgNodes.length;i++){
+              var x = imgNodes[i].getBoundingClientRect().left+imgNodes[i].offsetWidth/2 - e.clientX
+              var y = imgNodes[i].getBoundingClientRect().top+imgNodes[i].offsetHeight/2 - e.clientY
+              var c = Math.sqrt(x*x +y*y)
+
+              if(c>=r){
+                  c=r
+              }
+              imgNodes[i].style.width=128 - c/2 +"px";
+              imgNodes[i].style.height=128 - c/2 +"px";
+
+          }
+        }
+    }
+</script>
+</body>
+</html>

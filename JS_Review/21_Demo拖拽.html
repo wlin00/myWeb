@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;}
+
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+        #box2{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: orange;
+            top: 200px;
+            left: 200px;
+        }
+
+
+        body{height: 800px;overflow: hidden}
+
+    </style>
+</head>
+<body>
+
+<div id="box"></div>
+<div id="box2"></div>
+
+<!--
+需求：
+1、当鼠标在被拖拽的元素上按下的时候，开始拖拽
+2、当鼠标移动时候，被拖拽元素跟随鼠标移动
+3、当鼠标松开的时候，被拖拽的元素固定在当前位置
+-->
+<script>
+    var flagLeft=false;
+    var flagTop=false;
+    var flagRight=false;
+    var flagBottom=false
+
+    //1、当鼠标在被拖拽的元素上按下的时候，开始拖拽
+    //首先，当点击时候，开启事件，将鼠标当前的pageX和pageY赋予给div的left和top
+    var box=document.getElementById("box")
+    box.onmousedown=function (event) {
+        //还需要自动根据用户的鼠标位置，来让盒子向左上方进行一个左上方的偏移
+        //左上方的原因是因为盒子点击时，会自动将鼠标移动到最极限的左上点，影响体验
+        var mouseOffsetX=event.clientX-box.offsetLeft
+        var mouseOffsetY=event.clientY-box.offsetTop
+
+        document.onmousemove=function (event) {//2、当鼠标移动时候，被拖拽元素跟随鼠标移动
+
+            event=event||window.event
+            // var x=event.pageX;
+            // var y=event.pageY;//此处不能使用pageX、Y 因为兼容ie8
+            var x=event.clientX;
+            var y=event.clientY
+            var offset=document.documentElement.scrollTop||document.body.scrollTop
+            //ie8以上浏览器默认滚动条是body上，ie8则需要取用document.documentElement
+            box.style.left=x-mouseOffsetX+"px"
+            box.style.top=y-mouseOffsetY+offset+"px"
+
+        }
+
+        document.onmouseup=function () {//松鼠标事件绑定给document，防松开点不到box
+            document.onmousemove=null//若松开鼠标则取消document域的mousemove事件
+                                     //每个载入浏览器的html文档都会成为document对象
+
+            document.onmouseup=null
+            alert("鼠标松开了");
+        }
+        return false;//取消可能的Ctrl+A的默认行为
+    }
+
+
+
+    //再用键盘控制div移动
+    document.body.onkeydown=function (event) {
+        event=event||window.event
+        if(event.keyCode===37){flagLeft=true}//左
+        if(event.keyCode===38){flagTop=true}//上
+        if(event.keyCode===39){flagRight=true}//右
+        if(event.keyCode===40){flagBottom=true}//下
+
+    }
+    document.body.onkeyup=function (event) {
+        event=event||window.event
+        if(event.keyCode===37){flagLeft=false}//左
+        if(event.keyCode===38){flagTop=false}//上
+        if(event.keyCode===39){flagRight=false}//右
+        if(event.keyCode===40){flagBottom=false}//下
+
+    }
+    var addleft=0;
+    var addTop=0;//定义x和y轴方向的速度
+
+
+    function  moveLeft() {
+
+        addleft-=10;
+        box.style.left=addleft+"px"
+    }
+    function  moveRight() {
+        addleft+=10;
+        box.style.left=addleft+"px"
+
+    }
+    function  moveTop() {
+        addTop-=10;
+        box.style.top=addTop+"px"
+        // box.style.top=box.offsetTop-10+"px"
+    }
+    function  moveBottom() {
+        addTop+=10;
+        box.style.top=addTop+"px"
+        // box.style.top=box.offsetTop+10+"px"
+    }
+
+
+
+    //建立控制行为函数，并且设置定时器
+    function ctrl() {
+        if(flagLeft===true){ moveLeft() ;}
+        if(flagTop===true){ moveTop() ;}
+        if(flagRight===true){ moveRight() ;}
+        if(flagBottom===true){ moveBottom() ;}
+    }
+    var settool=setInterval(ctrl,30);
+    
+
+</script>
+</body>
+</html>

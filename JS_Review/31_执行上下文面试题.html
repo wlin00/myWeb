@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+
+    /*输出结果
+    * 全局begin：i=undefined,因为i变量声明提前
+    * 内部函数循环输出：
+    * func begin：1、2、3
+    * func  end：3、2、1 ---i减少原因：函数调用时，本轮的执行上下文入栈
+    *                                 然后直到i==4的时候函数return，导致函数执行的上下文先进后出顺序出栈
+    * 全局end i=1
+    * */
+    console.log("全局begin"+i)
+    var i=1
+    foo(1)
+    function foo(i) {
+        if(i===4){
+            return
+        }
+        console.log("func begin"+i)
+        foo(i+1)
+        console.log("func end"+i)
+    }
+    console.log("全局end"+i)
+    console.log("-------")
+
+
+    //面试题2：同时声明同名的变量和函数a,变量声明先执行，然后再执行；
+        var a;
+        function a(){}
+        console.log(typeof a)//输出function
+        console.log(a)
+    console.log("-----")
+
+    //面试题3
+      if(!(b in window)){//b在window里，故不会执行定义b=1语句
+          var b=1
+      }
+      console.log(b)//
+      console.log("-----")
+
+    //面试题4
+    //   var c=1
+    // function c(c) {
+    //     console.log(c)
+    //     var c=3
+    //   }
+    // c(2)//此题会报错，因为c先声明和定义为了一个变量，而不会执行-函数执行上下文
+
+
+    //面试题5
+    var name="The Window"
+    var object={
+          name:"My Object",
+          getName:function () {
+              return function () {
+                  return this;
+              }
+          }
+    }
+    console.log(object.getName()())
+    //getName()调用后实际上是一个window的函数
+    //因为返回的this指向window
+    // 所以直接调用此函数，实际上是输出window
+    console.log("-------")
+
+
+    //面试题6
+    var name2="The Window"
+    var object2={
+        name2:"My Object",
+        getName2:function () {
+            var fun_this=this
+            return function () {
+                return fun_this;
+            }
+        }
+    }
+    console.log(object2.getName2()())
+    //因为返回的this保留了函数域中的this
+    // 所以直接调用此函数，实际上是输出object2
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

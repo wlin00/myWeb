@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_HelloWorld</title>
+    <style>
+        .classA{
+            background-color: orange;
+        }
+        .classB{
+            background-color: aliceblue;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<!--
+  1. 引入Vue.js
+  2. 创建Vue对象
+    el : 指定根element(选择器)
+    data : 初始化数据(页面可以访问)
+  3. 双向数据绑定 : v-model
+  4. 显示数据 : {{xxx}}
+  5. 理解vue的mvvm实现
+-->
+
+<!--模板-->
+<!--v-class的使用：可以是后接：“{‘className’：vm对象的data属性---存放一个布尔值 }”-->
+<div id="test">
+      <h2 :class="{'classA':a,'classB':b}">Switch</h2>
+      <button @click="update">点击切换</button>
+</div>
+
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({ // 配置对象 options
+        // 配置选项(option)
+        // el: '#test',  // element: 指定用vue来管理页面中的哪个标签区域
+        // data: {
+        //     msg: 'atguigu'
+        // }
+         el:'#test',
+          data:{
+             a:false,
+             b:true
+          } ,
+           methods:{
+             update(){
+                 this.a=!this.a
+                 // console.log(this.a)
+                  this.b=!this.b
+             }
+           }
+    })
+</script>
+</body>
+</html>

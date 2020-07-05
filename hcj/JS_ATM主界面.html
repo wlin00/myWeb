@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+<style>
+div{width: 300px;height: 200px;margin:0 auto;border:1px solid black;border-radius: 5px;text-align: center;}
+p{font-size:20px;}
+button{border:0px;padding:5px;background-color: green;color:white;}
+</style>
+
+<script>
+var balance=2000
+var i=2;//密码输入错的次数
+function checkNumber(account){return isNaN(account);}//判断输入卡号是不是数字类型，返回true就不是此类型
+
+function checkNull(account,password){if(account.length>0&&password.length>0){return true;}return false;}
+//判断输入的卡号和密码是否为空
+
+function login(){var account=document.getElementById("account").value;
+        var password=document.getElementById("password").value;
+if(!checkNull(account,password)){alert("卡号和密码都不能为空");return;}
+if(checkNumber(account)){alert("卡号必须是数字");return;}
+if(i>0&& account =="123456789"&& password =="123"){window.location.href="JS_ATM主界面.html";}
+else{
+      if(i==0){alert("你现有的卡号已经锁定");return;}
+alert("你还有"+i+"次机会");
+i--;return;
+
+}
+}
+
+function deposit(){
+    var balance=parseFloat(document.getElementById("balance").value);
+    var deposit=document.getElementById("deposit").value;
+    if(!deposit.length>0){alert("请输入你要存的金额...");return;}
+    if(checkNumber(deposit)){alert("存款操作请求输入数字...");return;}
+    balance+=parseFloat(deposit);
+    document.getElementById("balance").value=balance;
+
+}
+
+function withdraw(){
+	var balance=parseFloat(document.getElementById("balance").value);
+   var withdraw=document.getElementById("withdraw").value;
+
+   if(!withdraw.length>0){alert("请输入取款的金额...");return;}
+
+   if(checkNumber(withdraw)){alert("取款操作请求输入数字...");return;}
+   if(parseFloat(withdraw)>balance){alert("余额不足");return;}
+   balance-=parseFloat(withdraw);
+
+
+}
+</script>
+
+</head>
+<body>
+<div>
+<p>ATM存款取款</p>
+<p><label >余额</label><input type="text" name="balance" id="balance"></p>
+<p><label>存款</label><input type="text" id="deposit"><button onclick="deposit()">存入</button></p>
+<p><label>取款</label><input type="text" id="withdraw"><button onclick="withdraw()">提取</button></p>
+
+</div>
+
+	
+</body>
+</html>

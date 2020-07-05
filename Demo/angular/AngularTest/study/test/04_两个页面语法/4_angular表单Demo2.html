@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-app="myApp" ng-controller="ctrl">
+
+<div>
+    <form novalidate>
+        First Name:<br>
+    <input type="text" ng-model="user.firstName"><br>
+        Last Name:<br>
+    <input type="text" ng-model="user.lastName">
+    <br>
+    <br>
+    <button ng-click="reset()">Reset</button>
+    </form>
+
+    <p>form={{user}}</p>
+    <p>master={{master}}</p>
+</div>
+</body>
+<script src="../../js/angular-1.2.29/angular.js"></script>
+<script>
+    var app=angular.module('myApp',[])
+        .controller('ctrl',function ($scope) {
+            $scope.master={firstName:"john",lastName:"Doe"}
+            $scope.reset=function () {
+                $scope.user=angular.copy($scope.master)
+            }
+            $scope.reset()
+        })
+
+</script>
+</body>
+</html>
+
+

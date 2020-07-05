@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+
+<script>
+    function fun(n,o) {
+        console.log(o)
+        return{
+            fun:function (m) {
+                return fun(m,n)}}}
+                //若产生新的闭包，闭包内的变量可以重复使用，参数更新：
+                //0、0 (打印undefined)->1、1(打印0)->
+                // 2、2(打印1)-> 3、3(打印2)
+
+    var a=fun(0)//undefined
+    a.fun(1)//未产生新的闭包,只更新参数1，输出0
+    a.fun(2)//未产生新的闭包,只更新参数1，输出0
+    a.fun(3)//未产生新的闭包,只更新参数1，输出0
+
+    //undefined、0、1、2（此调用产生新闭包，从第一步执行)
+    var b=fun(0).fun(1).fun(2).fun(3)
+
+    var c=fun(0).fun(1)//产生新闭包，undefined、0--》结果参数是1、1
+    c.fun(2)//未产生新的闭包,只更新参数1，输出1
+    c.fun(3)//未产生新的闭包,只更新参数1，输出1
+
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>13_watch触发函数</title>
+</head>
+<body>
+
+
+<div id="test">
+  <p>
+      Ask a yes/no question
+      <input type="text" v-model="question">
+  </p>
+  <p>{{answer}}</p>
+</div>
+
+
+<script src="https://cdn.bootcss.com/axios/0.17.1/axios.min.js"></script>
+<script src="js/lodash.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+
+    // import axios from 'axios'
+    const vm = new Vue({ // 配置对象 options
+        // 配置选项(option)
+        el: '#test',  // element: 指定用vue来管理页面中的哪个标签区域
+        data: {
+
+            question:'',
+            answer:'we cannot give answer until u ask questions!'
+
+            //   声明需要的变量
+        },
+        watch:{
+            question:function () {
+                this.answer  = 'wating for your typing ... ';
+                this.getAnswer();
+            }
+        },//对question加监听，只要question值变化则调用methods中函数，
+
+        methods:{
+            getAnswer: _.debounce(function () {
+
+               var vm = this;
+               if(this.question.indexOf('?') === -1){
+                   this.answer  = 'questions should contain a question mark';
+                   return;
+               }
+               vm.answer  = 'Thinking';//请求接口拿到对应答案
+
+                axios.get('https://yesno.wtf/api').
+               then(
+                   function (res) {
+                       vm.answer  = res.data.answer
+                   }
+               ).catch(
+                   function (err) {
+                       vm.answer = 'Error! Could not find the Api'+err;
+                   }
+               )
+            },500)
+        }
+
+    })
+</script>
+</body>
+</html>

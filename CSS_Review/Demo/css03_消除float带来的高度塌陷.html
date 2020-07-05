@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        html,body{height: 100%;}
+        .box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            float: left;
+            /*float使得box的父元素高度塌陷，这时候需要为父元素设置触发BFC，让它能够成为包裹三个子盒子的容器*/
+        }
+        #box2{
+            margin-left: 10px;margin-right: 10px
+        }
+
+        .panel:after{
+            /*设置父盒子触发BFC*/
+            /*方法1：overflow: hidden;*/
+            /*方法2：display: table;*/
+            /*方法3：float: left;*/
+            /*方法4：父元素panel设置固定高低*/
+            /*方法5：设置一个额外标签节点box4，设置clear：both*/
+            /*方法6：为元素after：追加clearFloat类*/
+            clear: both;
+            content:"";
+            height: 0;
+            display: block;
+            visibility: hidden;
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="panel">
+<div class="box"></div>
+<div class="box " id="box2"></div>
+<div class="box"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+       function count(){
+          var fm_ckn=0;     //母鸡一只3文，最多33只母鸡
+          var m_ckn=0;      //公鸡一只5文，最多20只
+          var l_ckn=0;      //小鸡3只一文，最多300只，但只用100只，故取100
+          for(fm_ckn=0;fm_ckn<33;fm_ckn++)
+          	for(m_ckn=0;m_ckn<20;m_ckn++)
+          		for(l_ckn=0;l_ckn<100;l_ckn++)
+          			if((fm_ckn+m_ckn+l_ckn)==100&&(3*fm_ckn+5*m_ckn+l_ckn/3)==100){
+
+          				console.log('母鸡有: '+fm_ckn+'只');
+                        console.log('公鸡有: '+m_ckn+'只');
+                        console.log('小鸡有: '+l_ckn+'只');
+                        console.log(" ");
+}
+       }
+       count();
+
+
+
+
+	</script>
+     
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding: 0;}
+        #wrap{
+            position: relative;
+            left: 200px;
+            top:200px;
+            background-color: purple;
+            height: 100px;
+            width: 100px;
+        }
+        #inner1{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            background-color: #2196F3;
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div id="wrap">
+    <div id="inner1">
+        inner1
+    </div>
+</div>
+
+<script>
+    //获取元素绝对位置
+    window.onload=function () {
+
+    var x=0;
+    var y=0;
+    var node=document.querySelector("#inner1")
+    var result1 = getPosition1(node);
+    function getPosition1() {
+
+        while(node){
+            x+=node.offsetLeft;
+            y+=node.offsetTop;
+            node=node.offsetParent
+        }
+        return {x:x,y:y}
+    }
+console.log(result1)
+console.log(inner1.getBoundingClientRect())
+
+    }
+</script>
+</body>
+</html>

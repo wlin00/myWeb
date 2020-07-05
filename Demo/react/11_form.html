@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        #box{
+            position: absolute;
+            left: 50%;
+            top: 30%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/javascript" src="js/react.development1.js"></script>
+<script type="text/javascript" src="js/react-dom.development1.js"></script>
+<script type="text/javascript" src="js/prop-types.js"></script>
+<script type="text/javascript" src="js/babel.js"></script>
+
+<script type="text/babel">
+    class Component extends React.Component{
+
+        constructor(props){
+            super(props)
+            this.state={
+                pwd:'',
+                pwd2:''
+            }
+            this.HandleSubmit=this.HandleSubmit.bind(this)
+            this.HandleSubmit2=this.HandleSubmit2.bind(this)
+
+            this.HandleChange=this.HandleChange.bind(this)
+            this.HandleChange2=this.HandleChange2.bind(this)
+            //处理输入框的鼠标进入、移出事件
+            this.HandleHover1=this.HandleHover1.bind(this)
+            this.HandleHover2=this.HandleHover2.bind(this)
+            //处理输入框的获得焦点事件
+            this.HandleFocus=this.HandleFocus.bind(this)
+            //处理账号输入框的按键空格过滤
+            this.HandlePress=this.HandlePress.bind(this)
+
+        }
+        render(){
+            return(
+                <form action="" method="get">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<h2 style={{position:'relative',left:'146px',color:'red'}} >用户注册</h2><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;用户名:<input type="text" ref={input=>this.textinput=input} name='number' onMouseEnter={this.HandleHover1}
+                                                       onMouseOut={this.HandleHover2} onFocus={this.HandleFocus} onKeyDown={this.HandlePress}
+                                                       style={{placeholder:'张三',width:'180px' }} />
+                                                       <span style={{marginLeft:'4px',fontsize:'12px',color:'blue'}}>用户名不能为空！</span><br/><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码:<input type="password" name='password1' ref={input=>this.pswdinput1=input}
+                                                                        style={{width:'180px'}} onMouseEnter={this.HandleHover1} onMouseOut={this.HandleHover2}
+                                                                        onFocus={this.HandleFocus} value={this.state.pwd} onChange={this.HandleChange} />
+                                                                        <span style={{marginLeft:'4px',fontsize:'12px',color:'blue'}}>设置登陆密码，至少6位！</span><br/><br/>
+                    确认密码:<input type="password" ref={input=>this.pswdinput2=input} name='password2' style={{width:'180px'}} value={this.state.pwd2}
+                                onChange={this.HandleChange2} onMouseEnter={this.HandleHover1} onMouseOut={this.HandleHover2} onFocus={this.HandleFocus}/>
+                                <span style={{marginLeft:'4px',fontsize:'12px',color:'blue'}}>请再依次输入你的密码！</span><br/><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性别: <input type="radio" name='checkbox' value="male" ref={input=>this.sex1=input}/>
+                                &nbsp;男&nbsp;<input type="radio" name='checkbox' value="female" ref={input=>this.sex2=input}/>
+                                &nbsp;女<span style={{marginLeft:'105px',fontsize:'12px',color:'blue'}}>请选择你的性别！</span><br/><br/>
+                    联系电话:<input type="text" ref={input=>this.textinput2=input} name='phone' onKeyDown={this.HandlePress}
+                                style={{width:'180px'}} onMouseEnter={this.HandleHover1} onMouseOut={this.HandleHover2} onFocus={this.HandleFocus}/>
+                                <span style={{marginLeft:'4px',fontsize:'12px',color:'blue'}} >请输入11位手机号码！</span><br/><br/>
+                    邮箱地址:<input type="text" ref={input=>this.textinput3=input} name='email' onKeyDown={this.HandlePress} style={{width:'180px'}}
+                                onMouseEnter={this.HandleHover1} onMouseOut={this.HandleHover2} onFocus={this.HandleFocus}/>
+                                <span style={{marginLeft:'4px',fontsize:'12px',color:'blue'}} >常用邮箱可帮助找回密码！</span><br/><br/>
+                    <div style={{position:'relative',left:'110px'}}><input type="submit" onClick={this.HandleSubmit}
+                                                                           style={{marginRight:'48px',width:'60px',borderRadius:'3%',border:'1px solid gray'}}
+                                                                           value="确认" />&nbsp;&nbsp;
+                    <input type="submit" onClick={this.HandleSubmit2} value="取消" style={{width:'60px',borderRadius:'3%',border:'1px solid gray'}}/></div>
+
+                </form>
+            )
+        }
+        HandleSubmit(event){
+            // event.preventDefault()//阻止submit默认提交行为
+            const inp1=this.textinput.value//禁止输入框的空格输入
+            const {pwd}=this.state
+            const {pwd2}=this.state//获取两次的密码框输入密码，限制长度和相等
+            const sex1=this.sex1.checked
+            const sex2=this.sex2.checked
+            const inp2=this.textinput2.value
+            const inp3=this.textinput3.value
+
+            //用户名输入检测
+            if(inp1==""){alert('请输入用户名!');event.preventDefault();return false}
+            alert("当前输入（无空格)用户名是： "+inp1+"当前输入密码是: "+this.state.pwd)
+
+            //密码长度、相等检测
+            if(pwd.length<6||pwd.length<6){alert('请输入大于六位密码!');event.preventDefault();return false;}
+            if(pwd!=pwd2){alert('请输入相同密码!');event.preventDefault();return false;}
+
+            //性别选择检测
+             if(sex1==false&&sex2==false){console.log(sex1)    //性别不能都为空
+             alert('请选择性别！');event.preventDefault();return false;}
+
+            //电话检测：11位数字
+             if(inp2.length!=11){alert('请输入11位电话!');event.preventDefault();return false;}//电话位数检测
+             var reg=/^[0-9]+$/
+             if(!reg.test(inp2)){alert('电话请输入纯数字!');event.preventDefault();return false;}
+
+            //邮箱检测,必函@ , 且@必须在最左边或者最右边，思路:正则表达式匹配邮箱
+            //  var reg2=/^\w+@[a-z0-9]+(\.[a-z]+){1,3} $/
+                var reg2=/^\w{3,}(\.\w+)*@[a-zA-Z0-9]+(\.[a-zA-Z]{2,5}){1,2}$/
+             if(!reg2.test(inp3)){alert('请输入正确格式邮箱!');event.preventDefault();return false;}
+
+        }
+        HandleSubmit2(event){
+            const inp1=this.textinput//禁止输入框的空格输入
+            const inp2=this.textinput2
+            const inp3=this.textinput3
+            event.preventDefault()//阻止submit默认提交行为
+
+           //点击取消后，清空输入框、密码框和单选框
+            inp1.value=''
+            inp2.value=''
+            inp3.value=''
+            this.pswdinput1.value=''
+            this.pswdinput2.value=''
+            this.sex1.checked=false
+            this.sex2.checked=false
+
+        }
+        HandleChange(event){
+            //密码框1是一个受控组件：收集的数据会保存在状态里面；
+            // 每一次由onChange监听组件的数据输入，来修改状态；
+            // 密码框的value又由组件的状态数据决定。
+            const pwd=event.target.value
+            this.setState({pwd})
+        }
+        HandleChange2(event){
+            //密码框2是一个受控组件：收集的数据会保存在状态里面；
+            // 每一次由onChange监听组件的数据输入，来修改状态；
+            // 密码框的value又由组件的状态数据决定。
+            const pwd2=event.target.value
+            this.setState({pwd2})
+        }
+        HandleHover1(event){
+            // this.textinput.style.backgroundColor='blue'
+            event.target.style.backgroundColor='blue'
+        }
+        HandleHover2(event){
+            // this.textinput.style.backgroundColor='white'//鼠标进入离开input1的方法定义结束
+            event.target.style.backgroundColor='white'//修改当前时间对象---输入框的颜色
+        }
+        HandleFocus(event){
+            event.target.style.backgroundColor='gray'
+        }
+        HandlePress(event){//方法功能是：限制输入不能是空格
+            if(event.keyCode==32){
+                event.preventDefault()
+                return false;
+            }
+        }
+
+    }//收集表单数据组件定义完成，
+
+    ReactDOM.render(< Component />,document.getElementById('box'))
+
+
+</script>
+</body>
+</html>

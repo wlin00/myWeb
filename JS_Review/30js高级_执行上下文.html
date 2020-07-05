@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<script>
+
+    var a=10;
+    var bar=function (x) {
+        var b=5
+        foo(x+b)
+    }
+    var foo=function (y) {
+        var c=5
+        console.log(a+c+y)
+    }
+    bar(10)//30
+    //执行上下文的个数=n+1 （n代表调用函数的次数）
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body{overflow: hidden}
+
+        #img {
+            width: 180px;
+            height: 300px;
+            overflow: hidden;
+            position: absolute;
+            left: 50%;
+            top: 30%;
+            transform: translate(-50%,-50%);
+            background: url("../img/charector.png")no-repeat;
+            animation: ani1 .8s 0s infinite steps(1,start) ;
+            border: 1px solid gray;
+            border-radius: 5%;
+            animation-play-state: paused;
+        }
+
+
+        /*绑定动画事件给div，设置动画时间*/
+        /*animation-name:ani1;*/
+        /*animation-duration:5s;*/
+        /*animation-delay*/
+        /*animation-iteration-count: infinite;*/
+        /*animation-track*/
+        /*animation-direction: alternate-reverse;*/
+        @keyframes ani1 {
+            0% {
+                background-position: 0 0;
+            }
+
+            14.28% {
+                background-position: -180px 0;
+            }
+
+            28.56% {
+                background-position: -360px 0;
+            }
+
+            42.84% {
+                background-position: -540px 0;
+            }
+
+            57.12% {
+                background-position: -720px 0;
+            }
+
+            71.4% {
+                background-position: -900px 0;
+            }
+
+            85.68% {
+                background-position: -1080px 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        #btn{
+            width: 250px;
+            height: 20px;
+            float: left;
+            position: absolute;
+            left: 50%;
+            top: 60%;
+            transform: translate(-50%,-50%);
+            text-align: center;
+
+        }
+        #btn button{
+            width: 50px;
+            height: 22px;
+            font-size: small;
+        }
+
+        /*.start1{animation-play-state: running;}*/
+        /*.pause1{animation-play-state: paused;}*/
+        /*.fast1{animation-duration: 0.4s;}*/
+        /*.slow1{animation-duration: 1.6s;}*/
+    </style>
+</head>
+<body>
+
+<div id="img" ></div>
+
+<div id="btn">
+<button id="start">开始</button>
+<button id="pause">暂停</button>
+<button id="fast">快</button>
+<button id="slow">慢</button>
+</div>
+
+<script>
+var btn1=document.getElementById('start')
+var btn2=document.getElementById('pause')
+var btn3=document.getElementById('fast')
+var btn4=document.getElementById('slow')
+var box=document.getElementById('img')
+
+btn1.onclick=function () {
+    if(box.style.animationPlayState==="running"){return;}
+    box.style.animationPlayState="running"
+
+}
+btn2.onclick=function () {
+    if(box.style.animationPlayState==="paused"){return;}
+box.style.animationPlayState="paused"
+}
+btn3.onclick=function () {
+    if(box.style.animationPlayState==="paused"){return;}//若动画暂停，则不能加速或减速
+    box.style.animationDuration="0.4s";
+
+}
+btn4.onclick=function () {
+    if(box.style.animationPlayState==="paused"){return;}
+    box.style.animationDuration="1.6s";
+
+
+}
+
+
+</script>
+
+</body>
+</html>

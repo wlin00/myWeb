@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>第二个页面</h2>
+
+<button id="btn">回退</button>
+<a href="23_1.html" style="width: 100px;height: 100px;background-color: red">前往</a>
+<script>
+    var btn=document.getElementById("btn")
+    btn.onclick=function () {
+        history.back()//回退到上一个页面
+    }
+</script>
+</body>
+</html>

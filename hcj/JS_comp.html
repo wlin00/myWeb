@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script>
+function numsum(num)
+{
+  var sum=0;
+  while(num!=0)
+  {
+     sum+=num%10;
+     //取个位
+     num=parseInt(num/10);
+
+  }
+return sum;
+}
+var ss=numsum(456);
+console.log("the sum is： "+ss);
+</script>
+</head>
+<body>
+	
+</body>
+</html>

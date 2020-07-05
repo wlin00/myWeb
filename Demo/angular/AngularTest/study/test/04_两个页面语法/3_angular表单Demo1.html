@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-app="myApp" ng-controller="ctrl">
+
+<form action="#">
+<select  ng-model="myValue">
+    <option value="">
+    <option value="dogs">dogs
+    <option value="tuts">tuts
+    <option value="cars">cars
+</select>
+</form>
+    <!--创建值由section决定的下拉框
+        由外层div的ng-switch语句来获取 得到的值；
+        根据内层div的ng-switch-when属性来获取switch的值对应结果时的返回情况
+    -->
+
+<div ng-switch="myValue">
+    <div ng-switch-when="dogs">
+        <h1>Dogs</h1>
+    </div>
+    <div ng-switch-when="tuts">
+        <h1>Tuts</h1>
+    </div>
+    <div ng-switch-when="cars">
+        <h1>Cars</h1>
+    </div>
+</div>
+
+<p>根据ng-switch指令以及多个ng-switch-when的分支语句创建条件语句</p>
+
+
+<script src="../../js/angular-1.2.29/angular.js"></script>
+<script type="text/javascript">
+var app=angular.module('myApp',[])
+    .controller('ctrl',function ($scope) {
+        $scope.myValue='dogs'
+    })
+</script>
+</body>
+</html>

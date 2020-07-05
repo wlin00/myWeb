@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{width: 100px;
+             height:100px;
+            background-color: red;
+            position: absolute;
+        }
+        body{height: 1000px}
+    </style>
+</head>
+<body>
+
+<div id="box"></div>
+
+
+<script>
+    //火狐浏览器可以兼容的鼠标滑轮事件是 DOMMouse
+    var box=document.getElementById("box")
+    box.onmousewheel=function (event) {
+         //onmousewheel事件里的事件对象event存在一个wheeldelta值，为正代表向上
+         if(event.wheelDelta>0){
+             box.style.height=box.clientHeight-10+"px"
+             if(box.style.height>=30){return false;}
+             console.log(parseInt(box.style.height))
+         }
+         else{
+             box.style.height=box.clientHeight+10+"px"
+         }
+
+         event.preventDefault()
+   return false;
+    }
+
+
+</script>
+</body>
+</html>

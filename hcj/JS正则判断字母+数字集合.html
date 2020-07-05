@@ -1,0 +1,22 @@
+<html><body>
+<head><meta charset="utf-8">
+<script type="text/javascript">
+function check3(){
+var str=document.getElementById("username").value; 
+    if (/^[0-9a-zA-Z]+$/.test(str))  //a-z
+    { 
+      console.log("true");
+     }  
+   else {
+      console.log("false"); 
+     return false; 
+    }
+}
+ </script>
+  </head>
+  <body> 
+  <input type="button"value="提交" onClick="check3()">
+
+  <input type ="text" id="username">
+  </body>
+</html>

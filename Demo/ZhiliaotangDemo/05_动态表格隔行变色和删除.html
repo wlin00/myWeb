@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        table{border-left: 1px solid #ddd;
+              /*border-top: 1px solid #ddd;*/
+              margin: 50px auto;width: 600px;
+        }
+        table tr:hover{
+            background: #000;color:#fff;
+        }
+        td{border-bottom: 1px solid #ddd;border-right: 1px  solid #ddd;}
+
+        .ccc{background: #ccc}
+        .ac{background:#000;color: #fff}
+    </style>
+
+</head>
+<body>
+
+<script>
+
+    var json=[
+        { name:'zhangsan1',
+            age:18,
+            height:170
+        },
+        { name:'zhangsan2',
+            age:18,
+            height:170
+        },
+        { name:'zhangsan3',
+            age:18,
+            height:170
+        },
+        { name:'zhangsan4',
+            age:18,
+            height:170
+        },
+        { name:'zhangsan5',
+            age:18,
+            height:170
+        },
+        { name:'zhangsan6',
+            age:18,
+            height:170
+        },
+        { name:'zhangsan7',
+            age:18,
+            height:170
+        },
+        { name:'zhangsan8',
+            age:18,
+            height:170
+        },
+        { name:'zhangsan9',
+            age:18,
+            height:170
+        },
+        { name:'zhangsan10',
+            age:18,
+            height:170
+        }
+        ]
+
+    var table=document.createElement('table')
+    var tbody=document.createElement('tbody')
+    table.cellspacing=1
+
+    // var tbody=table.getElementsByTagName('tbody')[0]
+
+    for(var i=0;i<json.length;i++){//动态创建json数组个数的tr标签，并且赋予标签innerhtml，再插入table
+        var tr=document.createElement('tr');
+        tr.innerHTML='<td>'+json[i].name+'</td>'+'<td>'+json[i].age+'</td>'+
+            '<td>'+json[i].height+'</td>'+
+            '<td><a href="javascript:;">删除</a></td>'
+        var a=tr.getElementsByTagName('a')[0]
+        a.onclick=function(){
+            var name=this.parentElement.parentElement.firstElementChild.innerHTML;
+            console.log(name)
+
+            if(confirm('确定要删除'+name+'吗？')){
+            var par=this.parentNode.parentNode
+            par.parentNode.removeChild(par)}
+        }
+        if(i%2==0){
+            tr.classList.add('ccc')
+        }
+        tbody.appendChild(tr)
+    }
+    table.appendChild(tbody)
+    document.body.appendChild(table)
+
+
+</script>
+</body>
+</html>

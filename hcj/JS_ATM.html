@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+<style>
+div{width: 300px;height: 200px;margin:0 auto;border:1px solid black;border-radius: 5px;text-align: center;}
+p{font-size:20px;}
+button{border:0px;padding:5px;background-color: green;color:white;}
+</style>
+
+<script>
+var i=2;//密码输入错的次数
+function checkNumber(account){return isNaN(account);}//判断输入卡号是不是数字类型，返回true就不是此类型
+
+function checkNull(account,password){if(account.length>0&&password.length>0){return true;}return false;}
+//判断输入的卡号和密码是否为空
+
+function login(){var account=document.getElementById("account").value;
+        var password=document.getElementById("password").value;
+if(!checkNull(account,password)){alert("卡号和密码都不能为空");return;}
+if(checkNumber(account)){alert("卡号必须是数字");return;}
+if(i>0&& account =="123456789"&& password =="123"){window.location.href="JS_ATM主界面.html";}
+else{
+      if(i==0){alert("你现有的卡号已经锁定");return;}
+alert("你还有"+i+"次机会");
+i--;return;
+
+}
+}
+
+</script>
+
+</head>
+<body>
+<div>
+<p>ATM机</p>
+<p><label>卡号</label><input type="text" id="account"></p>
+<p><label>密码</label><input type="password" id="password"></p>
+<p><button onclick="login()">登陆</button></p>
+</div>
+
+	
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+         //Demo1
+         var arr=new Array(5);
+         arr[1]=1;
+         arr[5]=2;
+         console.log(arr.length);//6
+
+         //Demo2
+         console.log(Math.ceil(-3.14));//-3
+
+         //Demo3
+         var aa=[1,2,3,4].join('0');
+         console.log(aa);//1020304
+
+
+
+         //Demo5
+         var arr2=[2,3,4,5,6];
+         var sum2=0;
+         for (var i=1;i<arr2.length;i++)
+         {
+                 sum2+=arr2[i];
+         }
+         console.log(sum2);//18
+
+         //Demo6
+        console.log(typeof (3+2-'7'));
+        console.log(3+2-'7');//减法无法转化字符串，而是适应number，得到-2
+        console.log(typeof (3+2+'7'));//加法适应字符串，得到57
+         console.log(3+2+'7');//加法适应字符串，得到57
+        console.log("-------------");
+
+        //Demo7
+        var arr7=['你好','知了们','周末愉快'];
+        var str7='';
+        for(var i2=0;i2<arr7.length;i2++){
+            str7+=arr7[i2];
+            str7+=',';
+        }
+        console.log(str7);//你好，知了们，周末愉快，
+
+        //Demo8
+        function Fn() {
+            this.a=37;
+        }
+        var obj=new Fn();
+        console.log(obj.a);//37
+
+        function Foo() {
+            this.a=37;
+            return{a:38};//返回值的优先级大于函数域中的this
+        }
+        obj=new Foo();
+        console.log(obj.a);//38
+
+        //Demo9
+        console.log(0||1||0);//1
+        console.log(0||1&&2);//2
+
+        // //Demo10
+        // var name="windowsName";
+        // var a={
+        //
+        //     name:"Cherry",
+        // fun1:function () {
+        //     console.log(name)
+        // },
+        // fun2:function () {
+        //     setTimeout(function () {
+        //         this.fun1()
+        //     },100);
+        // }
+        // };
+        // a.fun2();
+         console.log("--------------");
+         
+         
+
+        //Demo11
+            function createP() {
+            this.name="孙悟空";
+            this.age=18;
+            this.sayName=function () {
+                console.log(this.name);
+            };
+                }
+            var oobj=new createP();
+             oobj.sayName();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

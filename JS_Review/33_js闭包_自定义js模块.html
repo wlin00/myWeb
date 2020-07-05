@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style></style>
+</head>
+<body>
+
+<script type="text/javascript" src="js/33_myJsModule.js"></script>
+<script>
+    //说明：使用自定义的js模块，封装在对象里的，向用户暴露的方法
+
+    //使用方法1：若模块是返回值来暴露对象，则此处需函数执行，获得封装在函数中的方法
+    // var fn=myJsModule()
+    // fn.toLower();
+    // fn.toUpper();
+
+    //用法2： 若模块是参数是window的立即执行函数，将对象封装为window的属性，可直接调用
+     myJsModule2.toUpper()
+     myJsModule2.toLower();
+
+</script>
+</body>
+</html>

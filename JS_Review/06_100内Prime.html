@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prime under 100</title>
+    <script>
+        var prime=function (len) {
+            var i,j;
+            var arr=[];
+
+            for(i=2;i<len;i++)
+                {var fla=true;
+                for(j=2;j<i;j++){
+                    if(i%j===0){
+
+                        fla=false;
+                        break;
+
+                    }
+                }
+                if(fla){
+                    arr.push(i);
+                }
+
+            }
+            return arr;
+        }
+
+        console.log(prime(100));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

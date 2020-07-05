@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Polo360</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <style>
+        body{
+            background: url("../images/1.gif") ;
+            background-repeat: repeat-x;
+            /*background-attachment: fixed;*/
+            }
+
+        /*因使用浮动 需解决高度塌陷问题，需使用clearfix*/
+        .clearfix:before,.clearfix:after{
+            content:"";
+            display: table;
+            clear: both;
+        }
+        .clearfix{zoom: 1;}
+
+
+
+        .w{
+            width: 940px;
+            margin: 0 auto;
+        }
+        .header{
+            padding-top: 37px;
+            /*background-color: chartreuse;*/
+            padding-bottom: 45px;
+        }
+        .logo1{
+            margin-left:15px ;
+            float: left;
+        }
+
+        .nav a{
+            font: bold 14px Georgia ;
+            color: #666666;
+            text-decoration: none;
+            }
+
+        .nav a:hover{
+            color: #a1a1a1;
+        }
+        .nav a:active{
+            color:mediumblue;
+        }
+
+        .nav p{
+            font:11px Tahoma;
+            color: #b7b7b7;
+        }
+
+        .header .nav{
+            float: right;
+        }
+
+        .nav li{
+            float: left;
+            padding:0 10px;
+            list-style-type: none;
+
+            border-left: 1px #d6d6d6 dotted;
+            /*设置每个li都有左虚线分隔*/
+        }
+
+        /*给banner设置阴影背景，3d效果*/
+        .banner{
+            padding-top:40px;
+            height: 378px;
+            /*background: url("../images/4.gif") no-repeat bottom center;*/
+            position: relative;
+        }
+
+        .PointDiv a{
+            background: url("../images/pointer_link.gif");
+            float: left;
+            width: 17px;
+            height: 17px;
+            margin-left: 4px;
+            background-color: white;
+
+        }
+
+        .PointDiv a:hover,.PointDiv .actived{background: url("../images/pointer_active.gif")}
+
+
+
+        /*下面设置父元素banner相对定位，子元素图标绝对定位
+           子元素需要绝对于父元素定位  absolute以后设置具体位置
+
+        父元素-banner图设置相对定位，相对于文档流*/
+        /*子元素—圆图标 绝对定位（绝对定位需要设置：绝对于父元素的位置）； */
+         .PointDiv{position: absolute;top:324px;left: 10px;}
+
+
+
+
+
+        /*content开始——设置文本的样式：大标题*/
+        .content h1{
+            text-align: center;
+            font: bold 24px Georgia ;
+            /*设置上内padding*/
+            padding-top:50px ;
+            padding-bottom: 20px;
+            /*给标题h1设置背景下滑阴影*/
+            background: url("../images/5.gif") no-repeat bottom center;
+            margin-bottom:38px;
+            height: 35px;
+
+        }
+        /*content文本栏和contact联系栏设置浮动样式：左浮动*/
+        /*浮动需要考虑高度塌陷问题*/
+        .content .lc,.content .mc,.content .rc,
+        .contact .sc, .contact .co, .contact .nu
+        {
+            float: left;
+            width: 300px;
+        }
+
+        /*content文本栏和contact联系栏设置，中间的盒子的左右外边距*/
+        .content .mc , .contact .co{margin: 0 20px;}
+
+
+
+
+
+
+        .content h2{
+            color:#11719e;
+            font: 21px Georgia;
+            text-indent: 0.5em;
+        }
+
+        .content .p1 {
+            color: #8c8c8c;
+            font: 12px Harrington;
+            text-indent: 0.5em;
+        }
+
+        .content .imge{
+            background: url("../images/6_content_bg.gif") no-repeat bottom center;
+            width: 299px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            text-align: center;
+        }
+        .content .p2 {
+
+            height: 92px;
+            color: #3e3e3e;
+            font: 13px Harrington;
+        }
+
+        .content .lm {
+            display: block;
+            width: 163px;
+            height: 35px;
+
+            /*去下划线*/
+            text-decoration: none;
+            /*插入背景*/
+            background: url("../images/7_button_bg.gif") no-repeat;
+            /*设置字体样式:可以由/行高 来设定y轴位置*/
+            font:12px/25px Harrington;
+            /*首行缩进1个字*/
+            text-indent: 1.5em;
+        }
+
+        .content{background: url("../images/8_content_shadow.gif") no-repeat bottom center;
+        /*margin: 10px 0;*/
+            margin-top: 10px;
+            margin-bottom: 17px;
+            height: 500px;
+        }
+
+        /*设置联系栏中的各个表单项,且去除默认自带的text文本栏等表单的边框*/
+        .contact .txt {
+            width: 276px;
+            height: 33px;
+            background: url("../images/contact/1_mid_text.gif") no-repeat;
+
+            /*单独给ie6浏览器设置，背景图片不随元素滚动*/
+            _background-attachment: fixed;
+
+            /*去除自带边框*/
+            border: none;
+            padding: 0 10px;
+            margin: 0px 0px 16px 0px;
+        }
+
+        /*联系栏中的textarea栏的编写*/
+        .contact .tarea {
+            width: 276px;
+            height: 124px;
+            background: url("../images/contact/2_mid_tarea.gif") no-repeat;
+
+            /*去除自带边框*/
+            border: none;
+
+            /*去除初始滚动条*/
+            overflow: auto;
+
+            /*设置文本域不能自动调整大小*/
+            resize: none;
+
+            /*去除默认内外边距*/
+            padding: 5px 10px;
+            margin:0;
+        }
+
+        .contact .btn {
+            background: url("../images/contact/3_btn.gif") no-repeat;
+            border: none;
+            width: 167px;
+            height: 34px;
+            margin: 13px 0 22px 0;
+            color:white;
+            font:13px  Georgia;
+            text-align: left;
+            text-indent: 1em;
+            cursor: pointer;
+        }
+
+
+        .contact h2 {
+            /*统一设置contact内h2标签，即小标签*/
+            font: 18px Georgia;
+            color: #444;
+
+            /*设置下边线框，虚线*/
+            border-bottom:1px dashed #d3d3d3;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+
+        }
+
+        /*联系栏左侧样式设定*/
+        .contact .pa {
+            color: #444;
+            font: 12px Harrington;
+            margin: 0 0 5px 0;
+        }
+
+        .contact .con_left_img{
+            float: left;
+            margin-right: 5px;
+            margin-top: 3px;
+            margin-bottom: 19px;
+        }
+
+        .contact .con_left_midtitle{
+            color:#444444;
+            font:bold 18px Georgia;
+
+            padding: 0 0 10px 0;
+            border-bottom: 1px dashed #d3d3d3;
+        }
+        .contact .pb {
+            color: #444;
+            font: 13px Harrington;
+            margin: 12px 0;
+        }
+
+        .contact .txt2{
+            width: 276px;
+            height: 33px;
+            background: url("../images/contact/1_mid_text.gif") no-repeat;
+
+            /*单独给ie6浏览器设置，背景图片不随元素滚动*/
+            _background-attachment: fixed;
+
+            /*去除自带边框*/
+            border: none;
+            padding: 0 10px;
+            margin: 0 0 10px 0;
+        }
+        .contact .btn2{
+            background: url("../images/contact/3_btn.gif") no-repeat;
+            border: none;
+            width: 167px;
+            height: 34px;
+            margin: 3px 0 22px 0;
+            color:white;
+            font:13px  Georgia;
+            text-align: left;
+            text-indent: 1em;
+            cursor: pointer;
+        }
+        .contact .con_rig a{float: left;margin-right: 4px;}
+        .contact .con_rig p{width: 250px;height: 50px;
+            color: #444;
+            font: 12px Harrington;
+            }
+        .contact .con_rig .con_rig_combination{
+            width:300px;
+            padding: 4px 0 16.5px 0;
+            border-bottom: 1px dashed #d3d3d3;
+            margin-top: 4px;
+            margin-bottom: 5px;
+        }
+
+        .contact .btn3{
+            background: url("../images/contact/3_btn.gif") no-repeat;
+            border: none;
+            width: 167px;
+            height: 34px;
+            margin: 12px 0 10px 0;
+            color:white;
+            font:13px  Georgia;
+            text-align: left;
+            text-indent: 1em;
+            cursor: pointer;
+        }
+
+        .footer {
+            height: 173px;
+            background: #333;
+            /*设置上边框*/
+            border-top: 10px solid #4c4c4c;
+        }
+
+        .footer .w2 {
+            padding-left: 8px;
+            padding-right: 23px;
+        }
+
+        .footer p,.footer a{
+             color:#999;
+            font:11px Harrington;
+            text-decoration: none;
+
+        }
+        .footer p{
+
+            margin:10px 110px  10px 110px;
+        }
+
+        /*设置移入鼠标的样式*/
+        .footer a:hover{
+            color:#cccaca;
+            text-decoration: underline;
+        }
+        .footer .rig_float{float: right;}
+
+        .panel{
+            background-color: #00a6ff;
+            /*top:9px;*/
+            left: 50%;
+            margin-left: -300px;
+            width: 600px;
+            height:400px;
+            overflow: hidden;
+            position: relative;
+            /*margin:0 auto;*/
+            box-shadow: 0px 0px 10px 10px rgba(15,15,15,.84);
+        }
+
+        #list{
+            /*left: 600px;*/
+            width: 4200px;
+            height: 400px;
+            position: absolute;
+            z-index: 1;
+            /*float: left;*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+        }
+
+        .panel #list>img{
+            width: 600px;
+            height: 400px;
+            float: left;
+        }
+
+        #pointsDiv{
+            position: absolute;
+            height: 10px;
+            width: 100px;
+            z-index: 2;
+            bottom: 20px;
+            left: 250px;
+        }
+
+        #pointsDiv span{
+            cursor: pointer;
+            float: left;
+            border:1px solid #fff;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #333;
+            margin-right: 5px;
+        }
+
+        #pointsDiv .on{background: orange;}
+
+        .arrow{
+            cursor: pointer;
+            /*display: none;*/
+            line-height: 39px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            z-index: 2;
+            top: 180px;
+            background-color: rgba(0,0,0,.3);
+            color:lightskyblue;
+        }
+
+        .arrow:hover{
+            /*display: block;*/
+            background-color: rgba(0,0,0,.7);
+        }
+
+        #prev {
+
+        }
+
+        #next{
+            left: 560px;
+            /*float: right;*/
+        }
+
+
+    </style>
+    <!--<link rel="stylesheet" href="css/csshake.css">-->
+
+</head>
+<body>
+   <div class="header w">
+       <div class="logo1">
+           <a href="../images/3.gif" title="polo360Page">
+               <img src="../images/3.gif" alt="网站的描述">
+           </a>
+       </div>
+
+       <ul class="nav">
+           <li>
+               <a href="#">
+                   HOME
+               </a>
+               <p>
+                   Back to home
+               </p>
+           </li>
+
+           <li>
+               <a href="#">
+                   PRODUCTS
+               </a>
+               <p>
+                   What we have for you
+               </p>
+           </li>
+
+           <li>
+               <a href="#">
+                   SERVICES
+               </a>
+               <p>
+                   Things we do
+               </p>
+           </li>
+
+           <li>
+               <a href="#">
+                   BLOG
+               </a>
+               <p>
+                   Follow our updates
+               </p>
+           </li>
+
+           <li>
+               <a href="#">
+                   CONTACT
+               </a>
+               <p>
+                   Ways to reach us
+               </p>
+           </li>
+       </ul>
+
+
+   </div>
+<!--头部结束-->
+    <div class="banner w">
+        <div class="panel clearfix " >
+            <div id="list" style="left: -600px">
+                <img src="../img/tx5.jpg" alt="#">
+                <img src="../img/tx1.jpg" alt="#">
+                <img src="../img/tx3.jpg" alt="#">
+                <img src="../img/tx2.jpg" alt="#">
+                <img src="../img/tx4.jpg" alt="#">
+                <img src="../img/tx5.jpg" alt="#">
+                <img src="../img/tx1.jpg" alt="#">
+            </div>
+            <div id="pointsDiv" >
+                <span index="1" class="Points on shake"></span>
+                <span index="2" class="Points shake"></span>
+                <span index="3" class="Points shake"></span>
+                <span index="4" class="Points shake"></span>
+                <span index="5" class="Points shake"></span>
+            </div>
+            <a href="javascript:" id="prev" class="arrow shake" onclick="nextpage(false)">←</a>
+            <a href="javascript:" id="next" class="arrow shake" onclick="nextpage(true)">→</a>
+
+        </div>
+
+    </div>
+<!--banner结束-->
+
+    <div class="content w clearfix ">
+        <h1>Lorem ipsum dolor sit amet,consectetur adipisicing elit</h1>
+        <div class="lc">
+            <h2 >
+                 perfect Logic
+            </h2>
+            <p class="p1">
+            All you want your website to do.
+            </p>
+
+            <div class="imge">
+                <img src="../images/content/content_img01.gif" alt="">
+            </div>
+
+            <p class="p2">
+            Sed ut perspiciatis undo omnis iste natus error sit voluptatem accusantium doloremque lauantium,totam rem aperiam,eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
+            <a href="#" class="lm">Learn More</a>
+        </div>
+
+        <div class="mc">
+            <h2>
+                Complete Solution
+            </h2>
+            <p class="p1">
+                All you want your website to do.
+            </p>
+
+            <div class="imge">
+                <img src="../images/content/content_img02.gif" alt="">
+            </div>
+
+            <p class="p2">
+                Sed ut perspiciatis undo omnis iste natus error sit voluptatem accusantium doloremque lauantium,totam rem aperiam,eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
+            <a href="#" class="lm">Learn More</a>
+        </div>
+        <div class="rc">
+            <h2>
+                Uber Culture
+            </h2>
+            <p class="p1">
+                All you want your website to do.
+            </p>
+
+            <div class="imge">
+                <img src="../images/content/content_img03.gif" alt="">
+            </div>
+
+            <p class="p2">
+                Sed ut perspiciatis undo omnis iste natus error sit voluptatem accusantium doloremque lauantium,totam rem aperiam,eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
+            <a href="#" class="lm">Learn More</a>
+        </div>
+    </div>
+<!--content结束-->
+    <div class="contact w clearfix">
+        <!--第一子元素包含三个子栏-->
+        <div class="sc">
+            <h2>Social Connection</h2>
+            <p class="pa">
+              At vero eos at acusamus et iusto odio dignissimos ducimus qui blanditiis paresentium
+            </p>
+            <div class="con_left_img">
+                <a href="#"><img src="../images/contact/left_01.gif" alt=""></a>
+                <a href="#"><img src="../images/contact/left_02.gif" alt=""></a>
+                <a href="#"><img src="../images/contact/left_03.gif" alt=""></a>
+                <a href="#"><img src="../images/contact/left_04.gif" alt=""></a>
+                <a href="#"><img src="../images/contact/left_05.gif" alt=""></a>
+            </div>
+
+            <h3 class="con_left_midtitle">
+                Newsletter
+            </h3>
+            <p class="pb">
+                At vero eos at acusamus et iusto odio dignissimos ducimus qui blanditiis paresentium
+            </p>
+            <form action="#">
+                <input type="text" class="txt2" placeholder="your name"><br>
+                <button class="btn2">Subscribe</button>
+            </form>
+
+        </div>
+
+        <div class="co">
+        <!--表单栏-->
+            <h2>Contact</h2>
+            <form action="#">
+                <!--在文本框或文本域中，可以通过placeholder来提示文字，
+                即水印          此方法不兼容ie8以下，除非使用js-->
+                <input type="text" class="txt" placeholder="your name"><br>
+                <input type="text" class="txt" placeholder="your email address">
+                <textarea ></textarea>
+                <button class="btn">Send it</button>
+            </form>
+
+
+        </div>
+
+        <div class="nu">
+            <h2>News Updates</h2>
+            <div class="con_rig w clearfix">
+                <div class="con_rig_combination">
+                    <a href="#" class="con_rig_img"><img src="../images/contact/right_01.gif" alt="#"></a>
+                    <p class="con_rig_mes">At vero eos at acusamus et iusto odio dignissimos ducimus qui blanditiis paresentium</p>
+                </div>
+                <div class="con_rig_combination">
+                    <a href="#" class="con_rig_img"><img src="../images/contact/right_02.gif" alt="#"></a>
+                    <p class="con_rig_mes">At vero eos at acusamus et iusto odio dignissimos ducimus qui blanditiis paresentium</p>
+                </div>
+                <div class="con_rig_combination">
+                    <a href="#" class="con_rig_img"><img src="../images/contact/right_03.gif" alt="#"></a>
+                    <p class="con_rig_mes">At vero eos at acusamus et iusto odio dignissimos ducimus qui blanditiis paresentium</p>
+                </div>
+                <form action="#">
+                    <button class="btn3">Visit our Blog</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<!--contact结束-->
+    <div class="footer  clearfix" >
+        <!--footer未居中，w2里内容居中-->
+        <div class="w2">
+            <p class="rig_float">Copyright 2010. Studio VIVROCKS.All Right Reserved</p>
+            <p>Site Powered by Wordpress. Design and Developd by VIVROCKS.</p>
+            <p>
+                <a href="#">Home</a>|<a href="#">About</a>|<a href="#">Products</a>|<a href="#">Services</a>|<a href="#">Contact</a>
+            </p>
+            <p>
+                <a href="#">Privacy Policy</a>|<a href="#">Terms of use</a>
+            </p>
+
+
+        </div>
+    </div>
+
+
+   <script>
+       /*
+       * banner轮播图需求分析：
+       * 1、获取dom节点和必要数值
+       * 2、点击向左向右实现平滑翻页
+       * 3、无限循环衔接图片
+       * 4、每隔3s自动滑到下一页
+       * 5、点击圆点传参翻页
+       * 6、解决快速点击多次翻页的bug，加入信号量控制
+       * 7、css样式修饰demo
+       * */
+
+       //* 1、获取dom节点和必要数值
+           var container = document.getElementsByClassName("panel")[0];
+           var list = document.getElementById("list");
+           var points = document.getElementsByClassName("Points")
+
+           var PAGE_WIDTH = 600;
+           var TIME = 400;
+           var ITEM_TIME = 20;
+           var index = 0;
+           var moving = false;
+
+       //* 2、点击向左向右实现平滑翻页
+
+          function nextpage(next) {
+              if(moving){return;}
+              moving = true;
+
+              var offset = parseInt(0);
+              var currLeft = parseInt(list.style.left);
+              if(typeof  next ==='boolean'){offset = next? -PAGE_WIDTH: PAGE_WIDTH}
+              else{offset = -(next-index)*PAGE_WIDTH;}
+
+              var itemoffset = offset/(TIME/ITEM_TIME);
+              var targetLeft = currLeft +offset;
+
+              //给翻页函数内设置定时器，用微元翻页来实现平滑翻页效果
+              var listInterval=setInterval(function () {
+                  currLeft+=itemoffset;
+                  if(currLeft===targetLeft){
+                      clearInterval(listInterval);
+                      moving=false;//完成翻页，“解锁”
+                  }
+                  // console.log(currLeft.toString());
+                  if(currLeft<=-3600){currLeft=-600;}//实现无缝循环轮播
+                  else if (currLeft>=0){currLeft=-3000;}
+                  list.style.left=currLeft+"px";
+              },ITEM_TIME);
+
+              updatePoints(next);
+          }
+
+
+       //* 3、无限循环衔接图片
+
+       //* 4、每隔3s自动滑到下一页; 鼠标进入图片区域，定时器消除，移出时定时器启动
+       var settool=setInterval(function () {
+           nextpage(true);
+       },3000);
+
+       container.addEventListener('mouseover',function () {
+           clearInterval(settool)
+       })
+       container.addEventListener('mouseout',function () {
+           settool = setInterval(function () {
+               nextpage(true)
+           },3000)
+       });
+
+
+       //* 5、点击圆点传参翻页，更新圆点、更新轮播图
+
+       //通过在nextpage的函数结束前调用updatePoints函数，来更新圆点
+       function updatePoints(next) {
+           //若是由顺序翻页定时器 或是点击浮标触发此函数，传入的形参必是布尔值,所以依然需要对参数判断
+           if(typeof  next==='boolean'){
+               var targetInder=0;
+               if(next){
+                   //后翻页时，计算目标节点（实际上下一个点）
+                   targetInder=index+1;
+                   if(targetInder===5){targetInder=0;}
+               }
+               else{
+                   //前翻页
+                   targetInder=index-1;
+                   if(targetInder===-1){targetInder=4;}}
+           }//以上判断参数布尔型的结果
+           else {
+               //或者参数传入为数值型，来自于圆点点击事件，闭包的返回值的调用(确定了目标圆点位置)
+               targetInder=next;
+           }
+
+           //得到目标index时候，点亮目标index处圆点（添加class），熄灭初始位置圆点（去掉class）,更新index
+           points[index].classList.remove("on");//去除本身class
+           points[targetInder].classList.add("on");
+
+           index=targetInder;
+       }
+
+
+       //点击圆点图片切换到对应的页,点击圆点，需给nextpage函数传入数值型形参，参数来自于点击圆点的下标的计算
+       for(i=0;i<points.length;i++){
+           // var targetIndex=0;
+           // points[i].onclick=(function (i) {
+           //     return function (){
+           //          targetIndex=i;
+           //         nextpage(targetIndex);}
+           // })(i)   //返回值作闭包
+
+           (function(i){
+               points[i].onclick=function () {
+                   targetIndex=i;
+                   nextpage(targetIndex)}
+           })(i)//立即执行函数
+
+       }
+
+       //* 6、解决快速点击多次翻页的bug，加入信号量控制
+       //加入全局变量moving 达到给nextpage以及updatePoints加“信号量原语”的效果
+
+       //* 7、css样式修饰demo
+
+
+
+
+
+
+
+   //banner轮播图部分结束
+   </script>
+
+
+</body>
+</html>

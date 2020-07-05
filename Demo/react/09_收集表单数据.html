@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<div id="box"></div>
+<script type="text/javascript" src="js/react.development1.js"></script>
+<script type="text/javascript" src="js/react-dom.development1.js"></script>
+<script type="text/javascript" src="js/prop-types.js"></script>
+<script type="text/javascript" src="js/babel.js"></script>
+
+<script type="text/babel">
+class Component extends React.Component{
+
+    constructor(props){
+        super(props)
+        this.state={
+            pwd:''
+        }
+        this.HandleSubmit=this.HandleSubmit.bind(this)
+        this.HandleChange=this.HandleChange.bind(this)
+
+    }
+    render(){
+        return(
+            <form action="09_收集表单数据.html">
+                用户名<input type="text" ref={input=>this.textinput=input} />&nbsp;
+                密码<input type="password" ref={input=>this.pswdinput=input}
+                         value={this.state.pwd}
+                         onChange={this.HandleChange} />&nbsp;
+                <input type="submit" onClick={this.HandleSubmit} />
+            </form>
+        )
+    }
+    HandleSubmit(event){
+        event.preventDefault()//阻止submit默认提交行为
+        const inp1=this.textinput.value;
+        const inp2=this.pswdinput.value;
+        alert("当前输入用户名是： "+inp1+"当前输入密码是: "+this.state.pwd)
+    }
+    HandleChange(event){
+        //密码框是一个受控组件：收集的数据会保存在状态里面；
+        // 每一次由onChange监听组件的数据输入，来修改状态；
+        // 密码框的value又由组件的状态数据决定。
+        const pwd=event.target.value
+        this.setState({pwd})
+    }
+}//收集表单数据组件定义完成，
+
+    ReactDOM.render(< Component />,document.getElementById('box'))
+
+
+</script>
+</body>
+</html>

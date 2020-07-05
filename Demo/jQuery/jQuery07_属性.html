@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性</title>
+    <style>
+        li{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="div1" class="box" title="one">class为box的div1</div>
+<div id="div2" class="box" title="two">class为box的div2</div>
+<div id="div3" title="three" >div3</div>
+<span class="box">class为box的span</span>
+<br/>
+
+<ul>
+    <li>AAAA</li>
+    <li title="hello" class="box2">BBBBB</li>
+    <li class="box">CCCC</li>
+    <li title="hello">DDDDDD</li>
+    <li title="two"><span>BBBBB</span></li>
+</ul>
+
+<input type="text" name="username" value="guiguClass">
+<br/>
+<input type="checkbox" >
+<input type="checkbox">
+<br/>
+<button>选中</button>
+<button>不选中</button>
+<!--jQuery属性练习-->
+
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+
+    /*需求：
+    * 1、读取第一个div的title属性,attr方法，传一个参数是读取属性
+    * 2、给所有的div设置name属性，attr方法，传两个参数是设置属性
+    * 3、移出所有div的title属性
+    * 4、给所有div设置class=‘guiguClass'
+    * 5、给所有div添加class=’abc'
+    * 6、移出所有div的guiguClass的class
+    * 7、得到最后一个li的标签体文本
+    * 8、设置第一个li的标签为“<h1>mmmmmmmm</h1>"
+    * 9、得到输入框的value值
+    * 10、将输入框的值设置为atguigu
+    * 11、点击全选按钮--实现全选
+    * 12、点击全不选--实现全不选
+    */
+
+    //1    attr方法一个参数代表读取属性
+    console.log($('div:first').attr('title'));
+
+    //2.   attr方法两个参数代表设置属性
+    $('div').attr('name','atguigu');
+    console.log($('div:first+').attr("name"));
+
+    //3     removeAttr方法移出属性
+    $('div').removeAttr('title');
+    console.log($('div').attr('title'))//移除后，属性显示为undefined
+
+    //4    设置class依然可以用attr设置，但不能用于添加
+    $('div').attr("class","guiguClass");
+    console.log($('div:first++').attr('class'));
+
+    //5  给所有div添加class=’abc‘
+    $('div').addClass('abc');
+    console.log($('div:first').attr('class'));
+
+    //6、移出所有div的guiguClass的class属性
+    $('div').removeClass('guiguClass');
+    console.log(6,$('div:first-child').attr('class'));
+
+    //7得到最后一个li的标签体文本
+      var va=$('li[title="two"]').html();
+      console.log(va);
+
+      //8 设置第一个li的标签体 ‘<h1>mmmmmmm</h1>’
+       $('li:first').html('<h1>mmmmmmm</h1>');
+
+      //9得到输入框中的value值
+       var $value=$('input[name="username"]').val();
+       console.log(9,$value);
+
+       //10 设置输入框的值为atguigu
+       var $value2="atguigu";
+       $('input[name="username"]').val($value2);
+
+       //11全选,prop来设置属性值为布尔值的属性，如checked
+        var $checkboxs=$('input[type="checkbox"]');//选中表单元素
+        $('button:first').click(function () {
+            $checkboxs.prop("checked",true);
+        })
+
+       //全不选
+    $('button:last').click(function () {
+        $checkboxs.prop("checked",false);
+    })
+
+</script>
+
+</body>
+</html>

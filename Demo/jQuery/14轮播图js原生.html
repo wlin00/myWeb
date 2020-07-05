@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+        }
+        body{
+            background: url("img/bg1.jpg") ;
+            background-size: 100%,100%;
+            /*background: url("img/banner02.gif") ;*/
+            /*background-size: 100% 100%;*/
+            /*width: 3600px;*/
+            /*padding:20px;*/
+        }
+
+        /*因使用浮动 需解决高度塌陷问题，需使用clearfix*/
+        .clearfix:before,.clearfix:after{
+            content:"";
+            display: table;
+            clear: both;
+        }
+        .clearfix{zoom: 1;}
+
+        .panel{
+            background-color: #00a6ff;
+
+            top: 50%;
+
+            left: 50%;
+            margin-left: -300px;
+            margin-top: 150px;
+            width: 600px;
+            height:400px;
+            overflow: hidden;
+            position: relative;
+            /*margin:0 auto;*/
+            box-shadow: 0px 0px 10px 10px rgba(15,15,15,.84);
+        }
+
+        #list{
+            /*left: 600px;*/
+            width: 4200px;
+            height: 400px;
+            position: absolute;
+            z-index: 1;
+            /*float: left;*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+        }
+
+        .panel #list>img{
+            width: 600px;
+            height: 400px;
+            float: left;
+        }
+
+        #pointsDiv{
+            position: absolute;
+            height: 10px;
+            width: 100px;
+            z-index: 2;
+            bottom: 20px;
+            left: 250px;
+        }
+
+        #pointsDiv span{
+            cursor: pointer;
+            float: left;
+            border:1px solid #fff;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #333;
+            margin-right: 5px;
+        }
+
+        #pointsDiv .on{background: orange;}
+
+        .arrow{
+            cursor: pointer;
+            /*display: none;*/
+            line-height: 39px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            z-index: 2;
+            top: 180px;
+            background-color: rgba(0,0,0,.3);
+            color:lightskyblue;
+        }
+
+        .arrow:hover{
+            /*display: block;*/
+            background-color: rgba(0,0,0,.7);
+        }
+
+        #prev {
+
+        }
+
+        #next{
+            left: 560px;
+            /*float: right;*/
+        }
+
+        /*#pointsDiv span:hover{color: orange;}*/
+
+    </style>
+    <link rel="stylesheet" href="css/csshake.css">
+</head>
+<body>
+
+<div class="panel " >
+    <div id="list" style="left: -600px">
+        <img src="img/tx5.jpg" alt="#">
+        <img src="img/tx1.jpg" alt="#">
+        <img src="img/tx3.jpg" alt="#">
+        <img src="img/tx2.jpg" alt="#">
+        <img src="img/tx4.jpg" alt="#">
+        <img src="img/tx5.jpg" alt="#">
+        <img src="img/tx1.jpg" alt="#">
+    </div>
+    <div id="pointsDiv" >
+        <span index="1" class="Points on shake"></span>
+        <span index="2" class="Points shake"></span>
+        <span index="3" class="Points shake"></span>
+        <span index="4" class="Points shake"></span>
+        <span index="5" class="Points shake"></span>
+    </div>
+    <a href="javascript:" id="prev" class="arrow shake" onclick="nextpage(false)">←</a>
+    <a href="javascript:" id="next" class="arrow shake" onclick="nextpage(true)">→</a>
+
+</div>
+
+<script>
+        // 功能需求：0:dom操作获取节点
+        var container=document.getElementsByClassName("panel")[0];
+        //外层窗体节点
+        var list=document.getElementById("list");
+        //图片容器对象
+        var points=document.getElementsByClassName("Points");
+        //小圆点对象
+        var prev=document.getElementById("prev");
+        //前翻页浮标对象
+        var next=document.getElementById("next");
+        //后翻页浮标对象
+
+
+        var PAGE_WIDTH=600;//一页的距离
+        var TIME=400;//翻页总时间
+        var ITEM_TIME=20;
+        var index=0;
+        var distance=0;
+        var moving=false;//标识，若没有在翻页中，则moving=false；若在翻页，则布尔值为true
+        var movingDiv=false;
+
+//     1、点击向左（右）的图标，平滑翻切换到上（下）一页
+
+       function nextpage(next) {
+             //进入翻页函数，先进行全局变量moving的判定，若正在翻页，则“加锁”
+             if(moving){return;}
+             moving=true;
+             var offset=parseInt(0);
+             var currLeft=parseInt(list.style.left);
+             if(typeof next==='boolean'){
+                 offset=next?-PAGE_WIDTH:PAGE_WIDTH
+             }
+             else{
+                 offset=-(next-index)*PAGE_WIDTH;
+                 //传入数值，来自于小圆点的点击
+             }
+             var itemoffset=offset/(TIME/ITEM_TIME);//部分偏移用与定时器微笑时间的页面位移
+             console.log("currleft="+currLeft);
+             console.log("offset"+offset);
+             var targetLeft=currLeft+offset;
+             console.log(targetLeft);
+             //给翻页函数内设置定时器，用微元翻页来实现平滑翻页效果
+             var listInterval=setInterval(function () {
+                 currLeft+=itemoffset;
+                 if(currLeft===targetLeft){
+                     clearInterval(listInterval);
+                      moving=false;//完成翻页，“解锁”
+                 }
+                 console.log(currLeft.toString());
+                 if(currLeft<=-3600){currLeft=-600;}//实现无缝循环轮播
+                 else if (currLeft>=0){currLeft=-3000;}
+                  list.style.left=currLeft+"px";
+             },ITEM_TIME);
+
+           //翻页结束，调用updatePoints函数更新圆点
+            updatePoints(next);
+       }
+
+//     2、无限循环切换，第一页的上一页为最后一页，最后一页的下一页为第一页
+       //功能在nextpage函数中 定时器最后的改变list图片列表left位移值之前进行if，else if判断
+
+//     3、每隔3s自动滑动到下一页
+        var settool=setInterval(function () {
+            nextpage(true);
+        },3000);
+
+//     4、鼠标进入图片区域，自动切换停止，鼠标离开的时候，重新开始计时切换
+           //需要给图片区域、小圆按钮、浮标都设置鼠标进入和移开的事件，移入清空定时器，移出再次生成
+              container.addEventListener('mouseover',function () {//mouseover（out)可用于所有子元素,enter不行
+                  clearInterval(settool)
+              });
+              container.addEventListener('mouseout',function () {
+                  settool=setInterval(function () {
+                      nextpage(true);
+                  },3000)
+               });
+
+//     5、切换页面的时候，下面的原点也同步更新
+            //通过在nextpage的函数结束前调用updatePoints函数，来更新圆点
+       function updatePoints(next) {
+           //若是由顺序翻页定时器 或是点击浮标触发此函数，传入的形参必是布尔值,所以依然需要对参数判断
+           if(typeof  next==='boolean'){
+           var targetInder=0;
+           if(next){
+               //后翻页时，计算目标节点（实际上下一个点）
+               targetInder=index+1;
+               if(targetInder===5){targetInder=0;}
+           }
+           else{
+               //前翻页
+               targetInder=index-1;
+               if(targetInder===-1){targetInder=4;}}
+           }//以上判断参数布尔型的结果
+           else {
+               //或者参数传入为数值型，来自于圆点点击事件，闭包的返回值的调用(确定了目标圆点位置)
+               targetInder=next;
+           }
+
+           //得到目标index时候，点亮目标index处圆点（添加class），熄灭初始位置圆点（去掉class）,更新index
+             points[index].classList.remove("on");//去除本身class
+             points[targetInder].classList.add("on");
+
+           index=targetInder;
+       }
+
+
+//     6、点击圆点图片切换到对应的页,点击圆点，需给nextpage函数传入数值型形参，参数来自于点击圆点的下标的计算
+             for(i=0;i<points.length;i++){
+                 // var targetIndex=0;
+                 // points[i].onclick=(function (i) {
+                 //     return function (){
+                 //          targetIndex=i;
+                 //         nextpage(targetIndex);}
+                 // })(i)   //返回值作闭包
+
+                 (function(i){
+                 points[i].onclick=function () {
+                     targetIndex=i;
+                      nextpage(targetIndex)}
+                 })(i)//立即执行函数
+
+             }
+
+
+//     7、bug解决方案:控制点击事件必须发生在图片完整出现在窗口的情况
+        //加入全局变量moving 达到给nextpage以及updatePoints加“信号量原语”的效果
+
+//     8、demo改良
+         //给浮标和圆点添加css3样式，以及伪class属性
+
+</script>
+</body>
+</html>

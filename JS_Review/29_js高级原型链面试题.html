@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style></style>
+
+</head>
+<body>
+
+<script>
+
+    //Demo1-
+
+    function A() {
+    }
+
+    A.prototype.n = 1;//建立构造函数A,给A的原型对象设置属性n
+    var b = new A();//b instanceof A
+    console.log(b.n);
+    A.prototype = {n: 2, m: 3};//现在更新A的原型对象的指向
+    console.log(b.n);//再次输出b发现b中n值没有更新,b.n=1
+    var b2 = new A();
+    console.log(b.n, b.m, b2.n, b2.m)//b1.n=1;b1.m=undefined;b2.n=2;b2.m=3
+    console.log("---------")
+
+
+    //Demo2
+    var F = function () {};
+    Object.prototype.a = function () {//f instanceof F instanceof Object
+        console.log('a()')};
+    Function.prototype.b = function () {
+        console.log('b()')};
+    var f=new F();
+    f.a();//con
+    console.log("---")
+    // f.b();//TypeError
+    F.a();//con
+    console.log("---")
+    F.b();
+
+
+
+
+</script>
+</body>
+</html>

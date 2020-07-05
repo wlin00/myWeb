@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{padding: 0;margin: 0}
+        html,body{
+            height: 100%;
+            background: url("bg1.jpg") no-repeat;
+            background-size: 100%,100%;
+        }
+        html img{
+            position: absolute;
+            /*让图片脱离文档流，可以实现图片随机出现*/
+
+            animation: anti1 0.6s 0s infinite ease-in alternate;
+            /*星星闪动*/
+        }
+        @keyframes anti1 {
+            0%{opacity: 0}
+            10%{opacity: 0.1}
+            20%{opacity: 0.2}
+            30%{opacity: 0.3}
+            40%{opacity: 0.4}
+            50%{opacity: 0.5}
+            60%{opacity: 0.6}
+            70%{opacity: 0.7}
+            80%{opacity: 0.8}
+            90%{opacity: 0.9}
+            100%{opacity: 1.0}
+
+        }
+    </style>
+
+</head>
+<body>
+
+
+<script>
+window.onload=function () {
+    var bodywidth=document.documentElement.clientWidth||document.body.clientWidth
+    var bodyheight=document.documentElement.clientHeight||document.body.clientHeight
+    setInterval(function () {
+        var img=document.createElement('img')
+        img.setAttribute('src','tx1.jpg')
+        //随机值定义大小、left、top值
+        var size=parseInt(Math.random()*25)+12
+        var left=parseInt(Math.random()*(bodywidth-size))
+        var top=parseInt(Math.random()*(bodyheight-size))
+        //将随机大小、长宽赋予给图片
+        img.style.left=left+'px'
+        img.style.top=top+'px'
+        img.style.width=img.style.height=size+'px'
+        document.body.appendChild(img)
+        img.onclick=function () {
+            img.parentNode.removeChild(this)
+        }
+
+    },3000)
+
+}
+</script>
+</body>
+</html>

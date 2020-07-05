@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+     function Narcissistic(){
+        console.log('求出1-1000内水仙花数');
+        var i=0;
+        var a=0;
+        var b=0;
+        var c=0;
+        for(i=1;i<1000;i++)
+        	{a=parseInt(i/100);   //取百位
+            b=parseInt(i/10%10);//取十位
+            c=parseInt(i%10);//取个位
+            if(a*a*a+b*b*b+c*c*c==i)
+                console.log('找到水仙花数: '+i);
+
+
+}
+     }
+     Narcissistic();
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

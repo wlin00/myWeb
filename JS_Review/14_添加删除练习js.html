@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0;}
+        html,body{
+            width: 300px;
+            margin-left: 150px;
+            margin-top: 40px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<table id="employeeTable">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>Tom</td>
+        <td>tom@tom.com</td>
+        <td>5000</td>
+        <td><a href="deleteEmp?id=001">Delete</a></td>
+    </tr>
+
+    <tr>
+        <td>Jerry</td>
+        <td>jerry@sohu.com</td>
+        <td>8000</td>
+        <td><a href="deleteEmp?id=002">Delete</a></td>
+    </tr>
+
+    <tr>
+        <td>Bob</td>
+        <td>bob@tom.com</td>
+        <td>10000</td>
+        <td><a href="deleteEmp?id=003">Delete</a></td>
+    </tr>
+</table>
+
+<h2>添加新员工</h2>
+<table id="addTable">
+    <tr>
+        <td class="word">name:</td>
+        <td class="inp">
+            <input type="text" name="empName" id="empName">
+        </td>
+    </tr>
+
+    <tr>
+        <td class="word">email:</td>
+        <td class="inp">
+            <input type="text" name="email" id="email">
+        </td>
+    </tr>
+
+    <tr>
+        <td class="word">salary:</td>
+        <td class="inp">
+            <input type="text" name="salary" id="salary">
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2" align="center">
+            <button id="addEmpButton" value="abc">添加</button>
+        </td>
+    </tr>
+
+</table>
+
+
+<script>
+
+window.onload=function () {
+
+
+    //一：添加功能（1、收集数据   3、清除输入）
+    var name = document.getElementById("empName");
+    var email = document.getElementById("email");
+    var salary = document.getElementById("salary");
+    var table1 = document.getElementById("employeeTable");
+     // console.log("name="+name.value)
+
+    //2、点击按钮，生成对应tr标签插入到table
+    var btn = document.getElementById("addEmpButton");
+    btn.onclick = function () {
+        var name1 = name.value;
+        var email1 = email.value;
+        var salary1 = salary.value;
+
+        console.log("!!!" + name);
+        var newTr = document.createElement("tr");
+        newTr.innerHTML = "<td>" + name1 + "</td>" + "<td>" + email1 + "</td>" + "<td>" + salary1 + "</td>" + "<td><a href='javaScript:;'>Delete</a></td>";
+
+        //顺带给新插入的标签中的a也绑定事件
+          var a2=newTr.getElementsByTagName("a")[0];
+          a2.onclick=function () {
+              var username = this.parentElement.parentElement.firstElementChild.innerHTML;
+              if (confirm("确定要删除" + username + "的信息吗")) {
+                  var tr = this.parentNode.parentNode;
+                  tr.parentNode.removeChild(tr);
+              }
+              return false;
+          };
+
+        //然后需要从表table1中找tbody，向其中插入newTr
+        var tbody = table1.getElementsByTagName("tbody")[0];
+        tbody.appendChild(newTr);
+
+        //3清空输入
+        document.getElementById("empName").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("salary").value = "";
+
+    };
+
+        //4、删除功能
+        var aaa = document.getElementsByTagName("a");
+        for (var i = 0; i < aaa.length; i++) {
+            aaa[i].onclick = function () {
+                var username = this.parentElement.parentElement.firstElementChild.innerHTML;
+                if (confirm("确定要删除" + username + "的信息吗")) {
+                    var tr = this.parentNode.parentNode;
+                    tr.parentNode.removeChild(tr);
+                }
+                return false;
+            }
+        }
+
+
+    //给a标签的父元素设置事件委托
+    //  var a_tr=document.getElementsByTagName("tr");
+    //     for(var i=0;i<a_tr.length;i++) {
+    //         var username = this.firstElementChild.innerHTML;
+    //         if (confirm("确定要删除" + username + "的信息吗")) {
+    //             var tr = this.parentNode.parentNode;
+    //             tr.parentNode.removeChild(tr);
+    //         }
+    //         return false;
+    //
+    //     }
+
+
+    }
+
+
+    //二：删除功能
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+
+        /*初始化*/
+        *{margin: 0;padding: 0;}
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+
+
+        .login_penel{
+            height:600px;
+            width: 800px;
+            background-color: red;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -400px;
+            margin-top: -300px;
+        }
+
+
+        .login_top{height: 200px;background-color: black;}
+
+        .login_main {
+            height: 400px;
+            color: aliceblue;
+            /*由于容器默认为普通布局的方式，所以不能适应垂直居中的布局效果，我们应该选用弹性模型*/
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .login_main input{
+            height: 30px;
+            width: 300px;
+            border-bottom: 1px solid gray;
+            margin-bottom: 10px;
+            border:hidden;
+        }
+
+
+        .login_main>input:first-of-type{
+            background-color: aliceblue;
+
+        }
+
+        .login_main>input:last-of-type{
+            background-color: aliceblue;
+        }
+
+
+
+        .login_userface{
+            height: 80px;height: 80px;
+            background-color: royalblue;
+            position: absolute;
+            top: 200px;
+            left: 50%;
+            margin-left: -40px;
+            margin-top: -40px;
+            border-radius: 50%;
+
+        }
+
+        .login_userface img{
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+        }
+
+
+    </style>
+</head>
+<body>
+<!--采用国字界面布局-->
+<!--布局只考虑布局，内容只考虑内容-->
+<!--实现居中布局结构-->
+<!--使用div原因：独占一行；无行高；无边框-->
+
+<div class="login_penel">
+    <div class="login_top"></div>
+    <div class="login_main">
+        <input type="text" />
+        <input type="password" />
+        <button>登陆</button>
+    </div>
+    <div class="login_userface">
+        <img src="img/img/tx1.jpg" alt="#" />
+    </div>
+</div>
+</body>
+</html>

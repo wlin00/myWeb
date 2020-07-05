@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /*动画实现步骤：
+              功能实现---
+             1、定义动画，方式可以是from->to,或者是百分比形式
+             2、绑定动画事件名字给div（使用animation-name），设置动画时间（使用animation-duration：ns）
+             3、设置animation-delay:分别为1s和-1s，比较区别，其实功能就是规定动画过多久开始，-1代表直接跳过时间
+             4、设置动画播放为循环播放
+             5、设置动画播放方式为匀速循环往复播放
+             6、利用简写的形式达到效果(实际上直接调用animation属性：后接六个参数
+                      参数1：动画名name  参数2：动画时间duration  参数3：动画延迟delay
+                参数4：动画播放次数：iteration-count 参数5：动画轨迹  参数6：动画循环方向：alternate
+
+             7、animation-iteration-count:n 规定动画的播放次数，默认为1；若设置infinite则代表无穷播放
+             8、animation-direction 规定动画是否在下一周期逆向播放 默认normal
+             9、animation-play-state 规定动画是否正在运行或暂停，默认running
+         */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: red;
+
+            /*绑定动画事件给div，设置动画时间*/
+            /*animation-name:ani1;*/
+            /*animation-duration:5s;*/
+            /*animation-delay*/
+            /*animation-iteration-count: infinite;*/
+            /*animation-track*/
+            /*animation-direction: alternate-reverse;*/
+
+            /*简写*/
+            animation: ani1 5s 0s infinite ease alternate-reverse;
+
+
+        }
+
+        /*1定义动画，方式可以是from->to,或者是百分比形式*/
+        @keyframes ani1 {
+            0% {
+                background-color: red;
+                top: 0px;
+                left: 0px;
+            }
+            25% {
+                background-color: blue;
+                top: 0px;
+                left: 200px;
+            }
+            50% {
+                background-color: green;
+                top:200px;
+                left: 200px;
+            }
+            75% {
+                background-color: yellow;
+                top:200px;
+                left: 0px;
+            }
+            100% {
+                background-color: red;
+                top:0px;
+                left: 0px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="box"></div>
+</body>
+</html>

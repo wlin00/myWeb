@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<div id="example1"></div>
+<div id="example2"></div>
+
+<script type="text/javascript" src="js/react.development1.js"></script>
+<script type="text/javascript" src="js/react-dom.development1.js"></script>
+<script type="text/javascript" src="js/prop-types.js"></script>
+<script type="text/javascript" src="js/babel.js"></script>
+
+<script type="text/babel">
+//需求:自定义用来显示一个人员信息的组件：1、姓名必须指定；2、性别默认为男；3、年龄默认18
+
+//     //一、工厂函数定义组件
+//      function Component(props){
+//          return(<ul>
+//              <li>{props.name}</li>
+//              <li>{props.sex}</li>
+//              <li>{props.age}</li></ul>)
+//      }
+
+//     二、类定义组件
+        class Component extends React.Component{
+            render(){
+                return (
+                    <ul>
+                        <li>{this.props.name}</li>
+                        <li>{this.props.sex}</li>
+                        <li>{this.props.age}</li></ul>  //当前this指向组件，通过属性prop找对应标签属性
+                )
+            }
+        }
+
+    //渲染组件标签
+      const p1={
+     name:'TOM',sex:'女',age:18
+     }
+     const p2={
+     name:'JACK'
+         // ,sex:'男',age:17
+     }
+
+     //这里使用react组件属性之二：props相关属性
+     //每个组件中有方法：
+          // 1:指定默认属性；  组件名.defaultProps={属性名1: '男' ，属性名2: 18}
+          // 2:指定属性的类型和必要性： 组件名.propTypes={属性名:PropTypes.string.isRequired }
+          //关于默认值和限定值的设置如下：
+              Component.defaultProps={
+                sex:'男'
+                  ,age:18
+              }//默认值设置
+
+              Component.propTypes={
+                 name:PropTypes.string.isRequired,
+                  age:PropTypes.number,
+                  sex:PropTypes.string
+              }//必要性设置,注意大小写
+
+
+      ReactDOM.render(  <Component {...p1}/>,           //{...p1} 解包使用，是分别赋予标签属性的语法糖
+          document.getElementById('example1') )
+
+      ReactDOM.render(  <Component name={p2.name} />,   //渲染具备标签属性的组件
+          document.getElementById('example2') )
+</script>
+</body>
+</html>

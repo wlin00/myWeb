@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+   *{margin: 0;
+       padding: 0}
+
+     li{list-style: none;}
+
+    </style>
+
+</head>
+<body>
+<ul>
+    <li>11111</li>
+    <li>1111111</li>
+    <li>111111111</li>
+    <li>11111111111</li>
+</ul>
+<br/>
+
+<li>22222</li>
+<br/>
+<button id="btn">添加新的li</button>
+<button id="btn2">添加事件委托：<br/>li委托父元素ul完成click触发事件</button>
+<button id="btn3">取消事件委托:<br/>取消新添加li触发click事件资格</button>
+<br/>
+
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script>
+
+    /*需要注意的---绑定事件监听的问题：新加的元素没有监听
+    *
+    *
+    * 需求：1_点击li背景变为红色
+    *       2_点击btn1就添加一个li（满足需求1）
+    *
+    * */
+
+    $('li').click(function () {
+        $(this).css("backgroundColor","red")
+    })
+
+    //实现新添加元素监听的方法一：新插入标签元素发生:appendTo事件后接click的事件绑定
+    //                   方法二：事件委托
+
+    $('#btn').click(function () {
+        $('<li>'+'11111111111'+'</li>').appendTo($('ul'))
+
+            // 这里也可以注释下面代码，对父元素ul添加事件委托
+            // .click(function () {
+            //     $(this).css("backgroundColor","red");
+            // })
+
+        //添加到html后在进行事件委托，继续绑定点击事件
+    })
+
+    $('#btn2').click(function () {
+        $('ul').delegate('li',"click",function (e) {
+            $(this).css("backgroundColor","red");
+            console.log(e.target)
+            e.stopPropagation();
+
+        })
+    })
+    
+    $('#btn3').click(function () {
+        $('ul').undelegate('click')
+    })
+
+</script>
+</body>
+</html>

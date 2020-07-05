@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding:0;}
+
+        #tab{
+            width: 300px;
+            height: 50px;
+            display: flex;
+            justify-content: flex-start;
+        }
+        #tab li{list-style: none;}
+        #container{
+            width: 400px;
+            height: 300px;
+        }
+        #content1{
+            width: 100%;
+            height: 100%;
+            background: yellow;
+        }
+        #content2{
+            width: 100%;
+            height: 100%;
+            background: deeppink;
+        }
+        #content3{
+            width: 100%;
+            height: 100%;
+            background: lightskyblue;
+        }
+    </style>
+</head>
+<body>
+<h2>多TAB点击切换</h2>
+<ul id="tab">
+    <li id="tab1" value="1" style="background: yellow">10元套餐</li>
+    <li id="tab2" value="2" style="background: deeppink">30元套餐</li>
+    <li id="tab3" value="3" style="background: lightskyblue">50元包月</li>
+</ul>
+<div id="container">
+    <div id="content1"><br/><br/> 10元套餐详情：<br/>&nbsp;每月套餐内拨打100分钟，超出部分2毛/分钟</div>
+    <div id="content2" style="display: none"><br/><br/>30元套餐详情：<br/>&nbsp;每月套餐内拨打4 00分钟，超出部分2毛/分钟</div>
+    <div id="content3" style="display: none"><br/><br/>50元套餐详情：<br/>&nbsp;每月套餐内拨打无限时间</div>
+</div>
+
+<script type="text/javascript"src="js/jquery-3.3.1.js"></script>
+<script>
+
+       //给一个index下标为0 表示当前显示的窗口对应下标
+           var currIndex=0;
+
+       //封装下方窗体的div，为jQ对,是一个伪数组，可以通过$contents[index]准确寻找
+       var $contents=$('#container>div');
+
+
+       //给3个li加上页面监听
+       $('#tab>li').click(function () {//隐式遍历
+
+        //方法一：获得li的value值，if语句判定
+        // var val=$(this).val();//使用val（）必须是jQ对象，即this要使用$转换
+        // //alert(val);
+        // if(val===1){
+        //     $('#content1').css("display","block");
+        //     $('#content2').css("display","none");
+        //     $('#content3').css("display","none");
+        // }
+        // else if(val===2){
+        //     $('#content1').css("display","none");
+        //     $('#content2').css("display","block");
+        //     $('#content3').css("display","none");
+        // }
+        // else if (val===3){
+        //     $('#content1').css("display","none");
+        //     $('#content2').css("display","none");
+        //     $('#content3').css("display","block");
+        // }
+
+        //   方法二:通过每次点击隐藏当前index—div，最后更新index
+         $contents[currIndex].style.display="none";
+
+         //并将下标由index方法获得，改变对应的div为块级元素显示
+           var index=$(this).index();
+           $contents[index].style.display="block";
+
+           currIndex=index;//下一次点击后 ，隐藏当前模块
+
+
+
+
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        .box{
+            height: 400px;
+            border:1px solid;
+            position: relative;
+        }
+        .content{
+            width: 100px;
+            height: 100px;
+            border:1px solid hotpink;
+            position:absolute;
+            left:50%;
+            top: 50%;
+            margin-left: -50px;
+            margin-top: -50px;
+            /*transform: translate(-50%,-50%);*/
+            /*当不知道子盒子高度时，除了flex外，可以使用translate（参数）因这个属性是根据子盒子本身实际大小进行移动
+               而此时不能使用margin方法，因margin-top无法知道被撑开的盒子的实际高度*/
+
+        }
+        /*
+         ①若知道子盒子的宽和高，子盒子居中方式：设置子盒子的position相对于父元素定位，并且设置top和left为50%，
+           此时子盒子节点左上角居中，只需要将盒子再次margin偏移自身宽高的一半即可居中。
+
+         ②若知道父盒子的宽和高以及子盒子宽高，可以使用父盒子的padding属性，需计算   x轴差值/y轴差值=（父盒宽/高-子盒宽/高）÷2
+         并使用padding-top和padding-left设置父盒子的内间距，将子盒挤到中间
+         此时还需要结合box-sizing属性，跳转父盒子为border-box，让宽高包含content、padding和border。
+         ③若不知道子盒子的高度，此时可以使用最基础的display：flex以及justify content：center； align-items设置居中；但此方法在pc端的兼容性不是特别好
+         ④若不知道子盒子的高度，高度由内容撑开，可以依然设置子盒的相对定位，并且top和left各50%，则此时不能使用margin方法， 因为margin-top无法识别盒子本身的高；
+           接着使用transform：translate属性，设置两个参数各-50%，可以让子盒根据自己的宽高进行位移
+         ⑤文字的居中：一行的文字可以使用属性 text-align:center;
+         line-height:400px
+          多行文字：不知道父节点高，可以用flex；知道的话可以用padding
+        ⑥图片的居中：不支持flex的话可以考虑，新增一个子元素，利用vertical-align属性与相邻节点间形成对应关系，例如新增span；
+         然后设置图片vertical-align:middle;
+         接着相邻节点span设置vertical-align:middle
+
+        */
+
+        /*.box{*/
+            /*height: 400px;*/
+            /*width: 400px;*/
+            /*border:1px solid;*/
+            /*position: relative;*/
+            /*padding-left: 150px;*/
+            /*padding-top: 150px;*/
+            /*!*此时必须设置border-box属性，防止因padding增加的间距*!*/
+            /*box-sizing: border-box;*/
+        /*}*/
+        /*.content{*/
+            /*width: 100px;*/
+            /*height: 100px;*/
+            /*border:1px solid hotpink;*/
+        /*}*/
+        /*!*第2种居中：*!*/
+
+
+
+
+    </style>
+</head>
+<body>
+
+<section class="box">
+    <section class="content">热烈欢迎小伙伴们来到XXX</section>
+</section>
+
+</body>
+</html>

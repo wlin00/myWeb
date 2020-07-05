@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+         *{margin:0;padding:0;}
+        body{background: url("img/bg.jpg");background-size: 100%,100%;}
+
+         /*因使用浮动 需解决高度塌陷问题，需使用clearfix*/
+         .clearfix:before,.clearfix:after{
+             content:"";
+             display: table;
+             clear: both;
+         }
+         .clearfix{zoom: 1;}
+         .w{
+             width: 280px;
+             margin-left: 430px;
+             float: left;
+         }
+         .r{width: 440px;
+            margin-right: 300px;
+         float: right;}
+
+         .inner>ul{display: flex;justify-content: flex-start}
+         .inner ul li {list-style: none;margin-right: 15px;font-size: 20px;border: 1px solid gray;background: lightgreen;}
+
+         .inner{
+             width: 100%;
+             height: 100%;
+             border: 1px solid black;
+         }
+         .inner:first-child{margin-top: 50px;margin-bottom: 30px;}
+
+         .inner>h2{
+             text-indent: 2em;
+         }
+         .bt{margin-top: 50px;}
+
+        .btn{
+            margin-top: 2px;
+            margin-bottom: 3px;
+            width: 210px;
+        }
+    </style>
+</head>
+<body>
+<div class="total w clearfix">
+    <div class="inner">
+        <h2>你最喜欢的城市</h2>
+        <ul id="city">
+            <li id="bj">北京</li>
+            <li>上海</li>
+            <li>东京</li>
+            <li>首尔</li>
+        </ul>
+        <br/>
+        <br/>
+        <h2>你最喜欢的游戏</h2>
+        <ul id="game">
+            <li id="rl">红警</li>
+            <li>实况</li>
+            <li>极品飞车</li>
+            <li>魔兽</li></ul>
+        <br/>
+        <br/>
+        <h2>你手机的操作系统</h2>
+        <ul id="phone">
+
+            <li>IOS</li>
+            <li id="android">Android</li>
+            <li>Windows Phone</li>
+        </ul>
+        <br/>
+        <br/>
+    </div>
+    <div class="inner">
+        <h2>gender:</h2>
+        <input type="radio" value="male" name="gender">Male
+        <input type="radio" value="female" name="gender">Female
+        <br/>
+        name <input type="text" value="abcde" name="name" id="username">
+        <br/>
+    </div>
+
+</div>
+
+<div id="btnList" class="bt r clearfix">
+    <div><button class="btn" id="btn01">查找#bj节点</button></div>
+    <div><button class="btn" id="btn02">查找所有li节点</button></div>
+    <div><button class="btn" id="btn03">查找name=gender节点</button></div>
+    <div><button class="btn" id="btn04">查找#city的所有li节点</button></div>
+    <div><button class="btn" id="btn05">返回#city所有子节点</button></div>
+    <div><button class="btn" id="btn06">返回#phone的第一个子节点</button></div>
+    <div><button class="btn" id="btn07">返回#bj的父节点</button></div>
+    <div><button class="btn" id="btn08">返回#android前一个兄弟节点</button></div>
+    <div><button class="btn" id="btn09">返回#username的value属性值</button></div>
+    <div><button class="btn" id="btn10">设置#username的value属性值</button></div>
+    <div><button class="btn" id="btn11">查找#bj文本值</button></div>
+</div>
+
+
+
+<script>
+
+    window.onload=function () {
+
+
+var t1=document.getElementById("btn01");
+   t1.onclick=function () {
+     var bj=document.getElementById("bj");
+     alert(bj.innerHTML);
+   };
+
+var t2=document.getElementById("btn02");
+t2.onclick=function () {
+    var list=document.getElementsByTagName("li");
+    console.log(list.length);
+    for(var i=0;i<list.length;i++){alert(list[i])}
+    // for(var i=0;i>list.length;i++)
+    // {alert(list[i])
+    // }
+};
+var t3=document.getElementById("btn03");
+t3.onclick=function () {
+  var test3=document.getElementsByName("gender");
+  console.log(test3.length)
+
+};
+var t4=document.getElementById("btn04");
+t4.onclick=function () {
+var test4=document.getElementById("city");
+console.log(test4.children)
+
+
+
+};
+var t5=document.getElementById("btn05");
+t5.onclick=function () {
+    var test5=document.getElementById("city");
+    console.log(test5.childNodes)
+};
+var t6=document.getElementById("btn06");
+t6.onclick=function () {
+    var test6=document.getElementById("phone");
+    console.log(test6.firstElementChild)
+};
+var t7=document.getElementById("btn07");
+t7.onclick=function () {
+    var test7=document.getElementById("bj");
+    console.log(test7.parentElement)
+
+};
+var t8=document.getElementById("btn08");
+t8.onclick=function () {
+    var test8=document.getElementById("android");
+    console.log(test8.parentElement.firstElementChild)
+
+
+};
+var t9=document.getElementById("btn09");
+t9.onclick=function () {
+var test9=document.getElementById("username").value;
+console.log(test9);
+
+};
+var t10=document.getElementById("btn10");
+t10.onclick=function () {//设置属性需要传入形参this
+    document.getElementById("username").value="new add";
+    // test9.innerText="new add";
+};
+var t11=document.getElementById("btn11");
+t11.onclick=function () {
+    var test11=document.getElementById("bj");
+    console.log(test11.innerHTML)
+
+};
+
+
+    }
+
+</script>
+</body>
+</html>

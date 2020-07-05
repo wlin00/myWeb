@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        console.log(111222333);
+        var a=111222333;
+        document.write(a);
+       var ff= function fun() {
+            console.log("hello");
+        return 1}
+        ff()//使用函数名、变量名接（）会导致函数执行，若以后接（）的函数作为参数，则是表示了使用函数返回值做参数；
+                                                  //若直接以函数名作为参数，无括号，则是使用了函数本身的对象作为参数
+
+        //typeof有六种返回值：num、str、boolean、object、undefined、function
+        console.log(typeof 123);//num
+        console.log(typeof "");//str
+        console.log(typeof true);//boolean
+        console.log(typeof {});//object
+        console.log(typeof []);//object
+        console.log(typeof null);//object
+        console.log(typeof undefined);//undefined
+        console.log(typeof Array);
+        console.log(typeof Object)//Object和Array和Function全部是返回function，因为他们是内置函数，最好使用instance of
+        console.log(typeof  console.log)//function
+        console.log("--------------");//A instanceof B   代表了B的显式原型在A的原型链上
+        console.log([] instanceof Array)
+        console.log(console.log instanceof Function)
+        console.log([] instanceof Object)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

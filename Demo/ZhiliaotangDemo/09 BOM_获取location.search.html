@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+
+<script>
+    function parseQuery() {
+    var obj={}
+    var cache=location.search.replace(/^\?/,'').split('&')
+    // 正则表达式来 获取location.search  ,用replace的方法替换所有url的问号，以及去除连接符号&
+    // 最后转化为键值对的方式(即等号左右当做键和值，来返回obj)
+
+    if(!cache.length){return obj}
+    for(var i=0;i<cache.length;i++)
+       {
+           var key=cache[i].split('=')[0],
+           value=cache[i].split('=')[1]
+           obj[key]=value
+       }
+    return obj
+    }
+    parseQuery()
+</script>
+</body>
+</html>

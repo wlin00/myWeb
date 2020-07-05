@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+    </style>
+
+</head>
+<body>
+
+<ul id="box">
+    <li><a href="#" class="link">超链接</a></li>
+    <li><a href="#" class="link">超链接</a></li>
+    <li><a href="#" class="link">超链接</a></li>
+
+</ul>
+<button id="btn">
+    点击添加超链接
+</button>
+<script>
+    var btn=document.getElementById("btn")
+    var ul=document.getElementById("box");
+
+    //给共同父节点ul设置a的click事件委派
+       ul.onclick=function(event){
+           event=event||window.event
+           //通过class判断事件对象的是a标签,target会返回触发此事件的元素
+           if(event.target.className==="link"){
+           alert("我是a的点击响应函数")}
+       }
+
+       ul.onclick= function(event){
+           event= event||window.event
+
+           if(event.target.className === "link"){
+               //执行事件
+           }
+
+       }
+
+    btn.onclick=function () {
+        var li=document.createElement("li")
+        li.innerHTML="<a href='#' class='link'>新加入的超链接</a>"
+        ul.appendChild(li);
+        return false
+    }
+
+
+
+</script>
+</body>
+</html>

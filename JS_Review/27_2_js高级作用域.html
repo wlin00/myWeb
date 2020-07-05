@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+
+<script>
+
+    //js作用域Demo1
+    var a=10
+    var b=20
+    function fn(x) {
+        var a=100
+        var c=300
+        console.log("fn()",a,b,c,x);//首先执行：fn(),100,20.300.10
+        function bar(x) {
+            var a=1000
+            var d=400
+            console.log("bar()",a,b,c,d,x)
+        }
+        bar (100)//2执行：bar 1000,20,300,400,100
+        bar (200)//      bar 1000,20,300,400,200
+    }
+    fn(10);
+    console.log("----");
+
+
+    //Demo2---函数嵌套模型的输出
+    var x=10
+    function show() {
+        var x=20
+        function f() {
+          console.log(x)}
+            return f;
+              }
+    var a=show()
+    a();
+
+
+    //Demo3 函数并联调用模型
+    var x2=10
+    function f2() {
+        console.log(x2)
+    }
+    function show2(f2) {
+        var x2=20
+        f2();//执行show2函数，show2入栈，然后是调用f2入栈，
+             // 接着f2函数作用域没找到x2，向上一层作用域（window）寻找到x2=10
+    }
+    show2(f2);
+
+    //Demo4_1 面试题
+    var fn=function () {
+        console.log(fn)
+    }
+    fn()
+
+
+    //Demo4_2 面试题，报错实例：若在对象内部直接打印方法名，
+    // 则在外部调用默认this是window找此对象名，所以可能出现指向错误
+    // //ReferenceError:fn2 is not defined
+
+    // var obj={
+    //     fn2:function () {
+    //         console.log(fn2)}
+    // }
+    // obj.fn2();
+
+
+    //Demo4_3 面试题
+    var obj={
+        fn2:function () {
+            var _this =this
+            console.log(this.fn2)//若不使用对象内部_this.fn2 则是默认为window.fn2 而window并没有此方法
+        }}
+    obj.fn2();
+
+</script>
+</body>
+</html>

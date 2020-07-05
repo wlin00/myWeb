@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #dd{
+            width:200px;
+            height: 200px;
+            background-color: aliceblue;
+        }
+        #sp{
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+
+<div id="dd">
+    我是div
+    <span id="sp">我是span</span>
+</div>
+
+
+<script>
+var box=document.getElementById("dd")
+var sp=document.getElementById("sp")
+var bd=document.body;
+
+box.onclick=function (event) {
+    event=event||window.event;
+    //用形参事件对象来取消事件冒泡
+    alert("我是box的单击响应函数")
+    event.stopPropagation();
+}
+sp.onclick=function (event) {
+    event=event||window.event;
+
+    //用形参事件对象来取消事件冒泡
+    alert("我是sp的单击响应函数")
+    event.cancelBubble=true;
+}
+
+bd.onclick=function (event) {
+    event=event||window.event;
+
+    alert("我是bd的单击响应函数")
+
+}
+
+
+</script>
+
+</body>
+</html>

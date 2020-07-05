@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+    function find()
+    {
+    	var i=0;
+        var a=0;
+        var a1=0;
+        var a2=0;
+        var b1=0;
+        var b2=0;
+        var b=0;   
+        var sum=0;
+        for(i=32;i<100;i++)
+        {
+            
+        	sum=i*i;
+        	a=parseInt(sum/100);
+        	b=parseInt(sum%100);
+        	a1=parseInt(a/10);
+        	a2=parseInt(a%10);
+        	b1=parseInt(b/10);
+        	b2=parseInt(b%10);
+            if(a1==a2&&b1==b2)
+
+        	    console.log('需要寻找的数是: '+sum);
+        }
+
+            	
+    }
+
+    find();
+
+	</script>
+    
+</head>
+<body>
+</body>
+</html>

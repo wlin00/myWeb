@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_HelloWorld</title>
+</head>
+<body>
+
+<!--
+  1. 引入Vue.js
+  2. 创建Vue对象
+    el : 指定根element(选择器)
+    data : 初始化数据(页面可以访问)
+  3. 双向数据绑定 : v-model
+  4. 显示数据 : {{xxx}}
+  5. 理解vue的mvvm实现
+-->
+
+<!--模板-->
+<div id="test">
+    <h2>v-for 遍历数组</h2>
+       <ul>
+           <li v-for="(x,index) in persons" :key="index">
+               {{index}} <---> {{x.name}} <---> {{x.age}}<--->
+               <button @click="delete1(index)">删除</button><---><button @click="update(index,{name:'Cat',age:15})">更新</button>
+           </li>
+       </ul>
+
+    <h2>v-for 遍历对象</h2>
+       <ul>
+           <li v-for="(value,attrName) in persons[1]" :key="attrName">
+               {{value}}---{{attrName}}
+               <!--
+               遍历数组和对象的区别：
+                   遍历数组： v-for=" (x,index) in persons "    :key="index"         参数1： 遍历的数组对象； 参数2：遍历的序号下标
+                   遍历对象： v-for=" (value,attrName) in persons "                  参数1： 遍历的值； 参数2： 属性名
+
+               -->
+           </li>
+       </ul>
+
+
+</div>
+
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({ // 配置对象 options
+        // 配置选项(option)
+        // el: '#test',  // element: 指定用vue来管理页面中的哪个标签区域
+        // data: {
+        //     msg: 'atguigu'
+        // }
+        el:'#test',
+        data:{
+            persons:[
+                {name:'Tom1',age:18},
+                {name:'Tom2',age:19},
+                {name:'Tom3',age:17},
+                {name:'Tom4',age:16}
+            ]
+        },
+        methods:{
+               delete1(index){
+                   this.persons.splice(index,1)
+               },
+            update(index,newP){
+            // 想要修改的数据绑定到视图，需要使用数组的变异方法如：splice、sort、push、unshift等等
+                this.persons.splice(index,1,newP)
+            }
+        }
+
+
+
+    })
+</script>
+</body>
+</html>

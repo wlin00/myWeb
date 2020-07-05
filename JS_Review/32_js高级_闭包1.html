@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+
+    </style>
+</head>
+<body>
+<button class="btn">测试1</button>
+<button class="btn">测试2</button>
+<button class="btn">测试3（函数返回值)</button>
+<br>
+<button class="btn2">测试一</button>
+<button class="btn2">测试二</button>
+<button class="btn2">测试三(函数参数)</button>
+
+<script>
+
+
+    window.onload=function () {
+        var btn=document.getElementsByClassName('btn')
+        var btn2=document.getElementsByClassName('btn2')
+
+        //闭包条件：1、函数嵌套   2、内部函数引用外部函数的变量
+        //闭包方法1：闭包函数当做返回值
+        for(var i=0;i<btn.length;i++)
+           {
+         btn[i].onclick=(function (i) {
+            return function () {
+            alert("第"+(i+1)+"个")
+            }
+         })(i)
+           }
+
+        //闭包方法2：闭包函数充当参数
+         for(var j=0;j<btn2.length;j++){
+             (function (j) {
+               btn2[j].onclick=function () {
+                   alert("第"+(j+1)+"个")
+               }
+             })(j)
+         }
+
+
+         //闭包实例3：读取函数内部变量，并且将函数内部变量的值保存在内存中
+         function fun() {
+             var a=2
+             function fun2() {
+                 a++;
+                 console.log(a)
+             }
+             return fun2
+         }
+         var f=fun()
+         f();//fun2函数是一个闭包（外部嵌套，且引用外部函数的变量），值是a=3
+         f();//闭包引用的变量不会消失，会保留在内存中，即局部变量a不会被垃圾回收，值是a=4
+
+
+
+
+    }
+
+</script>
+</body>
+</html>

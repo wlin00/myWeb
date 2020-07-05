@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /*因使用浮动 需解决高度塌陷问题，需使用clearfix*/
+        .clearfix:before,.clearfix:after{
+            content:"";
+            display: table;
+            clear: both;
+        }
+        .clearfix{zoom: 1;}
+
+
+        *{margin:0;padding:0;}
+
+        .panel{
+            width: 100%;height:100%;
+            position: absolute;
+
+        }
+        .top{
+            height: 22.5%;
+            background-color: gray;
+        }
+        .mid{
+            height: 55%;
+
+        }
+        .bottom{
+            height: 22.5%;
+            background-color: black;
+        }
+        .mid_left{
+            height: 100%;
+             float:left;
+            width:10%;background-color: red;
+        }
+
+        .mid_right{
+            height: 100%;
+            float: right;
+            width: 10%;background-color: purple;
+        }
+        .mid_center{
+            height: 100%;
+            float: right;
+            width: 80%;
+            background-color: lightpink;
+        }
+
+        /*当屏幕最大宽度小于980px时*/
+        @media screen and (max-width: 980px){
+            .top{ height: 30%;
+                background-color: gray;}
+            .mid{
+                height: 40%;}
+            .bottom{
+                height: 30%;
+                background-color: black;}
+            .mid_left{height: 100%;
+                float:left;
+                width:30%;background-color: red;}
+            .mid_center{
+                overflow-y: auto;
+                height: 100%;
+                float: right;
+                width: 40%;
+                background-color: lightpink;}
+            .mid_right{
+                height: 100%;
+                float: right;
+                width: 30%;background-color: purple;}
+        }
+
+        /*屏幕最大宽度小于620px时*/
+        @media screen and (max-width: 620px){
+            .mid{height: 55%;display: block}
+            .mid_left{width:100%;height:50%;background-color: red;}
+            .mid_center{width: 100%;height:50%;background-color: lightpink;}
+            .mid_right{width: 100%;height:0;background-color: purple;float: right;}
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="panel">
+    <div class="top">header</div>
+    <div class="mid clearfix">
+        <div class="mid_left">left</div>
+        <div class="mid_right">right</div>
+        <div class="mid_center">简介：淘宝网是亚太地区较大的网络零售、商圈，由阿里巴巴集团在2003年5月创立。淘宝网是中国深受欢迎的网购零售平台，拥有近五亿的注册用户数，每天有超过6000万的固定访客，同时每天的在线商品已经超过了8亿件，平均每分钟售出4.8万件商品。截止2011年</div>
+
+    </div>
+    <div class="bottom">footer</div>
+</div>
+</body>
+</html>

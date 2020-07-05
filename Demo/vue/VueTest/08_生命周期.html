@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_HelloWorld</title>
+</head>
+<body>
+
+<!--
+  1. 引入Vue.js
+  2. 创建Vue对象
+    el : 指定根element(选择器)
+    data : 初始化数据(页面可以访问)
+  3. 双向数据绑定 : v-model
+  4. 显示数据 : {{xxx}}
+  5. 理解vue的mvvm实现
+-->
+
+<!--模板-->
+<div id="test">
+   <h3 v-show="isShow">生命周期显示</h3>
+    <button @click="destroy">销毁生命周期</button>
+</div>
+
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({ // 配置对象 options
+        // 配置选项(option)
+        // el: '#test',  // element: 指定用vue来管理页面中的哪个标签区域
+        // data: {
+        //     msg: 'atguigu'
+        // }
+        el:'#test',
+        data:{
+            isShow:true  //isShow用来控制每隔1秒钟修改视图层的显示
+        },
+        methods:{
+            destroy(){
+               //删除vm对象，存在一个方法:$destroy
+                 this.$destroy();
+            }
+        },
+        mounted(){
+            //mounted钩子函数，用与进行刚刚结束页面渲染(挂载)后的处理
+            this.interval=setInterval(()=>{
+                //注意在定时器内使用this，this都指向window，需要bind（this）或箭头函数
+                this.isShow=!this.isShow;
+            },1000)
+        },
+        beforeDestroy(){
+           // 勾子函数beforeDestroy，用与生命周期结束前的事件处理，如销毁定时器
+           //  this.interval=null
+            clearInterval(this.interval)
+        }
+
+    })
+
+</script>
+</body>
+</html>

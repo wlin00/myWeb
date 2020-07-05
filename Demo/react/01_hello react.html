@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<!--react入门：使用react向空div里插入一个h标签-->
+<div id="test"></div>
+
+<script type="text/javascript" src="js/react.development1.js"></script>
+<script type="text/javascript" src="js/react-dom.development1.js"></script>
+<script type="text/javascript" src="js/babel.js"></script>
+<script type="text/babel">
+    //react核心操作：1、创建虚拟dom元素对象；
+    var virDom=<h1>麻烦</h1>//jsx语法
+    //2、虚拟Dom渲染到页面真实dom容器,使用方法render
+    ReactDOM.render(virDom,document.getElementById("test"))
+
+
+</script>
+</body>
+</html>

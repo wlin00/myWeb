@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        html{width: 100%;height: 100%}
+        body{
+            background-color: deeppink;
+        }
+        #box{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -400px;
+            margin-top: -300px;
+            width: 800px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 10px 0;
+        }
+        #left{
+            width: 50%;
+            height: 100%;
+            background-color: lightgreen;
+        }
+        #left p{
+            text-align: center;
+            word-wrap: break-spaces;
+            position: absolute;
+            top: 30%;
+            padding: 0 8% 0 8%;
+            color: white;
+        }
+        #left_bottom{
+            width: 120px;
+            height: 17px;
+            position: absolute;
+            top: 93%;
+            left: 17%;
+        }
+        #left_bottom span{
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: white;
+            border:1px solid limegreen;
+            float: left;
+            margin-right: 4px;
+        }
+        #left_bottom span:hover{
+        border: 3px solid limegreen;
+        }
+
+        #right{
+            width: 50%;
+            height: 100%;
+            background-color: #666666;
+        }
+
+        #right_top{width: 170px;
+                   height: 40px;
+                   border:none;
+                   -webkit-border-radius : 50%;
+                   background-color: lightgrey;
+                   position: absolute;
+                   top: 21px;
+                   left: 615px;
+                   display: flex;
+                   justify-content: flex-start;
+                    overflow: hidden;
+
+          }
+        #right_top div:first-child{
+            width: 50%;
+            background-color: #665566;
+            -webkit-border-top-left-radius: 50%;
+        }
+
+
+        #right_top div:last-child{
+            width: 50%;
+            background-color: limegreen;
+            -webkit-border-top-right-radius: 50%;}
+
+        #right_center_top span:first-child{
+            color: lightgrey;
+            font-size: 25px;
+        }
+        #right_center_top span:last-child{
+            color: white;
+            font-size: 25px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid darkgreen;
+        }
+        #right_center{
+            position: absolute;
+            top: 140px;
+            left: 475px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div id="box">
+    <div id="left"><p>Plan your activities and control your <br> progress online</p>
+    <div id="left_bottom">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span></div>
+    </div>
+    <div id="right">
+        <div id="right_top">
+            <div></div>
+            <div></div>
+        </div>
+
+        <div id="right_center">
+            <div id="right_center_top"><span>Sign In   or </span><span>Sign Up</span></div>
+            <div>
+                <p style="color: white">AAA BBB</p>
+                <input type="text" placeholder="ddd ddd aaa" style="border: none;border-bottom: 2px solid darkgreen;background-color: #666666" >
+            </div>
+        </div>
+        <div id="right_bottom">
+            <button id="login">Log in</button>
+            <p id="tt">please input</p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

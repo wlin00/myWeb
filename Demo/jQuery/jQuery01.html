@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            width: 200px;
+        }
+        p{
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<p>
+    我是用来占位置的+++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+    +++++++++++++++++++++++++
+
+</p>
+<input type="text" id="username">
+<button id="btn1" onclick="fun()">确定（原生js）</button>
+<button id="btn2">确定（jQUery)</button>
+<button id="btn3">功能3：快速返回顶部</button>
+<button id="btn4">功能4：平滑返回顶部</button>
+<!--原生dom-->
+<script>
+    function fun() {
+        var user=document.getElementById("username").value;
+        alert(user);
+    }
+</script>
+
+<!--引入jQuery，并使用jq-->
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        //绑定文档加载时候的监听,绑定触发最外层函数
+        //回调函数是获得输入框的信息，并且进行操作
+        //使用jQuery的核心函数就是符号：$ 或者写为jQuery
+        //使用jQuery的核心对象：执行$()返回的对象
+        //触发事件,点击按钮就触发回调函数
+
+        //$可以作为函数使用，如$（）；或者通过对象来调用，即使用$.的内置方法。
+
+        var $btn2=$('#btn2');//获取jQ对象，相当于var一个变量进行dom操作
+        $btn2.click(function () {
+            var username=$('#username').val();//普遍变量来存储jQ对象的函数返回值
+            alert(username);
+            console.log(username)
+
+        })
+    })
+
+    //快速返回顶部
+    $('#btn3').click(function () {
+        $('html,body').scrollTop(0);
+    })
+
+    //平滑返回顶部
+    $('#btn4').click(function () {
+        /*思路：创建定时器，并setInterval来使得定时器一直运行，
+                让scrollbar持续上升直到顶部
+        */
+        var totalTime=500;
+        var itemTime=50;
+        var distance=$('html,body').scrollTop();
+        var itemDistance=distance/(500/50);
+        var setTool=setInterval(function () {
+            distance-=itemDistance;
+            //如果scrollbar到达顶部，结束定时器
+            if(distance<=0){
+                distance=0;
+                clearInterval(setTool);
+            }
+            //否则使scrollbar上滑
+            $('html,body').scrollTop(distance);
+        },50)
+
+    })
+
+</script>
+</body>
+</html>

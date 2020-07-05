@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            height: 1000px;
+        }
+        #dd{
+            background-color: red;
+             width: 100px;
+            height: 100px;
+            /*为了让div标签可以进行style.left等样式的设置，需要让设置position的定位非static*/
+            position: absolute;
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="dd"></div>
+
+
+<script>
+    var dd=document.getElementById("dd")
+     document.onmousemove=function (event) {
+        event=event||widow.event//解决兼容性问题
+
+        var x=event.clientX;
+        var y=event.clientY;//若兼容ie8，则不使用pageX和Y直接获得鼠标相对于页面的偏移，而是相对于当前窗口的偏移clientX、Y加上滚动条的scrollTop偏移
+
+         var offsetY=document.body.scrollTop||document.documentElement.scrollTop;
+
+         dd.style.left=x+"px"
+         dd.style.top=y+offsetY+"px"
+     }
+
+
+
+</script>
+</body>
+</html>

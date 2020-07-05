@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<div id="example"></div>
+<script type="text/javascript" src="js/react.development1.js"></script>
+<script type="text/javascript" src="js/react-dom.development1.js"></script>
+<script type="text/javascript" src="js/babel.js"></script>
+<script type="text/babel">
+    //了解组件属性1：state
+    //功能需求：自定义组件，功能说明如下：1、显示h2标题，初始文本为：你喜欢我
+                                      //2、点击标题更新为：我喜欢你
+    //需求实现：使用组件的state状态来标记当前状态，点击对应内嵌标签触发事件onClick（react专属）进行状态改变；根据状态改变页面渲染
+
+     //定义组件
+     class Like extends React.Component{ //类中可以定义组件、定义组件基本状态和方法
+         constructor(props){
+             super(props)
+             this.state={
+                 isLikeMe:false
+             }
+             this.handleClick=this.handleClick.bind(this)//将新增方法的this修改为组件，操作集合在构造函数中，规整代码;
+         }
+
+         render(){
+             const isLikeMe=this.state.isLikeMe
+             return <h2 onClick={this.handleClick}>{isLikeMe?'我喜欢你':'你喜欢我'}</h2>
+             //此处需将新增方法中this，绑定为组件；因为新增方法的this都指向的是undefined
+         }
+
+         handleClick(){
+             const isLikeMe=!this.state.isLikeMe
+             this.setState({isLikeMe})
+             // this.handleClick=this.handleClick.bind(this)//绑定handleClick给this而不是undefined
+         }
+     }
+
+     //渲染组件标签
+      ReactDOM.render(<Like />,document.getElementById('example'))
+
+</script>
+</body>
+</html>

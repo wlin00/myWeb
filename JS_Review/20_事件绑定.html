@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+
+<button id="btn">点击触发响应事件</button>
+
+
+<script>
+var btn=document.getElementById("btn")
+
+//给btn设置绑定事件，addEventListener方法，只适用于ie8以上浏览器
+//参数1：事件的字符串   参数2：callback   参数3：是否在捕获阶段执行（通常false)
+btn.addEventListener("click",function () {
+    alert(1);
+},false)
+
+document.body.addEventListener("click",function (event) {
+    alert(2);
+    console.log(event.type)
+    console.log(event.target)
+    console.log(event.currentTarget)
+
+},false)//绑定的事件会按照绑定顺序执行
+
+
+//ie8的兼容方法：attachEvent，参数1：事件的字符串    参数2： callback
+
+
+</script>
+</body>
+</html>

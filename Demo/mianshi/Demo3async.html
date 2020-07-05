@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+
+
+<script>
+function getFirstName() {
+    return new Promise((resolve,reject) =>{
+        setTimeout(()=>{
+            console.log("hello")
+            resolve("hello")
+
+        },2000)
+    })
+}
+function getLastName() {
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log("world")
+            resolve('world')
+
+        },1000)
+    })
+}
+
+async function say() { //字段async结合对应异步操作的字段await  达成异步操作同步执行
+    let first=await getFirstName()
+    let last=await getLastName()
+    let main=first+last
+   console.log(main)
+}
+
+say()//执行同步函数
+</script>
+</body>
+</html>

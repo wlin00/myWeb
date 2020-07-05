@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body{
+            padding:0;
+            margin:0;
+        }
+        #inp{display: block; width: 200px;margin-left: 50px}
+        button{
+            width: 150px;
+            height: 20px;
+            margin-left: 70px;
+        }
+    </style>
+</head>
+<body>
+<input type="text" id="inp">
+<button onclick="ztest()" value="进行正则判断">进行正则判断</button>
+
+
+<script>
+
+    //匹配邮箱的正则表达式
+    function ztest(){
+    var str=document.getElementById("inp").value;
+    console.log(str);
+
+        //匹配邮箱的正则表达式：
+        //任意字母数字下划线（3位以上）    { . 任意字母数字下划线（1位上） }(整体可有可无)   @
+        // 任意字母数字(1位以上)   { .任意字母（2-5位） . 任意字母(2-5位）}(整体出现1-2次）
+        // if (/^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}&/.test()){}
+
+        if(/^\w{3,}(\.\w)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/.test(str)){console.log(true);
+        }
+        else {console.log(false);return false;
+        }
+    }
+
+
+
+
+</script>
+
+
+</body>
+</html>

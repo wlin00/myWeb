@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQ选择器</title>
+</head>
+<body>
+
+<div id="div1" class="box">class为box的div1</div>
+<div id="div2" class="box">class为box的div2</div>
+<div id="div3" >div3</div>
+<span class="box">class为box的span</span>
+<br/>
+
+<ul>
+    <li>AAAA</li>
+    <li title="hello">BBBBB</li>
+    <li class="box">CCCC</li>
+    <li title="hello">DDDDDD</li>
+    <li title="two">BBBBB</li>
+    <li style="display: none">我本来是隐藏的</li>
+</ul>
+
+<!--jQuery选择器主要是基本、层次、过滤选择器-->
+
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+
+    //基本选择器练习
+    $('#div2').css('background','red');
+    $('#div1').css({'background':'red'});
+
+    //层次选择器
+    $('#div3+span').css('background','lightblue');
+
+    /*过滤选择器练习
+    1:找div的第一个标签*/
+    $('div:first').css('background','blue');
+
+    //2:找最后一个class为box的标签
+    $('.box:last ').css('background','blue');
+
+    //3:找div,class不为box
+    $('div:not(.box)').css('background','blue');
+
+    //4:找第二个和第三个li元素,gt和lt不同时执行，而是顺序执行，故等执行lt时，已经从后面盒子选择
+    $('li:gt(0):lt(2)').css('background','yellow');
+
+    //5:找内容为BBBBB的li标签,使用过滤选择器 中的内容选择功能
+    $('li:contains("BBBBB")').css('background','red');
+
+    //6:找隐藏的li标签
+    $('li:hidden').css({'display':'block','background':'black'});
+
+    //7:找有title属性的li元素
+    $('li[title]').css('background','gray');
+
+    //8:找所有属性title为hello的li元素
+    $('li[title="hello"]').css('background','green');
+
+
+</script>
+</body>
+</html>

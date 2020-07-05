@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;
+            padding: 0;}
+
+        html,body{width: 100%;
+        height: 1000px;}
+
+        .out{
+            background: red;
+            /*position: absolute;*/
+            height: 200px;
+            width: 300px;
+        }
+
+        .inner{
+            background-color: blue;
+            width: 200px;
+            height: 100px;
+            margin-top: 25px;
+            /*padding-bottom: 30px;*/
+        }
+
+
+
+    </style>
+</head>
+<body>
+     <div class="out">
+         外部div
+         <div class="inner">内部div</div>
+     </div>
+
+     <div class="divBtn">
+         <button id="btn1">取消inner绑定所有的事件</button>
+         <button id="btn2">取消inner绑定mouseenter事件</button>
+         <button id="btn3">测试事件坐标</button>
+         <a href="http://www.baidu.com" id="test4">百度一下</a>
+     </div>
+
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script>
+
+
+    /*
+    * 需求
+    *1、给外部div绑定监听
+    *2、给内部div绑定鼠标移入和移出的事件监听
+    *3、点击btn1，解除内部div的事件监听
+    *4、点击btn2，解除内部div的mouseover事件
+    *5、点击btn3得到事件坐标
+    *6、点击内部div区域，外部点击监听不响应
+    *7、点击链接，如果当前时间是偶数，则不跳转
+    * */
+
+    //1,方式一:通过click方法，给外部div绑定点击事件
+         $('.out').click(function () {
+             console.log("click outside")
+
+         })
+    //1,方式二：通过on方法，给外部div绑定事件
+         $('.out').on('click',function () {
+             console.log("on click outside")
+             
+         });
+
+
+    //2_1,给内盒子绑定鼠标移入移出事件，参数是对应方法的回调函数
+          $('.inner').mouseenter(function () {
+              console.log("进入1")
+          })
+              .mouseleave(function () {
+                  console.log("离开1")
+              });
+    
+    //2_2，通过on方法给内部div绑定鼠标移动事件,参数是事件名、回调函数
+
+        $('.inner').on('mouseenter',function () {
+            console.log("进入2")
+        })
+            .on('mouseleave',function () {
+                console.log("离开2")
+            })
+
+    //2_3，使用jQ对象的hover方法，参数一是移入鼠标的回调函数，参数二是移出鼠标的回调函数
+        $('.inner').hover(function () {
+            //移入鼠标的回调函数
+            console.log("进入3")
+
+        },function () {
+            console.log("离开3")
+
+        })
+
+    //3_1 点击btn1解除inner的所有事件监听
+    $('#btn1').click(function () {
+        $('.inner').off();
+    })
+
+    //4_1 点击btn2 解除inner的mouseenter鼠标移入事件的监听
+    $('#btn2').click(function () {
+        $('.inner').off('mouseenter');
+    })
+    
+    //5-1 点击btn3 获得点击事件所在的坐标
+    $('#btn3').click(function (event) {
+        console.log(event.offsetX,event.offsetY)//原点为事件元素的左上角
+        console.log(event.clientX,event.clientY)//原点为窗口的左上角
+        console.log(event.pageX,event.pageY)//原点为页面左上角
+    })
+
+    //6_1 点击inner区域，外部不响应
+    $('.inner').click(function (event) {
+        console.log("click inner")
+        //阻止事件冒泡，防止默认事件以外的响应（阻止外部事件）
+        event.stopPropagation()//Propagation 原意为传播
+    })
+    
+    //7_1 点击链接，若当前时间为奇数才跳转
+     $('#test4').click(function (event) {
+         if(Date.now()%2===0){
+             event.preventDefault();//若时间偶数，则阻止默认事件
+         }
+     })
+
+</script>
+</body>
+</html>

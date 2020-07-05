@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<script type="text/javascript" src="../jQuery/js/jquery-3.3.1.js"></script>
+<script>
+    // //跨域方式1：动态创建script标签，用src映入一个带参url，从而引入外部服务器上的资源
+    // var script=document.createElement('script')
+    // script.type='text/javascript'
+    // script.src='http://www.demo2.com:8080/login?user=admin&callback=onBack'
+    // document.head.appendChild(script)
+    // function onBack(res) {
+    //     console.log(JSON.stringify(res))
+    // }
+
+    //跨域方法二：jQ ajax方法，设置请求get，dataType为jsonp ，从而获取服务器上资源
+    $.ajax({
+        url:'http://www.demo2.com:8080/login',
+        type:'get',
+        dataType: 'jsonp',
+        jsonpCallback:'onBack',
+        data:{}
+    })
+
+</script>
+</body>
+</html>

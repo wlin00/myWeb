@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<p style="color: blue">标签1</p>
+<p style="color: green">标签2</p>
+
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+    /*需求
+    *
+    * 1得到第一个标签的颜色
+    * 2设置所有p标签文本颜色为red
+    * 设置第二个p的字体颜色#ff0011
+    * */
+
+    //1
+     var $co=$('p');
+     console.log($co[0].style.color);
+
+    //2
+   $('p').css("color","red");
+
+    //3
+    var $fontColor=$('p:last');
+    $fontColor.css("color","#ff0011");
+
+</script>
+</body>
+</html>

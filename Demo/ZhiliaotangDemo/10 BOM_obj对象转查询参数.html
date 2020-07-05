@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+
+<script>
+    function stringify(obj) {
+        var str=''
+        for(var i=0;i<obj.length;i++){
+            var key=obj[i].key,
+            value=obj[i].value
+            var item=key+'='+value
+            str+=item
+        }
+        return str
+    }
+    stringify(obj)
+</script>
+</body>
+</html>

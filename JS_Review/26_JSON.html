@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+
+<script>
+    var jsobj={name:"原生",age:22};//分别建立原生、json的对象
+    var jsonobj={"name":"原生","age":22}
+
+    var yuan_t_json=JSON.stringify(jsobj)//原生js对象转化为json字符串
+    console.log(yuan_t_json)
+
+    var jsonstr_t_jsobj=JSON.parse(yuan_t_json)//json字符串转化为原生js对象
+    console.log(jsonstr_t_jsobj)
+
+    var jsonobj_t_jsonstr=JSON.stringify(jsonobj) //json对象可以在js中直接使用，因为json是JavaScript的原生格式
+    console.log(jsonobj_t_jsonstr)
+
+
+
+
+</script>
+</body>
+</html>

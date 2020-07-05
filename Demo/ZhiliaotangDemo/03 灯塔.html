@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;padding: 0;
+        }
+        ul,li{list-style: none}
+        #wrap{
+            width: 960px;
+            height: 300px;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+        ul li{
+            width: 160px;
+            float: left;
+            transition: all 0.3s;
+            height: 300px;
+
+        }
+        ul img{width:460px ;
+            height: 300px;
+            pointer-events: none;
+            /*pointer_events:none 让设置元素对于‘事件’透明*/
+            /*防止因子节点img撑开li，而让click事件对象.target找到img,应找到li*/
+        }
+        ul:hover li{width: 100px}
+        ul li:hover{width: 460px}
+        .other{
+            width: 100px;
+        }
+        .active{
+            width: 460px;}
+
+
+    </style>
+</head>
+<body>
+<ul id="wrap">
+    <li><img src="tx1.jpg" alt=""></li>
+    <li><img src="../img/tx2.jpg" alt=""></li>
+    <li><img src="../img/tx3.jpg" alt=""></li>
+    <li><img src="../img/tx4.jpg" alt=""></li>
+    <li><img src="../img/tx5.jpg" alt=""></li>
+    <li><img src="bg1.jpg" alt=""></li>
+</ul>
+
+
+<script>
+var ulDom=document.querySelector('#wrap')
+var liDom=ulDom.children;
+
+//给ul设置点击事件，捕获阶段不执行，冒泡会执行，即点击图片会冒泡到ul
+    ulDom.addEventListener('click',function (event) {
+        console.log(event.target)
+        var li=event.target;
+        if(li.classList.contains('active')){return;}//优化：当点的li已是active，返回
+        for(var i=0;i<liDom.length;i++){
+        //每次for循环除了加上短宽度标记，还需判断并删除之前active的盒子
+            var liJudge=liDom[i];
+            if(liJudge.classList.contains('active')){liJudge.classList.remove('active')}
+            liJudge.classList.add('other')
+        }
+        li.classList.remove('other')
+        li.classList.add('active')
+
+    },false)
+
+
+</script>
+</body>
+</html>

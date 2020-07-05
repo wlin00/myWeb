@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+        }
+        body{
+            background: url("img/bg1.jpg") ;
+            background-size: 100%,100%;
+            /*background: url("img/banner02.gif") ;*/
+            /*background-size: 100% 100%;*/
+            /*width: 3600px;*/
+            /*padding:20px;*/
+        }
+
+        /*因使用浮动 需解决高度塌陷问题，需使用clearfix*/
+        .clearfix:before,.clearfix:after{
+            content:"";
+            display: table;
+            clear: both;
+        }
+        .clearfix{zoom: 1;}
+
+        .panel{
+            background-color: #00a6ff;
+            top: 50%;
+            left: 50%;
+            margin-left: -300px;
+            margin-top: 150px;
+            width: 600px;
+            height:400px;
+            overflow: hidden;
+            position: relative;
+            /*margin:0 auto;*/
+            box-shadow: 0px 0px 10px 10px rgba(15,15,15,.84);
+            z-index: 1;
+        }
+
+        #list{
+            /*left: 600px;*/
+            width: 4200px;
+            height: 400px;
+            position: absolute;
+            z-index: 1;
+            /*float: left;*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+        }
+
+        .panel #list>img{
+            width: 600px;
+            height: 400px;
+            float: left;
+        }
+
+        #pointsDiv{
+            position: absolute;
+            height: 10px;
+            width: 100px;
+            z-index: 2;
+            bottom: 20px;
+            left: 250px;
+        }
+
+        #pointsDiv span{
+            cursor: pointer;
+            float: left;
+            border:1px solid #fff;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #333;
+            margin-right: 5px;
+        }
+
+        #pointsDiv .on{background: orange;}
+
+        .arrow{
+            cursor: pointer;
+            /*display: none;*/
+            line-height: 39px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            z-index: 2;
+            top: 180px;
+            background-color: rgba(0,0,0,.3);
+            color:lightskyblue;
+        }
+
+        .arrow:hover{
+            /*display: block;*/
+            background-color: rgba(0,0,0,.7);
+        }
+
+        #prev {
+
+        }
+
+        #next{
+            left: 560px;
+            /*float: right;*/
+        }
+
+        .cartoon{
+            top: 50%;
+            left: 50%;
+            margin-left: -300px;
+            margin-top: -401px;
+            width: 600px;
+            height:400px;
+            overflow: hidden;
+            position: relative;
+            /*margin:0 auto;*/
+            box-shadow: 0px 0px 10px 10px rgba(15,15,15,.84);
+            background-color: aliceblue;
+            z-index: 2;
+        }
+
+    </style>
+    <link rel="stylesheet" href="css/csshake.css">
+    <title></title>
+
+</head>
+<body>
+
+<div class="panel " >
+    <div id="list" style="left: -600px">
+        <img src="img/tx5.jpg" alt="#">
+        <img src="img/tx1.jpg" alt="#">
+        <img src="img/tx3.jpg" alt="#">
+        <img src="img/tx2.jpg" alt="#">
+        <img src="img/tx4.jpg" alt="#">
+        <img src="img/tx5.jpg" alt="#">
+        <img src="img/tx1.jpg" alt="#">
+    </div>
+    <div id="pointsDiv" >
+        <span index="1" class="on shake"></span>
+        <span index="2" class="Points shake"></span>
+        <span index="3" class="Points shake"></span>
+        <span index="4" class="Points shake"></span>
+        <span index="5" class="Points shake"></span>
+    </div>
+    <a href="javascript:" id="prev" class="arrow shake">←</a>
+    <a href="javascript:" id="next" class="arrow shake">→</a>
+</div>
+<div class="cartoon">
+</div>
+
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script>
+     //1：首先收集信息
+     var $container=$('.panel');//主窗口jQ对象
+     var $list=$('#list');//图片容器jQ对象
+     var $points=$('#pointsDiv>span');//小圆点jQ对象
+     var $prev=$('#prev');//前翻页浮标对象
+     var $next=$('#next');//后翻页浮标对象
+     var PAGE_WIDTH=600;//一页的距离
+     var TIME=400;//翻页总时间
+     var ITEM_TIME=20;
+     var index=0;
+     var distance=0;
+     var moving=false;//标识，若没有在翻页中，则moving=false；若在翻页，则布尔值为true
+     var movingDiv=false;
+
+
+
+//          功能需求：
+// 1、点击向左（右）的图标，平滑翻切换到上（下）一页
+         //思路：首先点击事件由浮标元素触发，绑定的回调函数是一个带判断作用参数的触发函数，作用是页面平滑
+         //总偏移量：offset；总得时间：TIME=400; 单位移动的时间间隔：ITEM_TIME=20
+         //做项目，习惯先声明，再定义
+
+     $next.click(function () {
+         nextpage(true);
+     });//后翻
+     $prev.click(function () {
+         nextpage(false);
+     });//前翻
+
+     function nextpage(next){
+         if(moving)
+         {return;}moving=true;//若图片正在翻页，锁定翻页操作，完成翻页后解锁。
+         var offset=0;
+         if(typeof next==='boolean') {//若形参布尔值，由点击或者顺序翻页定时器触发;若形参数值，则由点击小圆钮触发
+             offset = next ? -PAGE_WIDTH : PAGE_WIDTH;//offset指的是本次偏移的大小。
+         }else{
+             offset=-(next-index)*PAGE_WIDTH;
+         }
+         var itemoffset=offset/(TIME/ITEM_TIME); //计算单元移动的偏移量
+         var currLeft=$list.position().left;//获取当前位置值
+         var targetoffset=currLeft+offset;
+         var intervalId=setInterval(function () {
+             currLeft+=itemoffset;
+             if(currLeft===targetoffset){clearInterval(intervalId);
+                  moving=false;//若页面到达目标left位置，则允许再次翻页
+             }
+             if(currLeft<=-3600){currLeft=-600;}//判断当前$list的left值是否应该到达边界跳转
+             else if(currLeft>=0){currLeft=-3000;}
+             $list.css("left",currLeft);//调整list的现在位置
+
+         },ITEM_TIME);//计时器，小部分时间里小部分平滑，不断更新currLeft值从而更新$list的left值
+
+         updatePoints(next);//图片每次跳转，更新圆点
+     }
+
+
+//      2、无限循环切换，第一页的上一页为最后一页，最后一页的下一页为第一页
+           //思路 实现五张图无缝轮播：实际使用七张图，并且在边界图片进行$list的left值的跳转。
+           //实现位置，在nextpage（boolean）翻页函数中，每次currLeft累加了itemoffset后进行判断,边界则跳转
+
+
+
+//      3、每隔3s自动滑动到下一页
+            //思路 对函数nextpage（boolean）设置定时器，间隔时间是3000
+            var settool=setInterval(function () {
+                nextpage(true);
+            },3000);
+
+
+//      4、鼠标进入图片区域，自动切换停止，鼠标离开的时候，重新开始计时切换
+            //设置图片list区域的鼠标移入移出事件，若鼠标移入则清空自动滑动的定时器，否则再次实例化上一个定时器
+            $list.hover(function () {
+                //移入事件，clear定时器，原型是jQ.mouseenter事件,mouseenter事件相比mouseover事件，还可以对子元素起作用
+                clearInterval(settool);
+            },function () {
+                //移出鼠标事件，再次生成定时器，原型是jQ.mouseleave事件
+                settool=setInterval(function () {
+                    nextpage(true)
+                },3000)
+            });
+            //设置鼠标在小圆点以及浮标上面悬停时，同样停止定时器
+            $points.hover(function () {
+                clearInterval(settool)
+            },function () {
+                settool=setInterval(function () {
+                    nextpage(true)
+                },3000)
+            });
+            $prev.hover(function () {
+                clearInterval(settool)
+            },function () {
+                settool=setInterval(function () {
+                    nextpage(true)
+                },3000)
+            });
+            $next.hover(function () {
+                clearInterval(settool)
+            },function () {
+                settool=setInterval(function () {
+                    nextpage(true)
+                },3000)
+            });
+
+
+//      5、切换页面的时候，下面的原点也同步更新
+
+     function updatePoints(next) {
+         //功能：每次完成翻页后触发，更新小圆点的电点亮情况
+         //1、计算目标圆点的下标targetIndex
+         //2、判断next传入的是否布尔值，若是则普通更新点亮；若是数值，则将目标圆点targetIndex由点击的圆点位置确定
+         var targetIndex=0;
+
+         if(typeof next==='boolean'){
+         if(next){targetIndex=index+1;if(targetIndex===5){targetIndex=0;}}
+         else{targetIndex=index-1;if(targetIndex===-1){targetIndex=4;}}
+         }
+         else{
+             targetIndex=next;
+         }
+         //2、将当前index的<span>的class移除，给目标圆点添加class=‘on’
+         $points.eq(index).removeClass('on');//原生写法：$points[index].className='on'
+         $points.eq(targetIndex).addClass('on');
+         //3、将index更新为targetIndex
+         index=targetIndex;
+     }
+
+
+//      6、点击圆点图片切换到对应的页
+            $points.click(function () {
+                var targetIndex=$(this).index();//计算目标页的下标，来自于点击事件的按钮的index方法获得值
+                if(targetIndex!==index){//只有当目标页不是本页的时候执行函数
+                nextpage(targetIndex);}//想nextpage函数传入数值，接收方法是nextpage中typeof判断不是布尔值时
+            })
+
+
+//      7、bug解决方案:控制点击事件必须发生在图片完整出现在窗口的情况下
+              //思路：对全局变量moving（初值为false）的判定，若moving为true，则中断函数nextpage阻止翻页；
+              //且若正在翻页，则设置变量moving为true，从而阻止翻页过程中的再次点击导致函数触发
+              //实现在函数nextpage中，在函数开头处就进行判定
+
+
+        //8、demo改良
+        //可以给浮标以及小圆点添加css3特效(body上实现)以及伪class属性
+        $('.cartoon').fadeOut(3000);
+        // $('.panel').fadeIn(6000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

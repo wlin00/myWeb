@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        body{height: 250px;width: 100px}
+        html{height: 100px;width: 100px}
+        #top{
+            width: 100px;
+            height:100px;
+            margin-bottom: 50px;
+            background-color: aliceblue;
+        }
+
+        #bottom{
+            width: 100px;
+            height:100px;
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body>
+
+<!--<div id="top"></div>-->
+<div id="bottom"></div>
+
+
+<script>
+    // var top=document.getElementById("top")
+    var bot=document.getElementById("bottom")
+    bot.onmousemove=function (event) {
+        event=event||window.event
+        //在top区域移动鼠标的时候，触发回调函数;
+         //通过形参的clientX和clientY方法来获得当前的鼠标所在x和y坐标
+        var x =event.clientX;
+        var y=event.clientY
+        bot.innerHTML="x="+x+" ,y="+y
+
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<div id="box"></div>
+<script type="text/javascript" src="js/react.development1.js"></script>
+<script type="text/javascript" src="js/react-dom.development1.js"></script>
+<script type="text/javascript" src="js/babel.js"></script>
+
+<script type="text/babel">
+    //需求：点击按钮，弹出第一个框的信息；  失去第二个框的焦点，弹出第二框内容；
+class MyComponent extends  React.Component{
+    constructor(props){
+        super(props)
+        this.state={}
+        //constructor内部:修改组件自身状态，和修改自定义函数的指向
+        this.showInfo=this.showInfo.bind(this)
+        this.HandleBlur=this.HandleBlur.bind(this)
+    }
+
+    showInfo(){
+        //自定义方法，弹出左框value
+        // const msg=document.getElementById('inp1').value;
+        // alert(msg);
+
+
+        //获取节点不再使用dom，而是在this指针里保存属性
+        //方法1： 调用保存在this.refs.字段名中的属性
+        const msg2=this.refs.content;
+        if(msg2.value!==""){
+        alert(msg2.value)}
+
+        //方法2，使用箭头函数封装属性在this中
+        if(this.input.value!=='')
+        {console.log(this.input.value)
+        }
+    }
+
+    HandleBlur(event){
+        alert(event.target.value)
+        const msg3=this.refs.content
+        console.log(msg3.value)
+
+    }
+
+    render(){
+        /*
+                   * ref用法1：指定标签对应ref名，可以在触发事件中，通过this.ref.ref名来访问
+                   * ref用法2：通过当前标签使用箭头函数，封装属性到this指针中
+                   * */
+           return(
+               <div>
+
+                   <input type="text" id="'inp0" ref="content" />&nbsp;
+                   <input type="text" id="inp1" ref={input=>this.input=input} />&nbsp;&nbsp;
+                   <button id="btn" onClick={this.showInfo}>弹出左框</button>&nbsp;&nbsp;
+                   <input type="text" placeholder="失去焦点提示value" id="inp2" onBlur={this.HandleBlur}/>
+               </div>
+           )
+    }
+
+
+}
+
+ReactDOM.render(<MyComponent/>,document.getElementById('box'))
+
+</script>
+</body>
+</html>

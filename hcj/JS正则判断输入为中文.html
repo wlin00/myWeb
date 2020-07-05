@@ -1,0 +1,22 @@
+<html><body>
+<head><meta charset="utf-8">
+<script type="text/javascript">
+function check4(){
+var str=document.getElementById("username").value; 
+    if (/^[\u4E00-\u9FA5]+$/.test(str))  
+    { 
+      console.log("true");
+     }  
+   else {
+      console.log("false"); 
+     return false; 
+    }
+}
+ </script>
+  </head>
+  <body> 
+  <input type="button"value="提交" onClick="check4()">
+
+  <input type ="text" id="username">
+  </body>
+</html>
