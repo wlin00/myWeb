@@ -18,31 +18,22 @@ const binarySearch = (arr, target) => {
     }
   }    
 }
-
 const res = binarySearch([1,2,3,5,4], 3)
-// console.log('rr', res)
-
-/*
-// Demo2: 扁平化多维数组
-// */
 
 /**
- * Demo3: 数组扁平化
+ * Demo2: 数组扁平化
  */
 let arr = ['1',[[2.2,[1.5, '3']],'4.8'],5.5]
 //方法1 正则优化版
 let solution3 =JSON.parse('[' + JSON.stringify(arr).replace(/\[|\]/g, '') + ']')
-
 // 方法2: flat
 let solution4 = arr.flat(Infinity)
-
 // 方法3： reduce
 let solution5 = arr =>{
     return arr.reduce((prev,curr) => {
         return prev.concat(Array.isArray(curr) ? solution5(curr) : curr )
     }, []) // 初始值为一个[]
 }
-
 //  方法4: 函数递归
 let res6 = []
 let solution6 = arr =>{
@@ -57,11 +48,10 @@ let solution6 = arr =>{
 solution6(arr)
 
 /*
-// Demo4: 函数坷里化: 一种将多个参数的函数转换成一系列使用一个参数的函数的技术
-// 用于参数服用，提高适用性。
-   柯里化函数是一个高阶组件，接受一个函数，返回一个函数
-// */
-
+  Demo3: 函数坷里化: 一种将多个参数的函数转换成一系列使用一个参数的函数的技术
+  用于参数服用，提高适用性。
+  柯里化函数是一个高阶组件，接受一个函数，返回一个函数
+ */
 const curry = (fn, ...arg) => {
     return (...rest) => {
       if ([...arg, ...rest].length < fn.length ) {
@@ -72,45 +62,32 @@ const curry = (fn, ...arg) => {
       }
     }
 }
-
 function curryTest(a,b,c){
     return a+b+c
 }
-
 let curryRes = curry(curryTest) // 高阶函数返回一个fn
 const rs = curryRes(1)(4)(5)
-console.log(rs)
 
 /**
- * Demo5: Promise上层封装，可不用写try-catch
+ * Demo4: Promise上层封装，可不用写try-catch
  */
-
  const to = (promise) => {
    return promise.then((data) => [null, data]).catch((err) => [err])
  }
-
  const mock = () => {
    return new Promise((resolve, reject) => {
-    //  setTimeout(() => {
-    //    resolve('success~')
-    //  }, 1000)
     setTimeout(() => {
       reject('error~')
     }, 1000)
    })
  }
-
  const mockSuccess = () => {
   return new Promise((resolve, reject) => {
-   //  setTimeout(() => {
-   //    resolve('success~')
-   //  }, 1000)
    setTimeout(() => {
      resolve('success~')
    }, 1000)
   })
 }
-
  // 实例
  const asyncTest = async () => {
    let err, success
@@ -121,10 +98,8 @@ console.log(rs)
 
 
  /**
-  * Demo6：
+  * Demo5：继发/并发，调用装有Promise的数组
   */
-
-// 继发调用装有Promise的数组
 const asyncFn = async (arr) => {
   for (const item of arr) {
     const res = await item()
@@ -135,7 +110,6 @@ const fixAsyncFn = (arr) => {
     const res = await item()
     return res
   })
-
   for (const resItem of resArr) {
      console.log(resItem)
   }
@@ -143,9 +117,8 @@ const fixAsyncFn = (arr) => {
 
 
 /**
- * js休眠
- */
-
+ * Demo6：js休眠
+*/
 function sleep (wait) {
   return new Promise((resolve) => {
     setTimeout(resolve, wait)
@@ -158,14 +131,12 @@ const log = async ()  => {
     await sleep(1000)
   }
 }
-
 // log() // 程序sleep
 
 
 /**
  * Demo7 - 多个async / await ，独立捕获错误, 通过asyncFn().catch(err => Promise.reject('xxx')), 外层+ try-catch
  */
-
  const catchDemo = async () => {
    try {
     const res1 = await mockSuccess().catch(err => Promise.reject('捕获错误1'))
@@ -175,12 +146,11 @@ const log = async ()  => {
      console.log(err)
    }
  }
-
 //  catchDemo()
 
 
 /** 
- * 四种继承：构造函数、原型链、组合、寄生组合
+ * Demo8 - 四种继承：构造函数、原型链、组合、寄生组合
 */
 
 function Parent (name) {
@@ -222,9 +192,8 @@ const child4 = new Child4('test4')
 
 
 /**
- * InstanceOf
+ * Demo9 - InstanceOf
 */
-
 const myInstanceOf = (a, b) => {
   let child = a.__proto__
   let parent = b.prototype
@@ -237,55 +206,53 @@ const myInstanceOf = (a, b) => {
   }
   return false 
 }
-
 // console.log(myInstanceOf(child4, Child3))
 
 /** 
- * Demo8 promiseAll
+ * Demo10- promiseAll
 */
-
 const myPromiseAll = (promises) => {
   return new Promise((resolve, reject)=> {
     var resolvedCounter = 0
     var promiseNum = promises.length
     var resolvedValues = new Array(promiseNum)
     for (let i = 0; i < promiseNum; i++) {
-        Promise.resolve(promises[i]).then((value)=> {
-          resolvedCounter++
-          resolvedValues[i] = value
-          if (resolvedCounter == promiseNum) {
-            console.log('res -- self', resolvedCounter, promises, resolvedValues)
-            return resolve(resolvedValues)
-          }
-        }, (reason)=> {
-          return reject(reason)
-        })
+      Promise.resolve(promises[i]).then((value)=> {
+        resolvedCounter++
+        resolvedValues[i] = value
+        if (resolvedCounter == promiseNum) {
+          console.log('res -- self', resolvedCounter, promises, resolvedValues)
+          return resolve(resolvedValues)
+        }
+      }, (reason)=> {
+        return reject(reason)
+      })
     }
   })
 }
 
-const myPromiseAllSelf = (promises) => {
-      return new Promise((resolve, reject) => {
-        let index = 0,
-        resArr = [] // resArr = new Array(promises)
+  const myPromiseAllSelf = (promises) => {
+    return new Promise((resolve, reject) => {
+      let index = 0,
+      resArr = [] // resArr = new Array(promises)
 
-        const deal = (idx, res) => {
-          index++;
-          resArr[idx] = res;
-          if (index === promises.length) {
-            return resolve(resArr)
-          }
+      const deal = (idx, res) => {
+        index++;
+        resArr[idx] = res;
+        if (index === promises.length) {
+          return resolve(resArr)
         }
+      }
 
-        for (let i = 0; i < promises.length; i++) {
-          Promise.resolve(promises[i]).then((res) => {
-            deal(i, res) // 遍历promiseArr，收集其执行结果，等到全部收集完毕统一resolve
-          }, (err) => {
-            return reject(err) // 若失败则返回失败的那个promise终止promise
-          })
-        }
-      })
-} 
+      for (let i = 0; i < promises.length; i++) {
+        Promise.resolve(promises[i]).then((res) => {
+          deal(i, res) // 遍历promiseArr，收集其执行结果，等到全部收集完毕统一resolve
+        }, (err) => {
+          return reject(err) // 若失败则返回失败的那个promise终止promise
+        })
+      }
+    })
+  }
 
   const promise1 = new Promise((resolve) => {
       setTimeout(() => {
@@ -304,17 +271,14 @@ const myPromiseAllSelf = (promises) => {
         resolve('prrrr3')
       }, 3000)
     })
-
-
   // myPromiseAllSelf([promise1, promise2, promise3]).then((res) => {
   //   console.log('rrr - all' , res)
   // }).catch((err) => console.log('err', err))
 
 
   /** 
-   * Demo9 promiseRace  拿个promise先执行完，回调哪个的结果
+   * Demo11 - promiseRace  拿个promise先执行完，回调哪个的结果
   */
-
   const myPromiseRace = (promises) => {
     return new Promise((resolve, reject) => {
       for (let i = 0; i < promises.length; i++) {
@@ -326,15 +290,15 @@ const myPromiseAllSelf = (promises) => {
       }
     })
   }
-
   // myPromiseRace([promise1, promise2, promise3]).then((res) => {
   //   console.log('first' , res)
   // }).catch((err) => console.log('err', err))
 
   /**
-   * Demo 10 - stair : count solutions of input stairs
+   * Demo 12 - stair : count solutions of input stairs
    */
 
+   // normal
   const stair = (n) =>  {
     if ([1, 2].indexOf(n) >= 0) {
       return n
@@ -355,7 +319,6 @@ const myPromiseAllSelf = (promises) => {
     }
     return dp[n - 1]
   }
-
   // console.time('normal')
   // stair(100)
   // console.timeEnd('normal')
@@ -365,9 +328,8 @@ const myPromiseAllSelf = (promises) => {
   // console.timeEnd('dp')
 
   /**
-   * Demo 11 - sum of two num
-   */
-
+   * Demo 13 - sum of two num
+  */
   const sumOfTwo = (arr, target) => {
     let map = {}
     arr.forEach((item, index) => {
@@ -380,7 +342,7 @@ const myPromiseAllSelf = (promises) => {
   }
 
   /**
-   * Demo 12 - sum of three num
+   * Demo 14 - sum of three num
    * input : arr of num
    * output : index of nums (sum = 0)
    */
@@ -415,13 +377,11 @@ const myPromiseAllSelf = (promises) => {
     }
     return res
   }
-
   // console.log('sum', sumOfThree([1, 2, 4, -3]))
 
   /** 
-   * Demo13 千分位分隔
+   * Demo15 千分位分隔
   */
-
  function formatThousands() {
   if (!target || target.toString().includes('%')) {
     return target
@@ -440,9 +400,8 @@ const myPromiseAllSelf = (promises) => {
 }
 
 /** 
- * Demo14 深拷贝
+ * Demo16 深拷贝
 */
-
 function deepClone (obj){
   let result
   if (getType(obj) === 'Object') {
@@ -468,9 +427,9 @@ function deepClone (obj){
   }
   return result
 }
-
 const getType = (o) => Object.prototype.toString.call(o).slice(8, -1)
 
+// solution2
 function cloneDeep(target) {
   let res
   if (typeof target === 'object') {
@@ -489,19 +448,16 @@ function cloneDeep(target) {
         res[s] = cloneDeep(target[s])
       }
     }
-
   } else {
     res = target
   }
   return res
 }
-
 const obj1 = {name:'test', inner: {key:[{innerItem: 'aaa'}]}}
 
 /** 
- * Demo15 盛水最多的容器
+ * Demo17 - 盛水最多的容器
 */
-
 const maxArea = (arr) => {
   let begin = 0,
       end = arr.length - 1,
@@ -519,17 +475,14 @@ const maxArea = (arr) => {
   }
   return max
 }
-
 // console.log('max', maxArea([1,8,6,2,5,4,8,3,7]))
 
 
-
 /** 
- * Demo16 - easy - promise
+ * Demo18 - easy - promise
 */
 
 // 16 -1 ,未实现链式调用的promise -> 极简态 + 延时机制
-
 class myPromise {
   value = null
   callbacks = []
@@ -559,7 +512,6 @@ class myPromise {
     this.callbacks.forEach(fn => fn(value))
   }
 }
-
 // let promiseTest1 = new myPromise((resolve) => {
 //   setTimeout(() => {
 //     resolve('promse1 - test')
@@ -570,9 +522,8 @@ class myPromise {
 
 
 /** 
- * Demo17 - longgest palindromes string - dp, 
+ * Demo19 - longgest palindromes string - dp, 
 */
-
 const palindromesString = (str) => {
   if (!str) return
   const dp = []
@@ -611,9 +562,8 @@ const palindromesString = (str) => {
 
 
 /** 
- * Demo18 - promise - complete
+ * Demo20 - promise - complete
 */
-
 class selfPromise {
   callbacks = []
   state = 'PENDING'
@@ -682,7 +632,6 @@ class selfPromise {
   }
 }
 
-
 const promise11 = new selfPromise((resolve, reject) => {
   setTimeout(() => {
     resolve('prrrr1')
@@ -705,7 +654,7 @@ promise11.then((res1) => {
 })
 
 /** 
- * Demo19 call、apply、bind
+ * Demo21 call、apply、bind
  * */ 
 
  Function.prototype.myCall = (context, ...arg) => {
@@ -733,7 +682,7 @@ Function.prototype.myBind = (context, ...arg) => {
 }
 
 /** 
- * Demo20 最长无重复子序列
+ * Demo22 最长无重复子序列
 * */ 
 const getStrFn = (s) => {
   let start = 0, max = 0;
