@@ -697,3 +697,22 @@ const getStrFn = (s) => {
   }
 return max
 }
+
+/** 
+ * Demo23 实现一个document.getElementById 
+*/
+const nodes = document.body
+// 递归获取当前根结点下的字节点id - dom的映射map
+const getMap = (node, map) => {
+  if (node) {
+    map[node.id] = node
+    for (let i = 0; i < node.children.length; i++) {
+      getMap(node.children[i], map)
+    }
+  }
+  return map
+}
+// 拿到map - object
+const map = getMap(nodes, {})
+// 封装findId - fn
+const findId = (id) => map[id]
