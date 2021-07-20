@@ -716,3 +716,48 @@ const getMap = (node, map) => {
 const map = getMap(nodes, {})
 // 封装findId - fn
 const findId = (id) => map[id]
+
+/** 
+ * Demo24 实现redux中间件 - applyMiddleware
+*/
+
+// compose函数，用于组合多个函数，从后向前允许，每一个运行结果返回给前一个函数，最终返回一个函数（洋葱模型）
+const compose = (...funcs) => {
+  if (funcs.length === 0) {
+    return (arg) => arg
+  }
+  if (funcs.length === 1) {
+    return funcs[0]
+  }
+  return funcs.reduce((prev, curr) => (...args) => (prev(curr(...args))))
+}
+
+// applyMiddleWare - 会返回一个应用了 middleware 的新的 createStore（store enhancer）
+// exp： let createStoreEnhancer = applyMiddleware(logger)(createStore)
+const applyMiddleWare = (...middleWares) => {
+  // 返回一个闭包函数，接收createStore方法
+  return (createStore) => {
+    // 接收reducer和默认state， 用于创建一个非完整的store仓库
+    return (reducer, defaultState) => {
+      // 实例化一个初始store， 将其封装为miniStore
+      const store = createStore(reducer, defaultState)
+      let dispatch = () => { throw new Error('请等待dispatch封装完成再使用') }
+      // 封装mini-store，作为组合函数compose接收的各个中间数组（dispatchProducers）内部元素的入参
+      const miniStore = {
+        getState: store.getState,
+        // 注：此处不能写为store.dispatch，否则一直取到初始的dispatch；
+        //    也不能写做dispatch， 否则一直是未封装好前的错误dispatcg   
+        dispatch: (...args) => dispatch(...args)
+      }
+
+      // 封装dispatchs - arr，作为compose函数入参，目的是组合多个dispatch
+      const dispatchProducers = middleWares.map((e) => e(miniStore))
+      const dispatch = compose(...dispatchProducers)(store.dispatch)
+      return {
+        ...store,
+        dispatch
+      }
+    }
+  }
+
+}
