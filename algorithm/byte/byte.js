@@ -649,7 +649,10 @@ promise11.then((res1) => {
   return promise22
 }).then((res2) => {
   console.log('then2', res2)
-}).catch((err) => {
+}).then((final) => {
+  console.log('final',final)
+})
+.catch((err) => {
   console.log('err', err)
 })
 
@@ -752,12 +755,49 @@ const applyMiddleWare = (...middleWares) => {
 
       // 封装dispatchs - arr，作为compose函数入参，目的是组合多个dispatch
       const dispatchProducers = middleWares.map((e) => e(miniStore))
-      const dispatch = compose(...dispatchProducers)(store.dispatch)
+      dispatch = compose(...dispatchProducers)(store.dispatch)
       return {
         ...store,
         dispatch
       }
     }
   }
-
 }
+
+/** 
+ * Demo25 FindData类实现find方法： find(data).where({name: /\d$/,}).orderBy('userId','desc')
+ */
+
+var dataForFinding = [
+  {title: 't1', userId: '10086', name: 'Jay'},
+  {title: 't2', userId: '10087', name: 'Tom1'},
+  {title: 't3', userId: '10088', name: 'Tina2'},
+]
+
+// 可实例化find方法（类似sql查询方法）的findData类
+class FindData {
+  constructor(data){ this.data = data }
+  where(regObj) {
+    const keys = Object.keys(regObj)
+    const filterData = this.data.filter((item) => {
+      let flag = true
+      for (let i = 0; i < keys.length; i++) {
+        const currentValue = item[keys[i]]
+        if (!(currentValue && regObj[keys[i]].test(currentValue))) {
+          flag = false
+        }
+      }   
+      return flag
+    })
+    return new FindData(filterData)
+    
+  }
+  orderBy(key,  sort) {
+    let fn = sort === 'desc' ? (a,b) => b[key] - a[key] : (a,b) => a[key] - b[key]
+    return this.data.sort(fn)   
+  }
+}
+
+const selfFind = (data) => new FindData(data)
+const findRes = selfFind(dataForFinding).where({ name: /\d$/ }).orderBy('userId','desc')
+// console.log('fd - res', findRes)
