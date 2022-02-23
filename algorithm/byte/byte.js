@@ -363,11 +363,16 @@ const myPromiseAll = (promises) => {
         let sum = arr[i] + arr[j] + arr[k] // 获取三数之和
         if (sum === 0) {
           res.push(i, j, k)
-          j++
-          // 对第二位j去重
-          while (arr[j] === arr[j - 1]) {
+          // 对j，k去重
+          while (arr[j] === arr[j + 1]) {
             j++
           }
+          while (arr[k] === arr[k - 1]) {
+            k--
+          }
+
+          j++
+          k--
         } else if (sum < 0) {
           j++
         } else {
