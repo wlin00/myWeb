@@ -673,7 +673,7 @@ promise11.then((res1) => {
    return res
  }
 
- Function.prototype.myCall = (context, arg) => {
+ Function.prototype.myApply = (context, arg) => {
   context = context || window
   context.fn = this
   let res = eval('context.fn(...arg)')
