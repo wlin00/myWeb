@@ -105,13 +105,13 @@ const asyncFn = async (arr) => {
     const res = await item()
   }
 } // 由于是继发，效率很差，所以并发改造如下
-const fixAsyncFn = (arr) => {
+const fixAsyncFn = async (arr) => {
   const resArr = arr.map(async (item) => {
     const res = await item()
     return res
   })
   for (const resItem of resArr) {
-     console.log(resItem)
+     console.log(await resItem)
   }
 }
 
@@ -665,25 +665,33 @@ promise11.then((res1) => {
  * Demo21 call、apply、bind
  * */ 
 
- Function.prototype.myCall = (context, ...arg) => {
-   context = context || window
-   context.fn = this
-   let res = eval('context.fn(...arg)')
-   delete context.fn
+  // 示例： 输入，打印this.value = 1
+  var foo = {
+    value: 1
+  };
+  function bar() {
+    console.log(this.value);
+  }
+
+ Function.prototype.myCall = (context = window, ...args) => {
+   // call流程： 1、在当前上下文上新增fn方法，将这个fn赋值为this，即当前调用call的方法；2、在当前上下文调用fn方法；3、删除当前上下文里新增的fn这个key
+   context.fn = this // this指向新的上下文
+   let res = eval('context.fn(...args)') // 当前如果执行context.fn(),即在对应上下文调用了该方法，成功修改了this指向；但由于call是ES3的方法，这里用eval调用处理
+   delete context.fn // 删除fn这个添入上下文的key
    return res
  }
 
- Function.prototype.myApply = (context, arg) => {
-  context = context || window
+ Function.prototype.myApply = (context = window, args) => {
+  // apply和call的唯一处理区别是，接受的args是一个数组
   context.fn = this
-  let res = eval('context.fn(...arg)')
+  let res = eval('context.fn(...args)') 
   delete context.fn
   return res
 }
 
-Function.prototype.myBind = (context, ...arg) => {
-  context = context || window
-  context.fn = this
+Function.prototype.myBind = (context = window, ...arg) => {
+  // bind修改指向，先不执行而是向外暴露一个闭包函数等待再次调用执行，这个函数支持传入参数
+  context.fn = this  
   return (...rest) => {
     context.fn(...arg, ...rest)
   }
